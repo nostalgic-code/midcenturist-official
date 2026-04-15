@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Midcenturist SA — Mid-Century Modern Furniture & Décor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;1,100;1,200&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --black:  #0c0b0a;
+  --white:  #ffffff;
+  --off:    #f6f4f1;
+  --off-d:  #eeebe6;
+  --rule:   rgba(12,11,10,0.08);
+  --muted:  #8c8882;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans:  'Century Gothic', 'Josefin Sans', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-sans); background: var(--white); color: var(--black); font-weight: 200; overflow-x: hidden; cursor: none; }
+
+/* ─── CUSTOM CURSOR ─── */
+.cursor-dot {
+  width: 6px; height: 6px;
+  background: var(--black);
+  border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, background 0.2s;
+}
+.cursor-ring {
+  width: 36px; height: 36px;
+  border: 1px solid rgba(12,11,10,0.35);
+  border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width 0.35s cubic-bezier(0.25,0.46,0.45,0.94),
+              height 0.35s cubic-bezier(0.25,0.46,0.45,0.94),
+              border-color 0.2s,
+              top 0.06s linear,
+              left 0.06s linear;
+}
+.cursor-label {
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 9999;
+  transform: translate(-50%, -50%);
+  font-size: 0.48rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--white); font-weight: 300; font-family: var(--font-sans);
+  opacity: 0; transition: opacity 0.2s; white-space: nowrap;
+}
+body.cursor-hover .cursor-ring {
+  width: 72px; height: 72px;
+  background: var(--black);
+  border-color: var(--black);
+}
+body.cursor-hover .cursor-dot { opacity: 0; }
+body.cursor-hover .cursor-label { opacity: 1; }
+body.cursor-click .cursor-ring { width: 28px; height: 28px; }
+
+/* ─── TOP BAR ─── */
+.topbar { background: var(--black); height: 34px; display: flex; align-items: center; justify-content: space-between; padding: 0 3rem; }
+.tb-left { font-size: 0.56rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.32); font-weight: 200; display: flex; align-items: center; gap: 8px; }
+.tb-right { display: flex; align-items: center; gap: 1rem; }
+.tb-soc { color: rgba(255,255,255,0.32); font-size: 0.7rem; text-decoration: none; transition: color 0.2s; cursor: none; }
+.tb-soc:hover { color: var(--white); }
+
+/* ─── NAV ─── */
+nav { position: sticky; top: 0; z-index: 200; background: rgba(255,255,255,0.97); border-bottom: 0.5px solid var(--rule); backdrop-filter: blur(12px); }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; padding: 0 3rem; }
+
+/* Logo — LEFT */
+.nav-logo { text-decoration: none; display: flex; align-items: center; gap: 12px; cursor: none; }
+.m-logo { width: 42px; height: 42px; border: 1.5px solid var(--black); display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 1.55rem; font-weight: 400; color: var(--black); transition: all 0.25s; flex-shrink: 0; }
+.nav-logo:hover .m-logo { background: var(--black); color: var(--white); }
+.nav-wordmark { font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--black); font-weight: 300; white-space: nowrap; }
+
+/* Links — CENTER */
+.nav-center { position: absolute; left: 50%; transform: translateX(-50%); }
+.nav-links { display: flex; list-style: none; height: 72px; }
+.nav-links > li { position: relative; height: 100%; }
+.nav-links > li > a { display: flex; align-items: center; gap: 5px; height: 100%; padding: 0 1.1rem; font-size: 0.67rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--black); text-decoration: none; font-weight: 300; cursor: none; }
+.nav-links > li > a::after { content: ''; position: absolute; bottom: 0; left: 1.1rem; right: 1.1rem; height: 1.5px; background: var(--black); transform: scaleX(0); transition: transform 0.25s; }
+.nav-links > li:hover > a::after { transform: scaleX(1); }
+.nav-links > li.active > a::after { transform: scaleX(1); }
+.nav-links > li.active > a {
+  font-weight: 400;
+  color: var(--black);
+}
+.nav-links > li.active > a .page-dot {
+  display: block;
+}
+/* Active dot below link */
+.nav-links > li > a .page-dot {
+  display: none;
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: var(--black);
+}
+.nav-links > li > a i.fa-chevron-down { font-size: 0.4rem; opacity: 0.3; }
+.dropdown { position: absolute; top: 72px; left: 50%; transform: translateX(-50%) translateY(6px); background: var(--white); border: 0.5px solid var(--rule); border-top: 1.5px solid var(--black); min-width: 224px; opacity: 0; visibility: hidden; transition: all 0.2s; z-index: 300; box-shadow: 0 12px 32px rgba(0,0,0,0.06); }
+.nav-links > li:hover .dropdown { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+.dropdown a { display: flex; align-items: center; gap: 10px; padding: 0.72rem 1.2rem; font-size: 0.65rem; letter-spacing: 0.13em; text-transform: uppercase; color: var(--black); text-decoration: none; font-weight: 300; border-bottom: 0.5px solid var(--rule); transition: background 0.15s; cursor: none; }
+.dropdown a:last-child { border-bottom: none; }
+.dropdown a:hover { background: var(--off); }
+.dropdown a i { width: 14px; text-align: center; opacity: 0.35; font-size: 0.68rem; }
+.dd-n { margin-left: auto; font-size: 0.52rem; color: var(--muted); }
+
+/* Icons — RIGHT */
+.nav-actions { display: flex; align-items: center; gap: 1.1rem; }
+.nav-icon-btn { background: none; border: none; cursor: none; color: var(--black); font-size: 0.9rem; opacity: 0.8; transition: opacity 0.2s; text-decoration: none; display: flex; align-items: center; }
+.nav-icon-btn:hover { opacity: 1; }
+.nav-menu-toggle { display: none; background: none; border: none; color: var(--black); font-size: 1rem; cursor: none; padding: 0; margin-left: 0.5rem; }
+.nav-actions { display: flex; align-items: center; }
+.cart-w { position: relative; }
+.cart-dot { position: absolute; top: -5px; right: -7px; width: 14px; height: 14px; background: var(--black); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.48rem; color: var(--white); }
+
+/* ─── HERO — FULL BLEED ─── */
+.hero { height: calc(100vh - 106px); min-height: 580px; position: relative; overflow: hidden; cursor: none; }
+.hero-slides { display: flex; height: 100%; transition: transform 0.9s cubic-bezier(0.76,0,0.24,1); }
+.hslide { min-width: 100%; height: 100%; position: relative; overflow: hidden; }
+.hslide-img { position: absolute; inset: 0; }
+.hslide-img img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) brightness(0.68); transition: transform 9s ease; }
+.hslide:hover .hslide-img img { transform: scale(1.04); }
+.hslide-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(12,11,10,0.65) 0%, rgba(12,11,10,0.1) 60%); }
+.hslide-content { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 4rem 5rem 5.5rem; }
+.hslide-eyebrow { font-size: 0.65rem; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 1.2rem; font-weight: 200; display: flex; align-items: center; gap: 12px; }
+.hslide-eyebrow::before { content: ''; display: block; width: 28px; height: 0.5px; background: rgba(255,255,255,0.35); }
+.hslide-title { font-family: var(--font-serif); font-size: clamp(4.5rem, 9vw, 9rem); font-weight: 300; line-height: 0.9; color: var(--white); letter-spacing: -0.02em; margin-bottom: 2rem; }
+.hslide-title em { font-style: italic; }
+.hslide-bottom { display: flex; align-items: flex-end; justify-content: space-between; gap: 3rem; }
+.hslide-sub { font-size: 0.95rem; font-weight: 200; line-height: 1.9; color: rgba(255,255,255,0.4); max-width: 320px; letter-spacing: 0.04em; }
+.hslide-cta { display: inline-flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.08); border: 0.5px solid rgba(255,255,255,0.3); color: var(--white); padding: 0.9rem 2rem; font-family: var(--font-sans); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 300; text-decoration: none; backdrop-filter: blur(8px); transition: all 0.25s; white-space: nowrap; cursor: none; }
+.hslide-cta:hover { background: rgba(255,255,255,0.16); border-color: rgba(255,255,255,0.6); }
+.hslide-tag { position: absolute; top: 2.5rem; right: 3rem; background: rgba(255,255,255,0.07); border: 0.5px solid rgba(255,255,255,0.18); backdrop-filter: blur(10px); padding: 1rem 1.25rem; min-width: 176px; border-top: 1.5px solid rgba(255,255,255,0.5); }
+.ht-label { font-size: 0.5rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.38); margin-bottom: 0.4rem; font-weight: 200; }
+.ht-name { font-family: var(--font-serif); font-size: 1rem; font-weight: 400; color: var(--white); margin-bottom: 0.25rem; }
+.ht-price { font-size: 0.68rem; letter-spacing: 0.08em; color: rgba(255,255,255,0.5); font-weight: 300; }
+
+/* Dots — vertical right */
+.hero-dots { position: absolute; right: 2.5rem; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 0.55rem; z-index: 10; }
+.hero-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.22); cursor: none; border: none; transition: all 0.3s; }
+.hero-dot.active { background: var(--white); height: 20px; border-radius: 2px; }
+/* Arrows */
+.h-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; background: rgba(255,255,255,0.08); border: 0.5px solid rgba(255,255,255,0.18); backdrop-filter: blur(8px); cursor: none; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: var(--white); z-index: 10; opacity: 0; transition: opacity 0.2s, background 0.2s; }
+.hero:hover .h-arrow { opacity: 1; }
+.h-arrow:hover { background: rgba(255,255,255,0.18); }
+.h-arrow.prev { left: 2rem; }
+.h-arrow.next { right: 5.5rem; }
+
+/* ─── TICKER ─── */
+.ticker { background: var(--black); padding: 0.6rem 0; overflow: hidden; white-space: nowrap; }
+.ticker-track { display: inline-block; animation: tick 38s linear infinite; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.3); font-weight: 200; }
+.ticker-track span { margin: 0 2rem; }
+.ticker-track i { font-size: 0.26rem; opacity: 0.22; vertical-align: middle; }
+@keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ─── SHARED ─── */
+.eyebrow { font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.6rem; font-weight: 200; display: block; }
+.sec-title { font-family: var(--font-serif); font-size: clamp(1.95rem, 2.8vw, 2.8rem); font-weight: 300; color: var(--black); letter-spacing: -0.01em; line-height: 1.15; }
+.divider-line { width: 36px; height: 1px; background: rgba(12,11,10,0.18); margin: 1.5rem 0; }
+.btn-solid { display: inline-flex; align-items: center; gap: 9px; background: var(--black); color: var(--white); padding: 0.85rem 1.9rem; font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 300; text-decoration: none; font-family: var(--font-sans); cursor: none; border: none; transition: opacity 0.2s; }
+.btn-solid:hover { opacity: 0.7; }
+.btn-outline { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--black); border: 0.5px solid rgba(12,11,10,0.25); padding: 0.65rem 1.25rem; font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 300; text-decoration: none; font-family: var(--font-sans); cursor: none; transition: all 0.2s; }
+.btn-outline:hover { background: var(--black); color: var(--white); border-color: var(--black); }
+.btn-text-link { display: inline-flex; align-items: center; gap: 8px; font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--black); text-decoration: none; font-weight: 300; border-bottom: 0.5px solid var(--black); padding-bottom: 3px; width: fit-content; transition: opacity 0.2s; cursor: none; }
+.btn-text-link:hover { opacity: 0.45; }
+
+/* ─── EDITORIAL INTRO ─── */
+.editorial-intro { display: grid; grid-template-columns: 1fr 1fr; border-top: 0.5px solid var(--rule); }
+.ei-image { position: relative; overflow: hidden; background: var(--off); min-height: 580px; }
+.ei-image img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: transform 7s ease; display: block; }
+.editorial-intro:hover .ei-image img { transform: scale(1.03); }
+.ei-text { background: var(--white); display: flex; flex-direction: column; justify-content: center; padding: 6rem 5.5rem; border-left: 0.5px solid var(--rule); }
+.ei-heading { font-family: var(--font-serif); font-size: clamp(2rem, 3vw, 3.2rem); font-weight: 300; line-height: 1.15; color: var(--black); margin-bottom: 1.5rem; letter-spacing: -0.01em; }
+.ei-heading em { font-style: italic; }
+.ei-body { font-size: 0.95rem; line-height: 2.1; color: var(--muted); max-width: 400px; margin-bottom: 1.1rem; font-weight: 200; letter-spacing: 0.03em; }
+
+/* ─── SPACER ─── */
+.section-spacer { height: 5rem; background: var(--white); border-bottom: 0.5px solid var(--rule); }
+
+/* ─── SHOP PANELS ─── */
+.shop-panels { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--off-d); }
+.shop-panel { position: relative; overflow: hidden; cursor: none; min-height: 500px; text-decoration: none; display: block; }
+.shop-panel img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(100%) brightness(0.8); transition: transform 0.7s ease, filter 0.4s; }
+.shop-panel:hover img { transform: scale(1.04); filter: grayscale(80%) brightness(0.75); }
+.sp-over { position: absolute; inset: 0; background: linear-gradient(to top, rgba(12,11,10,0.8) 0%, rgba(12,11,10,0.04) 60%); display: flex; flex-direction: column; justify-content: flex-end; padding: 2.75rem; }
+.sp-tag { display: inline-block; background: var(--white); color: var(--black); font-size: 0.52rem; letter-spacing: 0.16em; text-transform: uppercase; padding: 0.26rem 0.7rem; margin-bottom: 1rem; font-weight: 300; width: fit-content; }
+.sp-title { font-family: var(--font-serif); font-size: 2.7rem; font-weight: 300; color: var(--white); line-height: 1.1; margin-bottom: 0.5rem; }
+.sp-sub { font-size: 0.64rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.38); font-weight: 200; margin-bottom: 1.25rem; }
+.sp-cta { display: inline-flex; align-items: center; gap: 7px; font-size: 0.57rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.45); font-weight: 300; border-bottom: 0.5px solid rgba(255,255,255,0.2); padding-bottom: 2px; width: fit-content; transition: color 0.2s, border-color 0.2s; }
+.shop-panel:hover .sp-cta { color: var(--white); border-color: var(--white); }
+
+/* ─── VISION ─── */
+.collection-section { padding: 7rem 5rem; background: var(--white); text-align: center; border-top: 0.5px solid var(--rule); border-bottom: 0.5px solid var(--rule); }
+.col-heading { font-family: var(--font-serif); font-size: clamp(1.85rem, 2.5vw, 2.75rem); font-weight: 300; color: var(--black); margin-bottom: 1.2rem; letter-spacing: -0.01em; }
+.col-heading em { font-style: italic; }
+.col-divider { width: 36px; height: 1px; background: rgba(12,11,10,0.16); margin: 2rem auto; }
+.col-body { font-size: 0.95rem; color: var(--muted); line-height: 2.1; max-width: 680px; margin: 0 auto 1.1rem; font-weight: 200; letter-spacing: 0.03em; }
+
+/* ─── EXPLORE ─── */
+.explore-section { padding: 6rem 0; background: var(--off); border-top: 0.5px solid var(--off-d); }
+.explore-header { padding: 0 5rem; display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; }
+.carousel { display: flex; gap: 1.75rem; overflow-x: auto; padding: 0 5rem 1.5rem; scroll-behavior: smooth; -ms-overflow-style: none; scrollbar-width: none; }
+.carousel::-webkit-scrollbar { display: none; }
+.c-card { min-width: 285px; cursor: none; flex-shrink: 0; }
+.c-img { position: relative; overflow: hidden; background: var(--off-d); aspect-ratio: 3/4; }
+.c-img img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: transform 0.6s ease, filter 0.35s; }
+.c-card:hover .c-img img { transform: scale(1.05); filter: grayscale(60%); }
+.c-img-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; padding: 1rem; }
+.c-badge { display: inline-block; background: var(--black); color: var(--white); font-size: 0.48rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.24rem 0.58rem; font-weight: 300; width: fit-content; }
+.c-badge.sold { background: var(--muted); }
+.c-actions { display: flex; justify-content: flex-end; gap: 6px; opacity: 0; transform: translateY(6px); transition: opacity 0.25s, transform 0.25s; }
+.c-card:hover .c-actions { opacity: 1; transform: translateY(0); }
+.c-action-btn { width: 30px; height: 30px; background: rgba(255,255,255,0.92); border: none; cursor: none; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; color: var(--black); }
+.c-add-bar { position: absolute; bottom: 0; left: 0; right: 0; background: var(--black); color: var(--white); font-size: 0.52rem; letter-spacing: 0.16em; text-transform: uppercase; padding: 0.72rem; font-family: var(--font-sans); font-weight: 200; transform: translateY(100%); transition: transform 0.3s; cursor: none; border: none; width: 100%; display: flex; align-items: center; justify-content: center; gap: 7px; }
+.c-card:hover .c-add-bar { transform: translateY(0); }
+.c-info { padding: 1.1rem 0 0; display: grid; grid-template-columns: 1fr auto; gap: 4px; align-items: start; }
+.c-era { font-size: 0.56rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.3rem; font-weight: 200; }
+.c-name { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 300; color: var(--black); line-height: 1.25; }
+.c-price { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 300; color: var(--black); }
+.c-old { font-size: 0.66rem; color: var(--muted); text-decoration: line-through; display: block; text-align: right; }
+.c-arrow-btn { width: 38px; height: 38px; background: var(--white); border: 0.5px solid var(--rule); cursor: none; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; color: var(--black); transition: all 0.2s; }
+.c-arrow-btn:hover { background: var(--black); color: var(--white); border-color: var(--black); }
+.explore-footer { padding: 2.5rem 5rem 0; text-align: center; }
+
+/* ─── WHY BUY ─── */
+.why-section { padding: 7rem 5rem; background: var(--white); }
+.why-header { display: grid; grid-template-columns: 1fr 2fr; gap: 5rem; align-items: start; margin-bottom: 4rem; }
+.why-lead { font-size: 0.95rem; color: var(--muted); line-height: 2.05; font-weight: 200; letter-spacing: 0.03em; }
+.why-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; background: var(--rule); }
+.why-card { padding: 2.75rem 2.25rem; background: var(--white); transition: background 0.3s; }
+.why-card:hover { background: var(--off); }
+.why-num { font-family: var(--font-serif); font-size: 3.5rem; font-weight: 300; color: rgba(12,11,10,0.05); line-height: 1; margin-bottom: 1.5rem; }
+.why-icon-wrap { width: 44px; height: 44px; border: 0.5px solid var(--rule); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; font-size: 1rem; color: var(--black); transition: all 0.3s; }
+.why-card:hover .why-icon-wrap { border-color: var(--black); background: var(--black); color: var(--white); }
+.why-title { font-family: var(--font-serif); font-size: 1.4rem; font-weight: 400; color: var(--black); margin-bottom: 1rem; }
+.why-body { font-size: 0.88rem; color: var(--muted); line-height: 1.95; font-weight: 200; letter-spacing: 0.03em; }
+
+/* ─── UPCOMING ─── */
+.upcoming-section { padding: 6rem 5rem; background: var(--off); border-top: 0.5px solid var(--off-d); }
+.upcoming-grid { display: grid; grid-template-columns: repeat(4,1fr); margin-top: 3rem; border: 0.5px solid var(--rule); }
+.u-card { padding: 2.25rem 2rem; border-right: 0.5px solid var(--rule); background: var(--white); transition: background 0.3s; }
+.u-card:last-child { border-right: none; }
+.u-card:hover { background: var(--off); }
+.u-n { font-family: var(--font-serif); font-size: 2.8rem; font-weight: 300; color: rgba(12,11,10,0.05); line-height: 1; margin-bottom: 1rem; }
+.u-label { font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; font-weight: 200; }
+.u-name { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 300; color: var(--black); line-height: 1.3; margin-bottom: 0.4rem; }
+.u-price { font-size: 0.82rem; letter-spacing: 0.08em; color: var(--muted); font-weight: 200; margin-bottom: 1.75rem; }
+.notify-btn { font-size: 0.63rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); background: none; border: 0.5px solid var(--rule); padding: 0.4rem 0.9rem; cursor: none; font-family: var(--font-sans); font-weight: 200; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; }
+.notify-btn:hover { color: var(--black); border-color: var(--black); }
+
+/* ─── IG FEED ─── */
+.ig-section { background: var(--white); padding: 6rem 5rem; border-top: 0.5px solid var(--rule); }
+.ig-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2.5rem; }
+.ig-grid { display: grid; grid-template-columns: repeat(6,1fr); gap: 3px; }
+.ig-tile { aspect-ratio: 1; overflow: hidden; position: relative; background: var(--off); cursor: none; }
+.ig-tile img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: transform 0.45s, filter 0.3s; }
+.ig-tile:hover img { transform: scale(1.07); filter: grayscale(60%); }
+.ig-over { position: absolute; inset: 0; background: rgba(12,11,10,0); display: flex; align-items: center; justify-content: center; transition: background 0.3s; }
+.ig-tile:hover .ig-over { background: rgba(12,11,10,0.42); }
+.ig-price { font-size: 0.64rem; letter-spacing: 0.1em; color: white; opacity: 0; transition: opacity 0.3s; font-weight: 300; }
+.ig-tile:hover .ig-price { opacity: 1; }
+.ig-sold { position: absolute; top: 0.5rem; left: 0.5rem; background: rgba(12,11,10,0.7); color: white; font-size: 0.45rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.18rem 0.48rem; font-weight: 200; }
+
+/* ─── NEWSLETTER ─── */
+.newsletter-section { display: grid; grid-template-columns: 1fr 1fr; border-top: 0.5px solid var(--rule); }
+.nl-image { position: relative; overflow: hidden; min-height: 480px; }
+.nl-image img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); display: block; transition: transform 7s ease; }
+.newsletter-section:hover .nl-image img { transform: scale(1.03); }
+.nl-text { padding: 5.5rem 5rem; display: flex; flex-direction: column; justify-content: center; background: var(--white); border-left: 0.5px solid var(--rule); }
+.nl-sub { font-size: 0.75rem; color: var(--muted); line-height: 1.95; max-width: 360px; font-weight: 200; letter-spacing: 0.03em; margin-top: 0.75rem; }
+.nl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin-top: 2rem; }
+.nl-input { padding: 0.82rem 1rem; border: 0.5px solid var(--rule); background: var(--off); color: var(--black); font-family: var(--font-sans); font-size: 0.7rem; font-weight: 200; letter-spacing: 0.06em; outline: none; transition: all 0.2s; width: 100%; cursor: none; }
+.nl-input::placeholder { color: var(--muted); }
+.nl-input:focus { border-color: var(--black); background: var(--white); }
+.nl-full { grid-column: 1/-1; }
+.nl-submit { width: 100%; background: var(--black); color: var(--white); border: none; padding: 0.88rem; font-family: var(--font-sans); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 300; cursor: none; grid-column: 1/-1; transition: opacity 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.nl-submit:hover { opacity: 0.75; }
+.nl-fine { font-size: 0.54rem; color: var(--muted); letter-spacing: 0.08em; font-weight: 200; grid-column: 1/-1; display: flex; align-items: center; gap: 6px; }
+
+/* ─── FOOTER ─── */
+footer { background: var(--white); padding: 5.5rem 5rem 2.5rem; position: relative; z-index: 1; border-top: 0.5px solid var(--rule); }
+.footer-top-logo { text-align: center; margin-bottom: 3.5rem; padding-bottom: 3.5rem; border-bottom: 0.5px solid var(--rule); }
+.f-m { width: 50px; height: 50px; border: 1px solid var(--rule); display: inline-flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 1.75rem; font-weight: 300; color: var(--black); margin-bottom: 0.75rem; }
+.f-brand { font-size: 0.57rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--black); font-weight: 200; display: block; margin-bottom: 1.25rem; }
+.footer-socials { display: flex; align-items: center; justify-content: center; gap: 0.65rem; }
+.fsoc { width: 32px; height: 32px; border: 0.5px solid var(--rule); display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 0.7rem; text-decoration: none; transition: all 0.2s; cursor: none; }
+.fsoc:hover { border-color: var(--black); color: var(--black); }
+.footer-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2.5rem; margin-bottom: 3.5rem; padding-bottom: 3.5rem; border-bottom: 0.5px solid var(--rule); }
+.f-col-title { font-size: 0.53rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--black); margin-bottom: 1.25rem; font-weight: 300; }
+.f-links { list-style: none; }
+.f-links li { margin-bottom: 0.52rem; }
+.f-links a { color: var(--dark); text-decoration: none; font-size: 0.68rem; font-weight: 200; letter-spacing: 0.04em; transition: color 0.2s; display: flex; align-items: center; gap: 8px; cursor: none; }
+.f-links a i { width: 13px; text-align: center; font-size: 0.57rem; opacity: 0.6; }
+.f-links a:hover { color: var(--black); }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; font-size: 0.54rem; color: var(--muted); letter-spacing: 0.1em; font-weight: 200; }
+
+/* ─── MOBILE RESPONSIVE ─── */
+@media (max-width: 1200px) {
+  .nav-links > li > a { padding: 0 0.8rem; }
+  .explore-header { flex-direction: column; gap: 1rem; }
+  .carousel { padding: 0 2rem 1.5rem; gap: 1.25rem; }
+  .c-card { min-width: 240px; }
+  .why-header { grid-template-columns: 1fr; gap: 2rem; }
+  .upcoming-grid { grid-template-columns: repeat(3,1fr); }
+  .footer-grid { gap: 1.5rem; }
+}
+
+@media (max-width: 1024px) {
+  .topbar { padding: 0 1.5rem; }
+  .nav-inner { padding: 0 1.5rem; }
+  .ei-text { padding: 4rem 3rem; }
+  .editorial-intro { grid-template-columns: 1fr; }
+  .ei-image { min-height: 400px; }
+  .shop-panels { grid-template-columns: 1fr; }
+  .section-spacer { display: none; }
+  .collection-section { padding: 5rem 2.5rem; }
+  .upcoming-section { padding: 4rem 2.5rem; }
+  .ig-section { padding: 4rem 2.5rem; }
+  .newsletter-section { grid-template-columns: 1fr; }
+  .nl-text { padding: 3rem 2.5rem; border-left: none; border-top: 0.5px solid var(--rule); }
+  footer { padding: 3.5rem 2.5rem 1.5rem; }
+}
+
+@media (max-width: 768px) {
+  body { font-size: 14px; }
+  .topbar { height: 28px; font-size: 0.48rem; padding: 0 1rem; }
+  .tb-right { gap: 0.5rem; }
+  .topbar { display: none; }
+  
+  /* NAV */
+  nav { position: sticky; top: 0; z-index: 200; }
+  .nav-inner { height: 60px; padding: 0 1rem; }
+  .nav-actions { display: flex; align-items: center; }
+  .nav-menu-toggle { display: flex; align-items: center; justify-content: center; }
+  .m-logo { width: 36px; height: 36px; font-size: 1.3rem; }
+  .nav-wordmark { font-size: 0.5rem; }
+  .nav-center { position: static; transform: none; }
+  .nav-links { position: absolute; display: none; top: 60px; left: 0; right: 0; flex-direction: column; background: var(--white); border-bottom: 0.5px solid var(--rule); list-style: none; height: auto; }
+  .nav-links.active { display: flex; }
+  .nav-links > li { height: auto; border-bottom: 0.5px solid var(--rule); }
+  .nav-links > li > a { padding: 0.75rem 1rem; height: auto; }
+  .nav-links > li > a::after { display: none; }
+  .nav-links > li.active > a::after { display: none; }
+  .nav-right-g { gap: 0.5rem; }
+  .nav-icon-btn { font-size: 0.75rem; }
+  .dropdown { position: static; opacity: 1; visibility: visible; transform: none; display: none; flex-direction: column; background: #f9f9f9; border: none; box-shadow: none; min-width: auto; }
+  .nav-links > li.has-dropdown.active .dropdown { display: flex; }
+  .nav-links > li.has-dropdown > a { display: flex; justify-content: space-between; }
+  .nav-links > li.has-dropdown > a i { margin-left: auto; }
+  
+  /* HERO */
+  .hero { height: calc(100vh - 60px); min-height: 400px; }
+  .hslide-content { padding: 2rem 1.5rem 3rem; }
+  .hslide-title { font-size: clamp(2.5rem, 6vw, 3.5rem); margin-bottom: 1rem; }
+  .hslide-eyebrow { font-size: 0.5rem; margin-bottom: 0.8rem; }
+  .hslide-eyebrow::before { width: 20px; }
+  .hslide-bottom { flex-direction: column; gap: 1.5rem; }
+  .hslide-sub { font-size: 0.8rem; max-width: 100%; }
+  .hslide-cta { font-size: 0.55rem; padding: 0.75rem 1.5rem; }
+  .hslide-tag { top: 1.5rem; right: 1.5rem; padding: 0.75rem 1rem; min-width: auto; font-size: 0.48rem; }
+  .hero-dots { right: 1.5rem; gap: 0.4rem; }
+  .h-arrow { width: 36px; height: 36px; font-size: 0.6rem; }
+  .h-arrow.prev { left: 1rem; }
+  .h-arrow.next { right: 3.5rem; }
+  
+  /* TICKER */
+  .ticker { padding: 0.4rem 0; }
+  .ticker-track { font-size: 0.48rem; }
+  
+  /* EDITORIAL */
+  .editorial-intro { border-top: none; }
+  .ei-image { min-height: 300px; }
+  .ei-text { padding: 2.5rem 1.5rem; }
+  .ei-heading { font-size: clamp(1.4rem, 2.5vw, 1.8rem); margin-bottom: 1rem; }
+  .ei-body { font-size: 0.85rem; }
+  .divider-line { margin: 1rem 0; }
+  .btn-text-link { font-size: 0.54rem; }
+  
+  /* SHOP PANELS */
+  .sp-title { font-size: 1.8rem; }
+  .sp-sub { font-size: 0.56rem; margin-bottom: 0.75rem; }
+  .sp-cta { font-size: 0.5rem; }
+  
+  /* COLLECTION / VISION */
+  .collection-section { padding: 3rem 1.5rem; }
+  .sec-title { font-size: clamp(1.3rem, 2vw, 1.8rem); }
+  .col-body { font-size: 0.85rem; }
+  .eyebrow { font-size: 0.5rem; margin-bottom: 0.5rem; }
+  
+  /* EXPLORE */
+  .explore-section { padding: 3rem 0; }
+  .explore-header { padding: 0 1.5rem; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem; }
+  .carousel { padding: 0 1rem 1rem; gap: 1rem; }
+  .c-card { min-width: 200px; }
+  .c-name { font-size: 0.95rem; }
+  .c-price { font-size: 1rem; }
+  .c-era { font-size: 0.48rem; }
+  .c-arrow-btn { width: 32px; height: 32px; font-size: 0.6rem; }
+  .explore-footer { padding: 1.5rem 1.5rem 0; }
+  
+  /* WHY BUY */
+  .why-section { padding: 3rem 1.5rem; }
+  .why-header { grid-template-columns: 1fr; gap: 0; margin-bottom: 2rem; }
+  .why-lead { font-size: 0.85rem; }
+  .why-grid { grid-template-columns: 1fr; }
+  .why-card { padding: 1.75rem 1.5rem; }
+  .why-title { font-size: 1.1rem; margin-bottom: 0.75rem; }
+  .why-body { font-size: 0.8rem; }
+  
+  /* UPCOMING */
+  .upcoming-section { padding: 3rem 1.5rem; }
+  .upcoming-grid { grid-template-columns: repeat(2,1fr); gap: 0.5px; margin-top: 1.5rem; }
+  .u-card { padding: 1.5rem 1rem; }
+  .u-n { font-size: 2rem; margin-bottom: 0.75rem; }
+  .u-label { font-size: 0.48rem; }
+  .u-name { font-size: 1rem; }
+  .u-price { font-size: 0.7rem; margin-bottom: 1rem; }
+  .notify-btn { font-size: 0.55rem; padding: 0.35rem 0.7rem; }
+  
+  /* IG FEED */
+  .ig-section { padding: 3rem 1.5rem; }
+  .ig-header { flex-direction: column; gap: 1rem; margin-bottom: 1.5rem; }
+  .ig-grid { grid-template-columns: repeat(3,1fr); gap: 2px; }
+  
+  /* NEWSLETTER */
+  .nl-text { padding: 2.5rem 1.5rem; }
+  .nl-sub { font-size: 0.8rem; }
+  .nl-grid { grid-template-columns: 1fr; gap: 0.6rem; margin-top: 1.5rem; }
+  .nl-input { padding: 0.7rem 0.8rem; font-size: 0.65rem; }
+  .nl-submit { padding: 0.7rem; font-size: 0.55rem; }
+  
+  /* FOOTER */
+  footer { padding: 2rem 1.5rem 1rem; }
+  .footer-top-logo { margin-bottom: 2rem; padding-bottom: 2rem; }
+  .f-m { width: 40px; height: 40px; font-size: 1.4rem; }
+  .f-brand { font-size: 0.5rem; margin-bottom: 0.75rem; }
+  .footer-grid { grid-template-columns: repeat(2,1fr); gap: 1.5rem; margin-bottom: 2rem; padding-bottom: 2rem; }
+  .f-col-title { font-size: 0.48rem; margin-bottom: 0.75rem; }
+  .f-links a { font-size: 0.6rem; }
+  .footer-bottom { flex-direction: column; gap: 0.5rem; font-size: 0.48rem; text-align: center; }
+}
+
+@media (max-width: 480px) {
+  body { font-size: 13px; }
+  
+  /* NAV */
+  .nav-inner { height: 56px; }
+  .nav-actions { display: flex; align-items: center; }
+  .nav-menu-toggle { display: flex; align-items: center; justify-content: center; }
+  .m-logo { width: 32px; height: 32px; font-size: 1.1rem; }
+  .nav-wordmark { font-size: 0.45rem; }
+  .nav-icon-btn { font-size: 0.65rem; }
+  
+  /* HERO */
+  .hero { height: calc(100vh - 56px); min-height: 350px; }
+  .hslide-content { padding: 1.5rem 1rem 2rem; }
+  .hslide-title { font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 0.75rem; }
+  .hslide-eyebrow { font-size: 0.48rem; margin-bottom: 0.6rem; }
+  .hslide-sub { font-size: 0.75rem; }
+  .hslide-cta { font-size: 0.5rem; padding: 0.65rem 1.25rem; gap: 8px; }
+  .hslide-tag { padding: 0.6rem 0.85rem; }
+  
+  /* SECTIONS */
+  .editorial-intro { border-top: none; }
+  .ei-image { min-height: 250px; }
+  .ei-text { padding: 2rem 1rem; }
+  .ei-heading { font-size: clamp(1.2rem, 2vw, 1.6rem); }
+  .ei-body { font-size: 0.8rem; line-height: 1.8; }
+  
+  .collection-section { padding: 2.5rem 1rem; }
+  .sec-title { font-size: clamp(1.1rem, 1.8vw, 1.6rem); }
+  .col-body { font-size: 0.8rem; }
+  
+  /* CAROUSEL */
+  .explore-header { padding: 0 1rem; }
+  .carousel { padding: 0 0.75rem 0.75rem; gap: 0.75rem; }
+  .c-card { min-width: 160px; }
+  .c-name { font-size: 0.9rem; }
+  .c-price { font-size: 0.95rem; }
+  
+  /* WHY BUY */
+  .why-section { padding: 2.5rem 1rem; }
+  .why-card { padding: 1.5rem 1rem; }
+  .why-title { font-size: 1rem; }
+  .why-body { font-size: 0.75rem; line-height: 1.85; }
+  
+  /* UPCOMING */
+  .upcoming-section { padding: 2.5rem 1rem; }
+  .upcoming-grid { grid-template-columns: 1fr; gap: 0.5px; margin-top: 1rem; }
+  .u-card { padding: 1.25rem 0.8rem; }
+  .u-name { font-size: 0.9rem; }
+  .u-price { font-size: 0.65rem; margin-bottom: 0.8rem; }
+  .notify-btn { font-size: 0.5rem; padding: 0.3rem 0.6rem; }
+  
+  /* IG GRID */
+  .ig-section { padding: 2.5rem 1rem; }
+  .ig-grid { grid-template-columns: repeat(2,1fr); gap: 1px; }
+  
+  /* NEWSLETTER */
+  .nl-text { padding: 2rem 1rem; }
+  .nl-sub { font-size: 0.75rem; }
+  
+  /* FOOTER */
+  footer { padding: 1.5rem 1rem 0.8rem; }
+  .footer-top-logo { margin-bottom: 1.5rem; padding-bottom: 1.5rem; }
+  .f-m { width: 36px; height: 36px; font-size: 1.2rem; }
+  .f-brand { font-size: 0.48rem; }
+  .footer-grid { grid-template-columns: 1fr; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 1.5rem; }
+  .f-col-title { font-size: 0.45rem; margin-bottom: 0.6rem; }
+  .f-links a { font-size: 0.55rem; gap: 6px; }
+  .footer-bottom { font-size: 0.45rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="cursor-label" id="cursorLabel">View</div>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="tb-left"><i class="fa-solid fa-location-dot"></i> South Africa &nbsp;·&nbsp; Nationwide Delivery Available</div>
+  <div class="tb-right">
+    <a href="#" class="tb-soc"><i class="fa-brands fa-instagram"></i></a>
+    <a href="#" class="tb-soc"><i class="fa-brands fa-facebook-f"></i></a>
+    <a href="#" class="tb-soc"><i class="fa-brands fa-tiktok"></i></a>
+    <a href="#" class="tb-soc"><i class="fa-brands fa-x-twitter"></i></a>
+    <a href="mailto:hello@midcenturist.co.za" class="tb-soc"><i class="fa-regular fa-envelope"></i></a>
+  </div>
+</div>
+
+<!-- NAV — logo left, links center, icons right -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="m-logo">M</div>
+      <span class="nav-wordmark">Midcenturist SA</span>
+    </a>
+    <div class="nav-center">
+      <ul class="nav-links">
+        <li class="active"><a href="#">Home<span class="page-dot"></span></a></li>
+        <li><a href="#">About<span class="page-dot"></span></a></li>
+        <li class="has-dropdown">
+          <a href="#">Categories <i class="fa-solid fa-chevron-down"></i><span class="page-dot"></span></a>
+          <div class="dropdown">
+            <a href="#"><i class="fa-solid fa-couch"></i> Seating <span class="dd-n">48</span></a>
+            <a href="#"><i class="fa-solid fa-boxes-stacked"></i> Sideboards &amp; Storage <span class="dd-n">32</span></a>
+            <a href="#"><i class="fa-regular fa-lightbulb"></i> Lighting <span class="dd-n">29</span></a>
+            <a href="#"><i class="fa-solid fa-table-cells-large"></i> Coffee &amp; Side Tables <span class="dd-n">21</span></a>
+            <a href="#"><i class="fa-solid fa-bed"></i> Bedroom <span class="dd-n">17</span></a>
+            <a href="#"><i class="fa-solid fa-star"></i> Home Décor <span class="dd-n">91</span></a>
+            <a href="#"><i class="fa-solid fa-tag"></i> On Sale <span class="dd-n">14</span></a>
+          </div>
+        </li>
+        <li><a href="#">Contact Us<span class="page-dot"></span></a></li>
+      </ul>
+    </div>
+    <div class="nav-actions">
+      <a href="#" class="nav-icon-btn"><i class="fa-solid fa-magnifying-glass"></i></a>
+      <a href="#" class="nav-icon-btn"><i class="fa-regular fa-heart"></i></a>
+      <a href="#" class="nav-icon-btn cart-w">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span class="cart-dot">2</span>
+      </a>
+      <button class="nav-menu-toggle" id="navMenuToggle"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO SLIDER -->
+<div class="hero" id="hero">
+  <div class="hero-slides" id="heroSlides">
+
+    <div class="hslide" data-label="Shop" onclick="goCategory('sideboards')">
+      <div class="hslide-img"><img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1600&q=85" alt="Sideboards"/></div>
+      <div class="hslide-overlay"></div>
+      <div class="hslide-tag"><div class="ht-label">Featured piece</div><div class="ht-name">Danish Teak Sideboard</div><div class="ht-price">R 14,500 &nbsp;·&nbsp; 1962</div></div>
+      <div class="hslide-content">
+        <p class="hslide-eyebrow">Sideboards &amp; Storage</p>
+        <h1 class="hslide-title">Teak.<br><em>Timeless.</em></h1>
+        <div class="hslide-bottom">
+          <p class="hslide-sub">Authentic Danish teak sideboards from the 1950s and 60s — the centrepiece of every mid-century interior.</p>
+          <a class="hslide-cta" href="#" onclick="event.stopPropagation()"><i class="fa-solid fa-arrow-right"></i> Shop Sideboards</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hslide" data-label="Shop" onclick="goCategory('seating')">
+      <div class="hslide-img"><img src="https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=1600&q=85" alt="Seating"/></div>
+      <div class="hslide-overlay"></div>
+      <div class="hslide-tag"><div class="ht-label">Featured piece</div><div class="ht-name">Walnut Lounge Chair</div><div class="ht-price">R 9,800 &nbsp;·&nbsp; 1955</div></div>
+      <div class="hslide-content">
+        <p class="hslide-eyebrow">Seating Collection</p>
+        <h1 class="hslide-title">Sit in<br><em>History.</em></h1>
+        <div class="hslide-bottom">
+          <p class="hslide-sub">Lounge chairs, dining sets and armchairs from the golden age — restored and ready to live with you for another lifetime.</p>
+          <a class="hslide-cta" href="#" onclick="event.stopPropagation()"><i class="fa-solid fa-arrow-right"></i> Shop Seating</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hslide" data-label="Shop" onclick="goCategory('lighting')">
+      <div class="hslide-img"><img src="https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=1600&q=85" alt="Lighting"/></div>
+      <div class="hslide-overlay"></div>
+      <div class="hslide-tag"><div class="ht-label">Featured piece</div><div class="ht-name">Atomic Tripod Floor Lamp</div><div class="ht-price">R 4,200 &nbsp;·&nbsp; 1962</div></div>
+      <div class="hslide-content">
+        <p class="hslide-eyebrow">Statement Lighting</p>
+        <h1 class="hslide-title">Light<br><em>the room.</em></h1>
+        <div class="hslide-bottom">
+          <p class="hslide-sub">Brass atomic pendants, teak tripod floor lamps and original 60s table lights — rewired, restored and ready.</p>
+          <a class="hslide-cta" href="#" onclick="event.stopPropagation()"><i class="fa-solid fa-arrow-right"></i> Shop Lighting</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hslide" data-label="Shop" onclick="goCategory('decor')">
+      <div class="hslide-img"><img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=1600&q=85" alt="Décor"/></div>
+      <div class="hslide-overlay"></div>
+      <div class="hslide-tag"><div class="ht-label">Featured piece</div><div class="ht-name">Ceramic Vessel Set</div><div class="ht-price">R 1,950 &nbsp;·&nbsp; Set of 3</div></div>
+      <div class="hslide-content">
+        <p class="hslide-eyebrow">Home Décor Elements</p>
+        <h1 class="hslide-title">Details<br><em>matter.</em></h1>
+        <div class="hslide-bottom">
+          <p class="hslide-sub">Ceramics, sculptural vases and wall objects — curated with the same care as every piece of furniture we sell.</p>
+          <a class="hslide-cta" href="#" onclick="event.stopPropagation()"><i class="fa-solid fa-arrow-right"></i> Shop Décor</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <button class="h-arrow prev" onclick="event.stopPropagation(); changeSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+  <button class="h-arrow next" onclick="event.stopPropagation(); changeSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
+  <div class="hero-dots" id="heroDots">
+    <button class="hero-dot active" onclick="event.stopPropagation(); goSlide(0)"></button>
+    <button class="hero-dot" onclick="event.stopPropagation(); goSlide(1)"></button>
+    <button class="hero-dot" onclick="event.stopPropagation(); goSlide(2)"></button>
+    <button class="hero-dot" onclick="event.stopPropagation(); goSlide(3)"></button>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span>New Arrivals Weekly</span><i class="fa-solid fa-circle"></i>
+    <span>Nationwide Delivery</span><i class="fa-solid fa-circle"></i>
+    <span>Every Piece Authenticated</span><i class="fa-solid fa-circle"></i>
+    <span>Collection by Appointment</span><i class="fa-solid fa-circle"></i>
+    <span>Layby Available</span><i class="fa-solid fa-circle"></i>
+    <span>Follow @midcenturist_sa</span><i class="fa-solid fa-circle"></i>
+    <span>New Arrivals Weekly</span><i class="fa-solid fa-circle"></i>
+    <span>Nationwide Delivery</span><i class="fa-solid fa-circle"></i>
+    <span>Every Piece Authenticated</span><i class="fa-solid fa-circle"></i>
+    <span>Collection by Appointment</span><i class="fa-solid fa-circle"></i>
+    <span>Layby Available</span><i class="fa-solid fa-circle"></i>
+    <span>Follow @midcenturist_sa</span><i class="fa-solid fa-circle"></i>
+  </div>
+</div>
+
+<!-- OUR ONLINE SHOP -->
+<div class="editorial-intro">
+  <div class="ei-image">
+    <img src="https://images.unsplash.com/photo-1538688525198-9b88f6f53126?w=900&q=85" alt="Our shop"/>
+  </div>
+  <div class="ei-text">
+    <p class="eyebrow">Our Online Shop</p>
+    <h2 class="ei-heading">A thoughtful selection<br>of <em>investment pieces</em></h2>
+    <div class="divider-line"></div>
+    <p class="ei-body">Midcenturist SA is an online store dedicated to mid-century modern furniture and home décor. We are avid collectors dedicated to sourcing, curating and refinishing a thoughtful selection — forming art and functionality in a space.</p>
+    <p class="ei-body">We share a small but very carefully selected range of authentic and beautifully crafted investment pieces, focusing mainly from the 1940s – 1970s.</p>
+    <p class="ei-body" style="margin-bottom:2.5rem;">Items can be viewed by appointment — send us an <a href="mailto:hello@midcenturist.co.za" style="color:var(--black);font-weight:300;text-decoration:underline;text-underline-offset:3px">email</a> or <a href="#" style="color:var(--black);font-weight:300;text-decoration:underline;text-underline-offset:3px">message</a> and we'd be happy to arrange a visit.</p>
+    <a href="#" class="btn-text-link"><i class="fa-solid fa-arrow-right"></i> Browse the Collection</a>
+  </div>
+</div>
+
+<!-- BREATHING ROOM -->
+<div class="section-spacer"></div>
+
+<!-- SHOP PANELS -->
+<div class="shop-panels">
+  <a href="#available" class="shop-panel">
+    <img src="https://images.unsplash.com/photo-1592078615290-033ee584e267?w=800&q=85" alt="Available Items"/>
+    <div class="sp-over">
+      <span class="sp-tag">Shop Now</span>
+      <div class="sp-title">Available Items</div>
+      <div class="sp-sub">Browse everything currently in stock</div>
+      <span class="sp-cta">Shop Now <i class="fa-solid fa-arrow-right"></i></span>
+    </div>
+  </a>
+  <a href="#all" class="shop-panel">
+    <img src="https://images.unsplash.com/photo-1567016432779-094069958ea5?w=800&q=85" alt="All Items"/>
+    <div class="sp-over">
+      <span class="sp-tag">Archive</span>
+      <div class="sp-title">All Items</div>
+      <div class="sp-sub">Available and sold — our full archive</div>
+      <span class="sp-cta">View All <i class="fa-solid fa-arrow-right"></i></span>
+    </div>
+  </a>
+</div>
+
+<!-- THE VISION -->
+<div class="collection-section">
+  <p class="eyebrow" style="text-align:center">Our Collection</p>
+  <h2 class="col-heading">The <em>Vision</em></h2>
+  <div class="col-divider"></div>
+  <p class="col-body">We're rather picky about the vintage furniture that we source. We aim to only offer quality pieces that we would love to live with ourselves. We hold a small but very carefully selected range of investment vintage pieces that are highly collectible. They do sell quickly, so there are always exciting new things arriving.</p>
+  <p class="col-body">At Midcenturist SA we are all about restoring and documenting vintage treasures. We don't just 'buy and sell'. We meticulously clean, lightly restore and refinish all our pieces to preserve the integrity of the piece to the best of our ability — back as close as possible to its former glory to last another lifetime.</p>
+  <div style="margin-top:2.75rem"><a href="#" class="btn-solid"><i class="fa-solid fa-arrow-right"></i> Shop the Collection</a></div>
+</div>
+
+<!-- EXPLORE THE COLLECTION -->
+<div class="explore-section">
+  <div class="explore-header">
+    <div>
+      <p class="eyebrow">Freshly Listed</p>
+      <h2 class="sec-title">Explore the Collection</h2>
+    </div>
+    <div style="display:flex;gap:0.5rem">
+      <button class="c-arrow-btn" onclick="scrollCarousel(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="c-arrow-btn" onclick="scrollCarousel(1)"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+  </div>
+  <div class="carousel" id="carousel">
+    <div class="c-card">
+      <div class="c-img"><img src="https://images.unsplash.com/photo-1592078615290-033ee584e267?w=500&q=85" alt="Sideboard"/>
+        <div class="c-img-overlay"><span class="c-badge">New In</span><div class="c-actions"><button class="c-action-btn"><i class="fa-regular fa-heart"></i></button><button class="c-action-btn"><i class="fa-solid fa-magnifying-glass"></i></button></div></div>
+        <button class="c-add-bar"><i class="fa-solid fa-bag-shopping"></i> Add to Cart</button>
+      </div>
+      <div class="c-info"><div><div class="c-era">Solid Teak · 1962</div><div class="c-name">Danish Teak Sideboard</div></div><div><div class="c-price">R 14,500</div></div></div>
+    </div>
+    <div class="c-card">
+      <div class="c-img"><img src="https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=500&q=85" alt="Chair"/>
+        <div class="c-img-overlay"><span style="height:22px;display:block"></span><div class="c-actions"><button class="c-action-btn"><i class="fa-regular fa-heart"></i></button><button class="c-action-btn"><i class="fa-solid fa-magnifying-glass"></i></button></div></div>
+        <button class="c-add-bar"><i class="fa-solid fa-bag-shopping"></i> Add to Cart</button>
+      </div>
+      <div class="c-info"><div><div class="c-era">Walnut + Boucle · 1955</div><div class="c-name">Walnut Lounge Chair</div></div><div><div class="c-price">R 9,800</div><div class="c-old">R 12,000</div></div></div>
+    </div>
+    <div class="c-card">
+      <div class="c-img"><img src="https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=500&q=85" alt="Lamp"/>
+        <div class="c-img-overlay"><span class="c-badge">Last One</span><div class="c-actions"><button class="c-action-btn"><i class="fa-regular fa-heart"></i></button><button class="c-action-btn"><i class="fa-solid fa-magnifying-glass"></i></button></div></div>
+        <button class="c-add-bar"><i class="fa-solid fa-bag-shopping"></i> Add to Cart</button>
+      </div>
+      <div class="c-info"><div><div class="c-era">Brass + Teak · 1962</div><div class="c-name">Atomic Tripod Floor Lamp</div></div><div><div class="c-price">R 4,200</div></div></div>
+    </div>
+    <div class="c-card">
+      <div class="c-img"><img src="https://images.unsplash.com/photo-1581428982868-e410dd047a90?w=500&q=85" alt="Table"/>
+        <div class="c-img-overlay"><span style="height:22px;display:block"></span><div class="c-actions"><button class="c-action-btn"><i class="fa-regular fa-heart"></i></button><button class="c-action-btn"><i class="fa-solid fa-magnifying-glass"></i></button></div></div>
+        <button class="c-add-bar"><i class="fa-solid fa-bag-shopping"></i> Add to Cart</button>
+      </div>
+      <div class="c-info"><div><div class="c-era">Rosewood · 1958</div><div class="c-name">Oval Rosewood Coffee Table</div></div><div><div class="c-price">R 8,500</div></div></div>
+    </div>
+    <div class="c-card">
+      <div class="c-img"><img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=500&q=85" alt="Vase"/>
+        <div class="c-img-overlay"><span style="height:22px;display:block"></span><div class="c-actions"><button class="c-action-btn"><i class="fa-regular fa-heart"></i></button><button class="c-action-btn"><i class="fa-solid fa-magnifying-glass"></i></button></div></div>
+        <button class="c-add-bar"><i class="fa-solid fa-bag-shopping"></i> Add to Cart</button>
+      </div>
+      <div class="c-info"><div><div class="c-era">Stoneware · Set of 3</div><div class="c-name">Ceramic Vessel Set</div></div><div><div class="c-price">R 1,950</div></div></div>
+    </div>
+    <div class="c-card">
+      <div class="c-img"><img src="https://images.unsplash.com/photo-1538688525198-9b88f6f53126?w=500&q=85" alt="Desk"/>
+        <div class="c-img-overlay"><span class="c-badge sold">Sold</span><div class="c-actions"><button class="c-action-btn"><i class="fa-regular fa-heart"></i></button></div></div>
+      </div>
+      <div class="c-info"><div><div class="c-era">Oak + Brass · 1964</div><div class="c-name">Secretary Writing Desk</div></div><div><div class="c-price" style="color:var(--muted)">Sold</div></div></div>
+    </div>
+    <div class="c-card">
+      <div class="c-img"><img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=500&q=85" alt="Credenza"/>
+        <div class="c-img-overlay"><span class="c-badge">New In</span><div class="c-actions"><button class="c-action-btn"><i class="fa-regular fa-heart"></i></button><button class="c-action-btn"><i class="fa-solid fa-magnifying-glass"></i></button></div></div>
+        <button class="c-add-bar"><i class="fa-solid fa-bag-shopping"></i> Add to Cart</button>
+      </div>
+      <div class="c-info"><div><div class="c-era">Walnut · 1960</div><div class="c-name">Low Walnut Credenza</div></div><div><div class="c-price">R 11,200</div></div></div>
+    </div>
+    <div class="c-card">
+      <div class="c-img"><img src="https://images.unsplash.com/photo-1567016432779-094069958ea5?w=500&q=85" alt="Dining Chairs"/>
+        <div class="c-img-overlay"><span style="height:22px;display:block"></span><div class="c-actions"><button class="c-action-btn"><i class="fa-regular fa-heart"></i></button><button class="c-action-btn"><i class="fa-solid fa-magnifying-glass"></i></button></div></div>
+        <button class="c-add-bar"><i class="fa-solid fa-bag-shopping"></i> Add to Cart</button>
+      </div>
+      <div class="c-info"><div><div class="c-era">Teak + Fabric · 1958</div><div class="c-name">Teak Dining Chair Set</div></div><div><div class="c-price">R 7,600</div></div></div>
+    </div>
+  </div>
+  <div class="explore-footer">
+    <a href="#" class="btn-solid"><i class="fa-solid fa-grid-2"></i> Shop Now — View All Pieces</a>
+  </div>
+</div>
+
+<!-- WHY BUY VINTAGE -->
+<div class="why-section">
+  <div class="why-header">
+    <div>
+      <p class="eyebrow">A Sustainable Approach</p>
+      <h2 class="sec-title">Why Buy<br>Vintage<br><em style="font-family:var(--font-serif);font-style:italic;font-weight:300">Furniture?</em></h2>
+    </div>
+    <p class="why-lead">Buying pre-loved furniture extends its product life. Most of our pieces are more than 40 years old and will last at least another 40+. Vintage furniture is beautiful, timeless, unique, valuable, well designed, high quality, full of character and a future investment. When you buy vintage furniture you buy into a piece of history.</p>
+  </div>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-num">01</div>
+      <div class="why-icon-wrap"><i class="fa-solid fa-leaf"></i></div>
+      <div class="why-title">Sustainable Living</div>
+      <p class="why-body">Reduce, reuse and repurpose — vintage is the most sustainable furniture choice available. These pieces have already endured decades of use and will continue to serve for years to come with minimal maintenance.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-num">02</div>
+      <div class="why-icon-wrap"><i class="fa-solid fa-gem"></i></div>
+      <div class="why-title">Investment Value</div>
+      <p class="why-body">Each vintage item carries its own unique charm and story — making it more than furniture. A carefully curated piece is a future investment that only appreciates in value over time.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-num">03</div>
+      <div class="why-icon-wrap"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+      <div class="why-title">Lovingly Restored</div>
+      <p class="why-body">Every piece is meticulously cleaned, lightly restored and refinished to preserve its integrity — back as close as possible to its former glory. We care for each piece as if it were our own.</p>
+    </div>
+  </div>
+</div>
+
+<!-- UPCOMING -->
+<div class="upcoming-section">
+  <p class="eyebrow">On the Way</p>
+  <h2 class="sec-title">Coming Soon</h2>
+  <div class="upcoming-grid">
+    <div class="u-card"><div class="u-n">01</div><div class="u-label"><i class="fa-regular fa-clock"></i> &nbsp;Expected this week</div><div class="u-name">G-Plan Teak Dining Set</div><div class="u-price">From R 18,000</div><button class="notify-btn"><i class="fa-regular fa-bell"></i> Notify Me</button></div>
+    <div class="u-card"><div class="u-n">02</div><div class="u-label"><i class="fa-solid fa-screwdriver-wrench"></i> &nbsp;In restoration</div><div class="u-name">Parker Knoll Armchair Pair</div><div class="u-price">From R 11,500</div><button class="notify-btn"><i class="fa-regular fa-bell"></i> Notify Me</button></div>
+    <div class="u-card"><div class="u-n">03</div><div class="u-label"><i class="fa-solid fa-magnifying-glass"></i> &nbsp;Just sourced</div><div class="u-name">Full Teak Wall Unit</div><div class="u-price">From R 22,000</div><button class="notify-btn"><i class="fa-regular fa-bell"></i> Notify Me</button></div>
+    <div class="u-card"><div class="u-n">04</div><div class="u-label"><i class="fa-regular fa-star"></i> &nbsp;Coming soon</div><div class="u-name">Brass Sputnik Chandelier</div><div class="u-price">From R 6,800</div><button class="notify-btn"><i class="fa-regular fa-bell"></i> Notify Me</button></div>
+  </div>
+</div>
+
+<!-- IG FEED -->
+<div class="ig-section">
+  <div class="ig-header">
+    <div><p class="eyebrow">As Seen On Instagram</p><h2 class="sec-title">@midcenturist_sa</h2></div>
+    <a href="https://instagram.com/midcenturist_sa" target="_blank" class="btn-outline"><i class="fa-brands fa-instagram"></i> Follow Us for New Stock</a>
+  </div>
+  <div class="ig-grid">
+    <div class="ig-tile"><img src="https://images.unsplash.com/photo-1592078615290-033ee584e267?w=300&q=80" alt=""/><div class="ig-over"><span class="ig-price">R 14,500</span></div></div>
+    <div class="ig-tile"><img src="https://images.unsplash.com/photo-1567016432779-094069958ea5?w=300&q=80" alt=""/><div class="ig-over"><span class="ig-price">R 9,800</span></div><span class="ig-sold">Sold</span></div>
+    <div class="ig-tile"><img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=300&q=80" alt=""/><div class="ig-over"><span class="ig-price">R 22,000</span></div></div>
+    <div class="ig-tile"><img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=300&q=80" alt=""/><div class="ig-over"><span class="ig-price">R 1,950</span></div></div>
+    <div class="ig-tile"><img src="https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=300&q=80" alt=""/><div class="ig-over"><span class="ig-price">R 4,200</span></div></div>
+    <div class="ig-tile"><img src="https://images.unsplash.com/photo-1581428982868-e410dd047a90?w=300&q=80" alt=""/><div class="ig-over"><span class="ig-price">R 8,500</span></div><span class="ig-sold">Sold</span></div>
+  </div>
+</div>
+
+<!-- NEWSLETTER -->
+<section class="newsletter-section">
+  <div class="nl-image"><img src="https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=800&q=85" alt="Newsletter"/></div>
+  <div class="nl-text">
+    <p class="eyebrow">Stay in the Loop</p>
+    <h2 class="sec-title">First to see<br>new arrivals.</h2>
+    <p class="nl-sub">Please follow us on social media for new stock updates — or join our list. New pieces drop every week and the best ones go fast.</p>
+    <div class="nl-grid">
+      <input class="nl-input" type="text" placeholder="First name"/>
+      <input class="nl-input" type="text" placeholder="Last name"/>
+      <input class="nl-input" type="email" placeholder="Email address"/>
+      <input class="nl-input" type="tel" placeholder="Contact number"/>
+      <input class="nl-input nl-full" type="text" placeholder="Area / City"/>
+      <button class="nl-submit"><i class="fa-regular fa-paper-plane"></i> Subscribe to New Arrivals</button>
+      <p class="nl-fine"><i class="fa-solid fa-lock"></i> No spam. Unsubscribe anytime.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top-logo">
+    <div class="f-m">M</div>
+    <span class="f-brand">Midcenturist SA</span>
+    <div class="footer-socials">
+      <a href="#" class="fsoc"><i class="fa-brands fa-instagram"></i></a>
+      <a href="#" class="fsoc"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="#" class="fsoc"><i class="fa-brands fa-tiktok"></i></a>
+      <a href="#" class="fsoc"><i class="fa-brands fa-x-twitter"></i></a>
+      <a href="mailto:hello@midcenturist.co.za" class="fsoc"><i class="fa-regular fa-envelope"></i></a>
+    </div>
+  </div>
+  <div class="footer-grid">
+    <div>
+      <div class="f-col-title">Categories</div>
+      <ul class="f-links">
+        <li><a href="#"><i class="fa-solid fa-couch"></i> Seating</a></li>
+        <li><a href="#"><i class="fa-solid fa-boxes-stacked"></i> Sideboards &amp; Storage</a></li>
+        <li><a href="#"><i class="fa-regular fa-lightbulb"></i> Lighting</a></li>
+        <li><a href="#"><i class="fa-solid fa-table-cells-large"></i> Coffee &amp; Side Tables</a></li>
+        <li><a href="#"><i class="fa-solid fa-star"></i> Home Décor</a></li>
+        <li><a href="#"><i class="fa-solid fa-tag"></i> On Sale</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="f-col-title">Shop</div>
+      <ul class="f-links">
+        <li><a href="#"><i class="fa-solid fa-fire"></i> New Arrivals</a></li>
+        <li><a href="#"><i class="fa-regular fa-clock"></i> Coming Soon</a></li>
+        <li><a href="#"><i class="fa-solid fa-circle-check"></i> Available Items</a></li>
+        <li><a href="#"><i class="fa-solid fa-circle-xmark"></i> Sold Items</a></li>
+        <li><a href="#"><i class="fa-solid fa-tag"></i> On Sale</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="f-col-title">Info</div>
+      <ul class="f-links">
+        <li><a href="#"><i class="fa-solid fa-circle-info"></i> About Us</a></li>
+        <li><a href="#"><i class="fa-solid fa-wand-magic-sparkles"></i> Restoration Process</a></li>
+        <li><a href="#"><i class="fa-solid fa-shield-halved"></i> Authenticity</a></li>
+        <li><a href="#"><i class="fa-solid fa-handshake"></i> Sell a Piece</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="f-col-title">Support</div>
+      <ul class="f-links">
+        <li><a href="#"><i class="fa-solid fa-truck"></i> Shipping &amp; Collection</a></li>
+        <li><a href="#"><i class="fa-solid fa-money-bill-wave"></i> Layby Terms</a></li>
+        <li><a href="#"><i class="fa-solid fa-rotate-left"></i> Returns Policy</a></li>
+        <li><a href="#"><i class="fa-regular fa-envelope"></i> Contact Us</a></li>
+        <li><a href="#"><i class="fa-regular fa-circle-question"></i> FAQ</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Midcenturist SA. All rights reserved.</span>
+    <span>Powered by <span style="color:rgba(255,255,255,0.26)">Astro Technologies</span></span>
+  </div>
+</footer>
+
+<script>
+// ── MOBILE MENU TOGGLE ──
+const navMenuToggle = document.getElementById('navMenuToggle');
+const navLinks = document.querySelector('.nav-links');
+if (navMenuToggle) {
+  navMenuToggle.addEventListener('click', (e) => {
+    e.preventDefault();
+    navLinks.classList.toggle('active');
+  });
+  // Close menu when link clicked
+  document.querySelectorAll('.nav-links > li > a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('active');
+    });
+  });
+  // Handle Categories dropdown on mobile
+  const categoriesLi = document.querySelector('.nav-links > li.has-dropdown');
+  if (categoriesLi) {
+    const categoriesLink = categoriesLi.querySelector('a');
+    categoriesLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      categoriesLi.classList.toggle('active');
+    });
+  }
+}
+
+// ── ACTIVE NAV ──
+const navItems = document.querySelectorAll('.nav-center .nav-links > li');
+navItems.forEach(li => {
+  li.addEventListener('click', () => {
+    navItems.forEach(n => n.classList.remove('active'));
+    li.classList.add('active');
+  });
+});
+
+// ── CURSOR ──
+const dot = document.getElementById('cursorDot');
+const ring = document.getElementById('cursorRing');
+const label = document.getElementById('cursorLabel');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  dot.style.left = mx + 'px';
+  dot.style.top  = my + 'px';
+  label.style.left = mx + 'px';
+  label.style.top  = my + 'px';
+});
+
+function animRing() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.left = rx + 'px';
+  ring.style.top  = ry + 'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+
+document.addEventListener('mousedown', () => document.body.classList.add('cursor-click'));
+document.addEventListener('mouseup',   () => document.body.classList.remove('cursor-click'));
+
+// Elements that trigger expand + label
+const hoverEls = document.querySelectorAll('.shop-panel, .ig-tile, .c-card, .hslide');
+hoverEls.forEach(el => {
+  const lbl = el.dataset.label || 'View';
+  el.addEventListener('mouseenter', () => {
+    label.textContent = lbl;
+    document.body.classList.add('cursor-hover');
+  });
+  el.addEventListener('mouseleave', () => {
+    document.body.classList.remove('cursor-hover');
+  });
+});
+
+// ── HERO SLIDER ──
+let cur = 0, total = 4, timer;
+function updateSlider() {
+  document.getElementById('heroSlides').style.transform = `translateX(-${cur * 100}%)`;
+  document.querySelectorAll('.hero-dot').forEach((d,i) => d.classList.toggle('active', i === cur));
+}
+function changeSlide(dir) { cur = (cur + dir + total) % total; updateSlider(); resetTimer(); }
+function goSlide(n) { cur = n; updateSlider(); resetTimer(); }
+function goCategory(cat) { window.location.hash = cat; }
+function resetTimer() { clearInterval(timer); timer = setInterval(() => changeSlide(1), 6000); }
+resetTimer();
+
+// ── CAROUSEL ──
+function scrollCarousel(dir) {
+  document.getElementById('carousel').scrollBy({ left: dir * 640, behavior: 'smooth' });
+}
+</script>
+
+<!-- Elfsight WhatsApp Chat | Untitled WhatsApp Chat -->
+<script src="https://elfsightcdn.com/platform.js" async></script>
+<div class="elfsight-app-c54d0604-1998-44e6-9d95-d218ebdee956" data-elfsight-app-lazy></div>
+
+</body>
+</html>
