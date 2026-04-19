@@ -55,16 +55,23 @@ export default function Navbar() {
 
   useEffect(() => {
     let cancelled = false
-    getCategories()
-      .then(({ categories }) => {
-        if (cancelled) return
-        const counts: Record<string, number> = {}
-        for (const cat of categories) {
-          counts[cat.slug] = cat.product_count ?? 0
-        }
-        setCategoryCounts(counts)
-      })
-      .catch(() => {})
+    const fetchCounts = (attempt = 1) => {
+      getCategories()
+        .then(({ categories }) => {
+          if (cancelled) return
+          const counts: Record<string, number> = {}
+          for (const cat of categories) {
+            counts[cat.slug] = cat.product_count ?? 0
+          }
+          setCategoryCounts(counts)
+        })
+        .catch(() => {
+          if (!cancelled && attempt < 3) {
+            setTimeout(() => fetchCounts(attempt + 1), 3000)
+          }
+        })
+    }
+    fetchCounts()
     return () => { cancelled = true }
   }, [])
 
