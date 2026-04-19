@@ -9,7 +9,7 @@ export const CATEGORIES = [
   { label: 'Dining Room', count: 0, href: '/categories/dining-room', icon: 'fa-utensils' },
   { label: 'Bedroom', count: 0, href: '/categories/bedroom', icon: 'fa-bed' },
   { label: 'Décor Elements', count: 0, href: '/categories/decor-elements', icon: 'fa-star' },
-  { label: 'Creative Workspace', count: 0, href: '/categories/creative-workspace', icon: 'fa-briefcase' },
+  { label: 'Creative Workspace', count: 0, href: '/categories/creative-workspaces', icon: 'fa-briefcase' },
   { label: 'Outdoor', count: 0, href: '/categories/outdoor', icon: 'fa-tree' },
 ]
 
@@ -27,7 +27,7 @@ export const FOOTER_LINKS = {
     { label: 'Dining Room', href: '/categories/dining-room', icon: 'fa-utensils' },
     { label: 'Bedroom', href: '/categories/bedroom', icon: 'fa-bed' },
     { label: 'Décor Elements', href: '/categories/decor-elements', icon: 'fa-star' },
-    { label: 'Creative Workspace', href: '/categories/creative-workspace', icon: 'fa-briefcase' },
+    { label: 'Creative Workspace', href: '/categories/creative-workspaces', icon: 'fa-briefcase' },
     { label: 'Outdoor', href: '/categories/outdoor', icon: 'fa-tree' },
   ],
   Shop: [
