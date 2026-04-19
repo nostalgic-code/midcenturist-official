@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  cursor: none;
+}
+
+@media (pointer: coarse) {
+  * {
+    cursor: auto;
+  }
+}
+
+::selection {
+  background-color: #0c0b0a;
+  color: #f6f4f1;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Century Gothic', 'Josefin Sans', sans-serif;
+  font-weight: 200;
+  background-color: #ffffff;
+  color: #0c0b0a;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Premium Typography ─── */
+.display-heading {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 300;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+}
+
+.label-caps {
+  font-family: 'Century Gothic', 'Josefin Sans', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 300;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+/* ─── Nav Underline ─── */
+.nav-link-underline {
+  transform: scaleX(0);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.nav-link-underline.active,
+.nav-link:hover .nav-link-underline {
+  transform: scaleX(1);
+}
+
+/* ─── Image Treatments ─── */
+.img-grey {
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.img-grey:hover,
+.group:hover .img-grey {
+  /* hover effect preserved without grayscale */
+}
+
+/* ─── Reveal Animations ─── */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-up.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-fade {
+  opacity: 0;
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-fade.revealed {
+  opacity: 1;
+}
+
+.stagger-child {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.stagger-child.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Parallax Layer ─── */
+.parallax-img {
+  will-change: transform;
+  transition: transform 0.1s linear;
+}
+
+/* ─── Ticker ─── */
+@keyframes tick {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.ticker-track {
+  animation: tick 38s linear infinite;
+}
+
+/* ─── Scrollbar ─── */
+.overflow-x-auto::-webkit-scrollbar,
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ─── Frosted Glass ─── */
+.glass {
+  background: rgba(255, 255, 255, 0.06);
+  border: 0.5px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* ─── Horizontal Rule ─── */
+.rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(12,11,10,0.12) 30%, rgba(12,11,10,0.12) 70%, transparent);
+}
+
+/* ─── Magnetic Button Hover ─── */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #f6f4f1;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 0;
+}
+.btn-primary:hover::before {
+  transform: translateY(0);
+}
+.btn-primary:hover {
+  color: #0c0b0a;
+}
+.btn-primary > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Smooth Image Zoom on Section ─── */
+.zoom-on-scroll {
+  will-change: transform;
+  transition: transform 8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.zoom-on-scroll:hover {
+  transform: scale(1.04);
+}
+
+/* ─── GSAP Horizontal Showcase ─── */
+.hz-track {
+  will-change: transform;
+}
+.hz-panel img {
+  will-change: transform;
+}
+
+/* ─── Grain Texture Overlay ─── */
+.grain-overlay {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.5'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+}
+
+/* ─── Clip-path Reveal Utility ─── */
+.clip-reveal {
+  will-change: clip-path;
+}
+
+/* ─── Page Transition ─── */
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+main {
+  animation: pageIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
