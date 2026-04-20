@@ -117,7 +117,7 @@ export default function ContactPage() {
         <div className="absolute -bottom-20 -right-20 h-72 w-72 rounded-full bg-[#b58a59]/20 blur-3xl" />
         <div className="absolute -left-20 top-12 h-72 w-72 rounded-full bg-[#d2b287]/20 blur-3xl" />
 
-        <div className="relative z-10 max-w-7xl px-8 py-28 md:px-12 md:py-36">
+        <div className="relative z-10 max-w-7xl mx-auto px-8 py-28 md:px-12 md:py-36">
           <div className="hero-kicker mb-6 flex items-center gap-3">
             <span className="h-[0.5px] w-8 bg-white/20" />
             <span className="label-caps text-white/60">
@@ -156,7 +156,7 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Grid */}
-      <section className="max-w-7xl px-8 py-20 md:px-12 md:py-28">
+      <section className="max-w-7xl mx-auto px-8 py-20 md:px-12 md:py-28">
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-[1fr_1.2fr] lg:gap-24 items-start">
           {/* Left — Info */}
           <div className="lg:pt-12">
