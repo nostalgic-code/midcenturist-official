@@ -118,9 +118,9 @@ export default function ContactPage() {
         <div className="absolute -left-20 top-12 h-72 w-72 rounded-full bg-[#d2b287]/20 blur-3xl" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-8 py-28 md:px-12 md:py-36">
-          <div className="hero-kicker mb-6 flex items-center gap-4">
-            <span className="h-px w-16 bg-white/45" />
-            <span className="block font-sans text-[0.6rem] uppercase tracking-[0.3em] text-white/60">
+          <div className="hero-kicker mb-6 flex items-center gap-3">
+            <span className="h-[0.5px] w-8 bg-white/40" />
+            <span className="label-caps text-white/60">
               Get in Touch
             </span>
           </div>
