@@ -136,7 +136,7 @@ export default function Navbar() {
               alt="Midcenturist SA"
               width={580}
               height={156}
-              className="h-[150px] w-[300px] object-contain"
+              className="h-[170px] w-[340px] object-contain"
               priority
             />
           </Link>
