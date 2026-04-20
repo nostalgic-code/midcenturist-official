@@ -32,6 +32,7 @@ const VALUES = [
 const SECTIONS = [
   {
     label: 'Our Story',
+    num: '01',
     title: 'A curated furniture house\n& aspirational brand',
     body: [
       'Midcenturist is a curated furniture house, and aspirational brand, dedicated to sourcing, restoration and offering timeless, collectable and iconic Mid-century, Danish, and Retro furniture and décor elements.',
@@ -44,6 +45,7 @@ const SECTIONS = [
   },
   {
     label: 'Our Mission',
+    num: '02',
     title: 'Character-filled living\n& creative work spaces',
     body: [
       'To enable our customers to create character-filled living and creative work spaces that perfectly blend simplicity, functionality and form.',
@@ -53,6 +55,7 @@ const SECTIONS = [
   },
   {
     label: 'Our Philosophy',
+    num: '03',
     title: 'Honouring design pieces\nmade in the middle of the century',
     body: [
       'To honour design pieces made in the middle of the century, through thoughtfully restoring them for the future.',
@@ -71,13 +74,17 @@ export default function AboutStory() {
     <div className="bg-brand-white">
       <Hero />
 
-      {/* Spacer between hero and content sections */}
+      {/* Spacer */}
       <div className="h-16 md:h-24" />
 
-      <div className="space-y-16 md:space-y-24">
-        {SECTIONS.map((section, i) => (
-          <ContentSection key={section.label} section={section} index={i} />
-        ))}
+      {/* Chapter navigation dots (sticky on desktop) */}
+      <div className="relative">
+        <ChapterNav />
+        <div className="space-y-0">
+          {SECTIONS.map((section, i) => (
+            <StoryChapter key={section.label} section={section} index={i} total={SECTIONS.length} />
+          ))}
+        </div>
       </div>
 
       {/* Spacer before values */}
@@ -88,7 +95,7 @@ export default function AboutStory() {
   )
 }
 
-/* ─── Hero — full-bleed image with staggered text ───────────────── */
+/* ─── Hero — full-bleed image with animated line + label ────────── */
 
 function Hero() {
   const ref = useRef<HTMLDivElement>(null)
@@ -121,14 +128,23 @@ function Hero() {
         className="relative z-10 h-full flex flex-col justify-end pb-12 md:pb-28 px-6 md:px-16 lg:px-24 max-w-[1400px] mx-auto"
         style={{ y: textY, opacity }}
       >
-        <motion.span
-          className="label-caps text-white/40 mb-5 block"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+        {/* Animated line + label (matching hero slider pattern) */}
+        <motion.div
+          className="flex items-center gap-4 mb-5"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          About Midcenturist
-        </motion.span>
+          <motion.div
+            className="h-[1px] bg-white/40 origin-left"
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            style={{ width: 48 }}
+          />
+          <span className="label-caps text-white/60">About Midcenturist</span>
+        </motion.div>
+
         <h1 className="font-serif text-[clamp(2.8rem,7vw,6.5rem)] font-light text-white leading-[0.95] max-w-4xl overflow-hidden">
           <motion.span
             className="block"
@@ -159,31 +175,93 @@ function Hero() {
   )
 }
 
-/* ─── Content Sections — image left, text right with scroll anim ── */
+/* ─── Chapter Navigation — sticky side dots ─────────────────────── */
 
-function ContentSection({
+function ChapterNav() {
+  return (
+    <div className="hidden lg:flex fixed right-8 top-1/2 -translate-y-1/2 z-30 flex-col items-center gap-3">
+      {SECTIONS.map((s, i) => (
+        <a
+          key={s.label}
+          href={`#chapter-${i}`}
+          className="group flex items-center gap-3"
+        >
+          <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 label-caps text-brand-black/50 text-[0.65rem]">
+            {s.label}
+          </span>
+          <span className="w-2 h-2 rounded-full border border-brand-black/20 group-hover:bg-brand-black/60 group-hover:border-brand-black/60 transition-all duration-300" />
+        </a>
+      ))}
+    </div>
+  )
+}
+
+/* ─── Story Chapter — modern storytelling section ───────────────── */
+
+function StoryChapter({
   section,
   index,
+  total,
 }: {
   section: (typeof SECTIONS)[number]
   index: number
+  total: number
 }) {
   const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: '-12%' })
+  const isInView = useInView(ref, { once: true, margin: '-8%' })
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
-  const imgScale = useTransform(scrollYProgress, [0, 0.6], [1.12, 1])
-  const imgY = useTransform(scrollYProgress, [0, 1], ['-3%', '3%'])
-  const textOpacity = useTransform(scrollYProgress, [0.1, 0.35], [0, 1])
+  const imgScale = useTransform(scrollYProgress, [0, 0.5], [1.08, 1])
+  const imgY = useTransform(scrollYProgress, [0, 1], ['-2%', '2%'])
+  const progressWidth = useTransform(scrollYProgress, [0, 0.6], ['0%', '100%'])
 
-  // Alternate background for visual rhythm
-  const bg = index % 2 === 0 ? 'bg-brand-off' : 'bg-white'
+  const isEven = index % 2 === 0
 
   return (
-    <section ref={ref} className={`relative overflow-hidden rounded-lg mx-3 md:mx-8 ${bg}`}>
-      <div className="max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-[0.85fr_1fr] gap-6 md:gap-12 items-center py-8 md:py-16 px-4 sm:px-6 md:px-12 lg:px-16">
-          {/* Image — always left, contained size */}
-          <div className="relative overflow-hidden rounded-md aspect-[4/3] max-h-[320px] md:max-h-[480px]">
+    <section
+      ref={ref}
+      id={`chapter-${index}`}
+      className="relative scroll-mt-20"
+    >
+      {/* Progress line at top */}
+      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 md:px-16 lg:px-24">
+        <div className="h-px bg-brand-black/[0.06] relative overflow-hidden">
+          <motion.div
+            className="absolute inset-y-0 left-0 bg-brand-black/20"
+            style={{ width: progressWidth }}
+          />
+        </div>
+      </div>
+
+      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 md:px-16 lg:px-24 py-16 md:py-28">
+        {/* Chapter header — number + label */}
+        <motion.div
+          className="flex items-center gap-5 mb-10 md:mb-14"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <span className="font-serif text-[2.5rem] md:text-[3.5rem] text-brand-black/[0.08] leading-none select-none">
+            {section.num}
+          </span>
+          <motion.div
+            className="h-px bg-brand-black/20 origin-left"
+            initial={{ scaleX: 0 }}
+            animate={isInView ? { scaleX: 1 } : {}}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            style={{ width: 40 }}
+          />
+          <span className="label-caps text-brand-muted">{section.label}</span>
+        </motion.div>
+
+        {/* Content grid — alternates image side for visual interest */}
+        <div className={`grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 lg:gap-20 items-center ${!isEven ? 'lg:direction-rtl' : ''}`}>
+          {/* Image with reveal */}
+          <motion.div
+            className={`relative overflow-hidden rounded-sm aspect-[4/3] max-h-[380px] md:max-h-[460px] ${!isEven ? 'lg:order-2' : ''}`}
+            initial={{ opacity: 0, clipPath: 'inset(0 100% 0 0)' }}
+            animate={isInView ? { opacity: 1, clipPath: 'inset(0 0% 0 0)' } : {}}
+            transition={{ duration: 1.2, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          >
             <motion.div
               className="absolute inset-0"
               style={{ scale: imgScale, y: imgY }}
@@ -195,87 +273,60 @@ function ContentSection({
                 className="object-cover"
               />
             </motion.div>
-
-            {/* Cinematic overlay gradient */}
             <div
               className="absolute inset-0"
-              style={{ background: 'linear-gradient(135deg, rgba(12,11,10,0.08) 0%, transparent 60%)' }}
+              style={{ background: 'linear-gradient(to top, rgba(12,11,10,0.06) 0%, transparent 40%)' }}
               aria-hidden="true"
             />
+          </motion.div>
 
-            {/* Section number — large, pinned bottom-left */}
-            <motion.div
-              className="absolute bottom-4 left-4 md:bottom-8 md:left-8 z-10"
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <span className="font-serif text-[4rem] md:text-[8rem] text-white/[0.12] leading-none select-none">
-                {String(index + 1).padStart(2, '0')}
-              </span>
-            </motion.div>
-          </div>
-
-          {/* Text — always right */}
-          <motion.div
-            className="flex flex-col justify-center px-2 py-6 sm:px-4 md:px-8 lg:px-12 md:py-0 overflow-hidden"
-            style={{ opacity: textOpacity }}
-          >
-            {/* Label with accent line */}
-            <motion.div
-              className="flex items-center gap-4 mb-8"
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : {}}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              <motion.div
-                className="w-8 h-px bg-brand-black/30"
-                initial={{ scaleX: 0, originX: 0 }}
-                animate={isInView ? { scaleX: 1 } : {}}
-                transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                aria-hidden="true"
-              />
-              <span className="label-caps text-brand-muted">{section.label}</span>
-            </motion.div>
-
-            {/* Title with clip reveal */}
-            <div className="overflow-hidden mb-10">
+          {/* Text content */}
+          <div className={`${!isEven ? 'lg:order-1' : ''}`}>
+            {/* Title */}
+            <div className="overflow-hidden mb-8">
               <motion.h2
                 className="font-serif text-[clamp(1.8rem,3vw,2.8rem)] font-light text-brand-black leading-[1.15] whitespace-pre-line"
                 initial={{ y: '110%' }}
                 animate={isInView ? { y: 0 } : {}}
-                transition={{ duration: 1, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
               >
                 {section.title}
               </motion.h2>
             </div>
 
-            {/* Body paragraphs */}
-            <div className="space-y-6">
+            {/* Body paragraphs — staggered reveal */}
+            <div className="space-y-5">
               {section.body.map((paragraph, pi) => (
                 <motion.p
                   key={pi}
-                  className="text-[0.85rem] text-brand-black/80 font-light leading-[2.1] tracking-[0.015em]"
-                  initial={{ opacity: 0, y: 20 }}
+                  className="text-[0.85rem] text-brand-black/75 font-light leading-[2.1] tracking-[0.015em]"
+                  initial={{ opacity: 0, y: 18 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.6, delay: 0.55 + pi * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 0.6, delay: 0.5 + pi * 0.1, ease: [0.22, 1, 0.36, 1] }}
                 >
                   {paragraph}
                 </motion.p>
               ))}
             </div>
 
-            {/* Bottom accent */}
+            {/* Bottom accent line */}
             <motion.div
-              className="w-10 h-px bg-brand-black/10 mt-12"
+              className="w-10 h-px bg-brand-black/10 mt-10"
               initial={{ scaleX: 0, originX: 0 }}
               animate={isInView ? { scaleX: 1 } : {}}
               transition={{ duration: 1, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
               aria-hidden="true"
             />
-          </motion.div>
+          </div>
         </div>
       </div>
+
+      {/* Final divider after last section */}
+      {index === total - 1 && (
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 md:px-16 lg:px-24">
+          <div className="h-px bg-brand-black/[0.06]" />
+        </div>
+      )}
     </section>
   )
 }
