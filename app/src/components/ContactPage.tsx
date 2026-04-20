@@ -159,7 +159,7 @@ export default function ContactPage() {
       <section className="max-w-7xl mx-auto px-8 py-20 md:px-12 md:py-28">
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-[1fr_1.2fr] lg:gap-24 items-start">
           {/* Left — Info */}
-          <div className="lg:pt-12">
+          <div>
             <motion.h2
               className="font-serif text-[clamp(2rem,3.2vw,3rem)] font-light leading-[1.08] text-brand-black mb-10"
               initial="hidden"
