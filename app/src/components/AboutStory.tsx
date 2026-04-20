@@ -2,36 +2,66 @@
 
 import React, { useRef } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import { motion, useScroll, useTransform, useInView } from 'framer-motion'
 
 /* ─── Data ──────────────────────────────────────────────────────── */
 
 const VALUES = [
   {
     num: '01',
-    word: 'Source',
-    text: 'We travel far and wide to find authentic mid-century pieces with strong design heritage and solid bones.',
+    word: 'Authenticity',
+    text: 'Every piece we sell is genuine mid-century — sourced, verified, and selected for its design heritage and provenance.',
   },
   {
     num: '02',
-    word: 'Restore',
-    text: 'Our craftsmanship honours each object\u2019s original intent — breathing new life without erasing character.',
+    word: 'Craftsmanship',
+    text: 'We restore with reverence. Original materials, traditional techniques, and an obsessive attention to detail define our process.',
   },
   {
     num: '03',
-    word: 'Curate',
-    text: 'Every piece is selected for its design integrity, historical significance, and condition. We deal in meaning.',
+    word: 'Integrity',
+    text: 'We believe in transparency — honest descriptions, fair pricing, and standing behind every piece that leaves our workshop.',
+  },
+  {
+    num: '04',
+    word: 'Sustainability',
+    text: 'Choosing vintage is choosing well. We extend the life of beautifully made objects, keeping craft alive and waste out of landfills.',
   },
 ]
 
-const CATEGORIES = [
-  { name: 'Living Room', slug: 'living-room', image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80' },
-  { name: 'Dining Room', slug: 'dining-room', image: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=800&q=80' },
-  { name: 'Bedroom', slug: 'bedroom', image: 'https://images.unsplash.com/photo-1540518614846-7eded433c457?w=800&q=80' },
-  { name: 'D\u00e9cor', slug: 'decor-elements', image: 'https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800&q=80' },
+const SECTIONS = [
+  {
+    label: 'Our Story',
+    title: 'A curated furniture house\n& aspirational brand',
+    body: [
+      'Midcenturist is a curated furniture house, and aspirational brand, dedicated to sourcing, restoration and offering timeless, collectable and iconic Mid-century, Danish, and Retro furniture and décor elements.',
+      'We source far and wide for artful and elegant iconic design furniture pieces and home décor elements, with strong design heritage, solid structure and potential for full restoration, ensuring that each of the pieces meet our standards for practicality, longevity, comfort, and visual impact.',
+      'From statement couches, armchairs, dining room suites, lounge sets, sideboards, coffee tables, lighting, bedroom suites, to vases, our curated collection are pieces built for quality, durability, design significance and integrity, coupled with the beauty of mid-century modern designs.',
+      'Our unique edge is our ability to balance environmental sustainability, simplicity, organic shapes, form and function, while blending warm woods, clean lines, sleek designs, eclectic touches and iconic silhouettes that feel both nostalgic yet forward looking.',
+    ],
+    image: '/images/suede%20couch/images/PHOTO-2026-04-15-18-49-00.jpg',
+    imageAlt: 'Curated mid-century furniture showroom',
+  },
+  {
+    label: 'Our Mission',
+    title: 'Character-filled living\n& creative work spaces',
+    body: [
+      'To enable our customers to create character-filled living and creative work spaces that perfectly blend simplicity, functionality and form.',
+    ],
+    image: '/images/office%20couch/images%20(1)/PHOTO-2026-04-15-18-48-00.jpg',
+    imageAlt: 'Restored mid-century modern couch',
+  },
+  {
+    label: 'Our Philosophy',
+    title: 'Honouring design pieces\nmade in the middle of the century',
+    body: [
+      'To honour design pieces made in the middle of the century, through thoughtfully restoring them for the future.',
+      'We believe we are Mid-century Woodsmiths, purely because we profoundly believe in the enduring value of good mid-century designs.',
+      'Our restorative craftsmanship reflects a deep respect for original materials and in the process, we breathe new life into mid-century iconic pieces, preserving their story and ensuring they remain functional pieces of art for generations to come.',
+    ],
+    image: '/images/folder%2030/images30/PHOTO-2026-04-15-18-51-53.jpg',
+    imageAlt: 'Mid-century walnut dining set',
+  },
 ]
 
 /* ─── Component ─────────────────────────────────────────────────── */
@@ -40,16 +70,25 @@ export default function AboutStory() {
   return (
     <div className="bg-brand-white">
       <Hero />
-      <Origin />
-      <ValueStrip />
-      <Philosophy />
-      <CategoryReel />
-      <ClosingCTA />
+
+      {/* Spacer between hero and content sections */}
+      <div className="h-16 md:h-24" />
+
+      <div className="space-y-16 md:space-y-24">
+        {SECTIONS.map((section, i) => (
+          <ContentSection key={section.label} section={section} index={i} />
+        ))}
+      </div>
+
+      {/* Spacer before values */}
+      <div className="h-16 md:h-24" />
+
+      <ValuesGrid />
     </div>
   )
 }
 
-/* ─── Hero — full-bleed image with parallax text ────────────────── */
+/* ─── Hero — full-bleed image with staggered text ───────────────── */
 
 function Hero() {
   const ref = useRef<HTMLDivElement>(null)
@@ -63,7 +102,7 @@ function Hero() {
       {/* Parallax background */}
       <motion.div className="absolute inset-0" style={{ y: imgY }}>
         <Image
-          src="https://images.unsplash.com/photo-1538688525198-9b88f6f53126?w=1600&q=85"
+          src="/images/chairs/images2/PHOTO-2026-04-15-18-51-17.jpg"
           alt="Mid-century modern interior"
           fill
           priority
@@ -82,74 +121,159 @@ function Hero() {
         className="relative z-10 h-full flex flex-col justify-end pb-20 md:pb-28 px-8 md:px-16 lg:px-24 max-w-[1400px] mx-auto"
         style={{ y: textY, opacity }}
       >
-        <span className="label-caps text-white/40 mb-5 block">About Midcenturist</span>
-        <h1 className="font-serif text-[clamp(2.8rem,7vw,6.5rem)] font-light text-white leading-[0.95] max-w-4xl">
-          Objects that carry
-          <br />
-          <span className="italic">decades of story.</span>
+        <motion.span
+          className="label-caps text-white/40 mb-5 block"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          About Midcenturist
+        </motion.span>
+        <h1 className="font-serif text-[clamp(2.8rem,7vw,6.5rem)] font-light text-white leading-[0.95] max-w-4xl overflow-hidden">
+          <motion.span
+            className="block"
+            initial={{ y: '100%' }}
+            animate={{ y: 0 }}
+            transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          >
+            Midcentury
+          </motion.span>
+          <motion.span
+            className="block italic"
+            initial={{ y: '100%' }}
+            animate={{ y: 0 }}
+            transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          >
+            Woodsmiths
+          </motion.span>
         </h1>
-        <div className="w-16 h-px bg-white/20 mt-10" aria-hidden="true" />
+        <motion.div
+          className="w-16 h-px bg-white/20 mt-10"
+          initial={{ scaleX: 0, originX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 1.2, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          aria-hidden="true"
+        />
       </motion.div>
     </section>
   )
 }
 
-/* ─── Origin — split image + text with scroll reveal ────────────── */
+/* ─── Content Sections — image left, text right with scroll anim ── */
 
-function Origin() {
+function ContentSection({
+  section,
+  index,
+}: {
+  section: (typeof SECTIONS)[number]
+  index: number
+}) {
   const ref = useRef<HTMLDivElement>(null)
+  const isInView = useInView(ref, { once: true, margin: '-12%' })
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
-  const imgScale = useTransform(scrollYProgress, [0, 0.5], [1.12, 1])
+  const imgScale = useTransform(scrollYProgress, [0, 0.6], [1.12, 1])
+  const imgY = useTransform(scrollYProgress, [0, 1], ['-3%', '3%'])
+  const textX = useTransform(scrollYProgress, [0.1, 0.4], [60, 0])
   const textOpacity = useTransform(scrollYProgress, [0.1, 0.35], [0, 1])
-  const textY = useTransform(scrollYProgress, [0.1, 0.35], [60, 0])
+
+  // Alternate background for visual rhythm
+  const bg = index % 2 === 0 ? 'bg-brand-off' : 'bg-white'
 
   return (
-    <section ref={ref} className="py-24 md:py-36">
-      <div className="max-w-[1400px] mx-auto px-8 md:px-16 lg:px-24">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
-          {/* Image */}
-          <div className="relative aspect-[4/5] overflow-hidden">
-            <motion.div className="absolute inset-0" style={{ scale: imgScale }}>
+    <section ref={ref} className={`relative overflow-hidden rounded-lg mx-4 md:mx-8 ${bg}`}>
+      <div className="max-w-[1400px] mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-[0.85fr_1fr] gap-8 md:gap-12 items-center py-12 md:py-16 px-6 md:px-12 lg:px-16">
+          {/* Image — always left, contained size */}
+          <div className="relative overflow-hidden rounded-md aspect-[4/3] max-h-[480px]">
+            <motion.div
+              className="absolute inset-0"
+              style={{ scale: imgScale, y: imgY }}
+            >
               <Image
-                src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1000&q=85"
-                alt="Curated mid-century furniture"
+                src={section.image}
+                alt={section.imageAlt}
                 fill
                 className="object-cover"
-                style={{ filter: 'brightness(0.8)' }}
               />
             </motion.div>
-            {/* Caption tag */}
-            <div className="absolute bottom-6 left-6 z-10">
-              <span className="label-caps text-white/50 bg-brand-black/60 backdrop-blur-sm px-4 py-2">
-                Johannesburg, SA &mdash; Est. 2018
+
+            {/* Cinematic overlay gradient */}
+            <div
+              className="absolute inset-0"
+              style={{ background: 'linear-gradient(135deg, rgba(12,11,10,0.08) 0%, transparent 60%)' }}
+              aria-hidden="true"
+            />
+
+            {/* Section number — large, pinned bottom-left */}
+            <motion.div
+              className="absolute bottom-8 left-8 z-10"
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <span className="font-serif text-[6rem] md:text-[8rem] text-white/[0.12] leading-none select-none">
+                {String(index + 1).padStart(2, '0')}
               </span>
-            </div>
+            </motion.div>
           </div>
 
-          {/* Text */}
-          <motion.div style={{ opacity: textOpacity, y: textY }}>
-            <span className="label-caps text-brand-muted block mb-4">Our Story</span>
-            <h2 className="font-serif text-[clamp(2rem,3.5vw,3rem)] font-light text-brand-black leading-[1.15] mb-8">
-              A curated destination for mid-century modern design
-            </h2>
-            <div className="space-y-5">
-              <p className="text-[0.88rem] text-brand-black/60 font-light leading-[2] tracking-[0.01em]">
-                Midcenturist began with a simple conviction: furniture should be more than
-                functional &mdash; it should be meaningful. Each piece we offer has been lived with,
-                admired, and made to last.
-              </p>
-              <p className="text-[0.88rem] text-brand-black/60 font-light leading-[2] tracking-[0.01em]">
-                We source from the 1940s through the 1970s &mdash; an era defined by clean lines,
-                organic forms, and the honest use of materials like teak, walnut, brass, and
-                ceramic. Our role is to find these objects, restore them with care, and place them
-                with people who see their value.
-              </p>
-              <p className="text-[0.88rem] text-brand-black/60 font-light leading-[2] tracking-[0.01em]">
-                Based in South Africa, we serve a growing community of design-conscious individuals,
-                interior designers, and collectors who share our appreciation for this golden era of
-                design.
-              </p>
+          {/* Text — always right */}
+          <motion.div
+            className="flex flex-col justify-center px-6 py-10 md:px-8 lg:px-12 md:py-0"
+            style={{ x: textX, opacity: textOpacity }}
+          >
+            {/* Label with accent line */}
+            <motion.div
+              className="flex items-center gap-4 mb-8"
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              <motion.div
+                className="w-8 h-px bg-brand-black/30"
+                initial={{ scaleX: 0, originX: 0 }}
+                animate={isInView ? { scaleX: 1 } : {}}
+                transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                aria-hidden="true"
+              />
+              <span className="label-caps text-brand-muted">{section.label}</span>
+            </motion.div>
+
+            {/* Title with clip reveal */}
+            <div className="overflow-hidden mb-10">
+              <motion.h2
+                className="font-serif text-[clamp(1.8rem,3vw,2.8rem)] font-light text-brand-black leading-[1.15] whitespace-pre-line"
+                initial={{ y: '110%' }}
+                animate={isInView ? { y: 0 } : {}}
+                transition={{ duration: 1, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {section.title}
+              </motion.h2>
             </div>
+
+            {/* Body paragraphs */}
+            <div className="space-y-6">
+              {section.body.map((paragraph, pi) => (
+                <motion.p
+                  key={pi}
+                  className="text-[0.85rem] text-brand-black/80 font-light leading-[2.1] tracking-[0.015em]"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.6, delay: 0.55 + pi * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  {paragraph}
+                </motion.p>
+              ))}
+            </div>
+
+            {/* Bottom accent */}
+            <motion.div
+              className="w-10 h-px bg-brand-black/10 mt-12"
+              initial={{ scaleX: 0, originX: 0 }}
+              animate={isInView ? { scaleX: 1 } : {}}
+              transition={{ duration: 1, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              aria-hidden="true"
+            />
           </motion.div>
         </div>
       </div>
@@ -157,23 +281,42 @@ function Origin() {
   )
 }
 
-/* ─── Values — horizontal scroll-reveal strip ───────────────────── */
+/* ─── Values Grid — 4-column with stagger reveal ────────────────── */
 
-function ValueStrip() {
+function ValuesGrid() {
   const ref = useRef<HTMLDivElement>(null)
+  const isInView = useInView(ref, { once: true, margin: '-10%' })
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
 
   return (
-    <section ref={ref} className="bg-brand-black py-28 md:py-36 overflow-hidden">
+    <section ref={ref} className="bg-brand-black py-28 md:py-40 overflow-hidden">
       <div className="max-w-[1400px] mx-auto px-8 md:px-16 lg:px-24">
-        <span className="label-caps text-white/30 block mb-4">How We Work</span>
-        <h2 className="font-serif text-[clamp(2rem,3.5vw,3rem)] font-light text-white leading-[1.15] mb-20 max-w-xl">
-          Every piece, handled with intention
-        </h2>
+        {/* Header */}
+        <div className="mb-20 md:mb-24">
+          <motion.span
+            className="label-caps text-white/30 block mb-4"
+            initial={{ opacity: 0, y: 15 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+          >
+            Our Values
+          </motion.span>
+          <div className="overflow-hidden">
+            <motion.h2
+              className="font-serif text-[clamp(2rem,3.5vw,3rem)] font-light text-white leading-[1.15] max-w-xl"
+              initial={{ y: '100%' }}
+              animate={isInView ? { y: 0 } : {}}
+              transition={{ duration: 0.9, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            >
+              What we stand for
+            </motion.h2>
+          </div>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-t border-white/10">
+        {/* 4-column grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-0 border-t border-white/10">
           {VALUES.map((v, i) => (
-            <ValueCard key={v.num} value={v} index={i} progress={scrollYProgress} />
+            <ValueCard key={v.num} value={v} index={i} isInView={isInView} progress={scrollYProgress} />
           ))}
         </div>
       </div>
@@ -184,194 +327,48 @@ function ValueStrip() {
 function ValueCard({
   value,
   index,
+  isInView,
   progress,
 }: {
   value: (typeof VALUES)[number]
   index: number
+  isInView: boolean
   progress: ReturnType<typeof useScroll>['scrollYProgress']
 }) {
-  const start = 0.15 + index * 0.08
-  const end = start + 0.15
-  const opacity = useTransform(progress, [start, end], [0, 1])
-  const y = useTransform(progress, [start, end], [40, 0])
+  const hoverY = useTransform(progress, [0.3, 0.7], [15, -15])
 
   return (
     <motion.div
-      className="border-b md:border-b-0 md:border-r last:border-r-0 border-white/10 py-12 md:py-16 md:px-10 first:md:pl-0 last:md:pr-0"
-      style={{ opacity, y }}
+      className="border-b sm:border-b md:border-b-0 sm:odd:border-r md:border-r md:last:border-r-0 border-white/10 py-12 md:py-16 md:px-8 first:md:pl-0 last:md:pr-0 group"
+      initial={{ opacity: 0, y: 40 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.7, delay: 0.2 + index * 0.12, ease: [0.22, 1, 0.36, 1] }}
     >
-      <span className="font-serif text-[4rem] text-white/[0.05] block leading-none mb-6">
+      {/* Large number watermark */}
+      <motion.span
+        className="font-serif text-[5rem] md:text-[6rem] text-white/[0.03] block leading-none mb-4 select-none transition-colors duration-700 group-hover:text-white/[0.06]"
+        style={{ y: hoverY }}
+      >
         {value.num}
-      </span>
-      <h3 className="font-serif text-2xl text-white font-light mb-4 italic">{value.word}</h3>
-      <p className="text-[0.82rem] text-white/40 font-light leading-[2]">{value.text}</p>
+      </motion.span>
+
+      {/* Accent line */}
+      <motion.div
+        className="w-6 h-px bg-white/20 mb-5"
+        initial={{ scaleX: 0, originX: 0 }}
+        animate={isInView ? { scaleX: 1 } : {}}
+        transition={{ duration: 0.8, delay: 0.4 + index * 0.12, ease: [0.22, 1, 0.36, 1] }}
+        aria-hidden="true"
+      />
+
+      <h3 className="font-serif text-xl md:text-2xl text-white font-light mb-4 italic tracking-wide">
+        {value.word}
+      </h3>
+      <p className="text-[0.82rem] text-white/35 font-light leading-[2]">
+        {value.text}
+      </p>
     </motion.div>
   )
 }
 
-/* ─── Philosophy — cinematic quote with parallax ────────────────── */
 
-function Philosophy() {
-  const ref = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
-  const quoteOpacity = useTransform(scrollYProgress, [0.15, 0.35], [0, 1])
-  const quoteScale = useTransform(scrollYProgress, [0.15, 0.35], [0.96, 1])
-  const lineScaleX = useTransform(scrollYProgress, [0.2, 0.4], [0, 1])
-
-  return (
-    <section ref={ref} className="relative py-32 md:py-44 overflow-hidden">
-      {/* Background image */}
-      <div className="absolute inset-0">
-        <Image
-          src="https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=1600&q=85"
-          alt="Mid-century workspace"
-          fill
-          className="object-cover"
-          style={{ filter: 'brightness(0.15)' }}
-        />
-      </div>
-
-      <motion.div
-        className="relative z-10 max-w-[900px] mx-auto px-8 md:px-16 text-center"
-        style={{ opacity: quoteOpacity, scale: quoteScale }}
-      >
-        <span className="label-caps text-white/25 mb-8 block">Philosophy</span>
-        <motion.div
-          className="w-12 h-px bg-white/15 mx-auto mb-10 origin-center"
-          style={{ scaleX: lineScaleX }}
-          aria-hidden="true"
-        />
-        <blockquote className="font-serif text-[clamp(1.5rem,3.5vw,2.8rem)] font-light text-white/70 leading-[1.45] italic">
-          &ldquo;Good design is as little design as possible. Less, but better &mdash; because it
-          concentrates on the essential aspects.&rdquo;
-        </blockquote>
-        <p className="mt-8 label-caps text-white/20">Dieter Rams</p>
-        <motion.div
-          className="w-12 h-px bg-white/15 mx-auto mt-10 origin-center"
-          style={{ scaleX: lineScaleX }}
-          aria-hidden="true"
-        />
-        <p className="mt-10 text-[0.88rem] text-white/35 font-light leading-[2] max-w-xl mx-auto">
-          Mid-century modernism wasn&rsquo;t just an aesthetic. It was a philosophy rooted in the
-          idea that good design should be accessible, functional, and lasting. Designers like Hans
-          Wegner, Charles and Ray Eames, and Arne Jacobsen didn&rsquo;t just create furniture
-          &mdash; they defined how people live with objects.
-        </p>
-      </motion.div>
-    </section>
-  )
-}
-
-/* ─── Category Reel — image cards with hover ────────────────────── */
-
-function CategoryReel() {
-  const ref = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
-  const opacity = useTransform(scrollYProgress, [0.1, 0.3], [0, 1])
-  const y = useTransform(scrollYProgress, [0.1, 0.3], [60, 0])
-
-  return (
-    <section ref={ref} className="py-24 md:py-36 bg-brand-off">
-      <div className="max-w-[1400px] mx-auto px-8 md:px-16 lg:px-24">
-        <motion.div style={{ opacity, y }}>
-          <span className="label-caps text-brand-muted block mb-4">Browse by Room</span>
-          <h2 className="font-serif text-[clamp(2rem,3.5vw,3rem)] font-light text-brand-black leading-[1.15] mb-16">
-            Explore our categories
-          </h2>
-        </motion.div>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-          {CATEGORIES.map((cat, i) => (
-            <CategoryCard key={cat.slug} cat={cat} index={i} progress={scrollYProgress} />
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function CategoryCard({
-  cat,
-  index,
-  progress,
-}: {
-  cat: (typeof CATEGORIES)[number]
-  index: number
-  progress: ReturnType<typeof useScroll>['scrollYProgress']
-}) {
-  const start = 0.2 + index * 0.05
-  const end = start + 0.12
-  const opacity = useTransform(progress, [start, end], [0, 1])
-  const y = useTransform(progress, [start, end], [30, 0])
-
-  return (
-    <motion.div style={{ opacity, y }}>
-      <Link
-        href={`/categories/${cat.slug}`}
-        className="group relative block aspect-[3/4] overflow-hidden"
-      >
-        <Image
-          src={cat.image}
-          alt={cat.name}
-          fill
-          className="object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.06]"
-          style={{ filter: 'brightness(0.5)' }}
-        />
-        <div
-          className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"
-          aria-hidden="true"
-        />
-        <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
-          <h3 className="font-serif text-lg md:text-xl text-white font-light group-hover:translate-y-[-4px] transition-transform duration-500">
-            {cat.name}
-          </h3>
-          <div className="flex items-center gap-2 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-            <span className="label-caps text-white/50">Explore</span>
-            <FontAwesomeIcon icon={faArrowRight} className="w-2.5 h-2.5 text-white/50" aria-hidden="true" />
-          </div>
-        </div>
-      </Link>
-    </motion.div>
-  )
-}
-
-/* ─── Closing CTA ───────────────────────────────────────────────── */
-
-function ClosingCTA() {
-  const ref = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
-  const opacity = useTransform(scrollYProgress, [0.1, 0.35], [0, 1])
-  const y = useTransform(scrollYProgress, [0.1, 0.35], [40, 0])
-
-  return (
-    <section ref={ref} className="py-28 md:py-36">
-      <motion.div
-        className="max-w-3xl mx-auto px-8 md:px-16 text-center"
-        style={{ opacity, y }}
-      >
-        <h2 className="font-serif text-[clamp(2rem,4vw,3.5rem)] text-brand-black font-light mb-6">
-          Start exploring
-        </h2>
-        <p className="text-[0.88rem] text-brand-black/50 font-light leading-[2] mb-12 max-w-lg mx-auto">
-          Browse our curated collection of mid-century modern furniture and d&eacute;cor. Each piece
-          is sourced, restored, and ready for your space.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link
-            href="/shop"
-            className="btn-primary inline-flex items-center justify-center gap-3 bg-brand-black text-white px-10 py-4 text-[0.6rem] uppercase tracking-widest-2 font-light"
-          >
-            <span>Shop All Pieces</span>
-            <FontAwesomeIcon icon={faArrowRight} className="w-3 h-3" aria-hidden="true" />
-          </Link>
-          <Link
-            href="/categories"
-            className="inline-flex items-center justify-center px-10 py-4 border border-brand-black text-brand-black text-[0.6rem] uppercase tracking-widest-2 font-light hover:bg-brand-black hover:text-white transition-all duration-500"
-          >
-            Browse Categories
-          </Link>
-        </div>
-      </motion.div>
-    </section>
-  )
-}
