@@ -8,42 +8,42 @@ const CATEGORIES = [
     name: 'Living Room',
     tagline: 'Where stories begin',
     description: 'Sideboards, credenzas, coffee tables and lounge chairs.',
-    image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=85',
+    image: '/images/suede%20couch/images/PHOTO-2026-04-15-18-49-00.jpg',
   },
   {
     slug: 'dining-room',
     name: 'Dining Room',
     tagline: 'Gather around something real',
     description: 'Dining tables, chairs, sideboards and display cabinets.',
-    image: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=800&q=85',
+    image: '/images/folder%2030/images30/PHOTO-2026-04-15-18-51-53.jpg',
   },
   {
     slug: 'bedroom',
     name: 'Bedroom',
     tagline: 'Rest in design',
     description: 'Dressers, bedside tables, wardrobes and vanities.',
-    image: 'https://images.unsplash.com/photo-1540518614846-7eded433c457?w=800&q=85',
+    image: '/images/office%20couch/images%20(1)/PHOTO-2026-04-15-18-48-00.jpg',
   },
   {
     slug: 'decor-elements',
     name: 'Décor Elements',
     tagline: 'Details that define a space',
     description: 'Ceramics, sculptural vases, wall art, clocks and mirrors.',
-    image: 'https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800&q=85',
+    image: '/images/folder%2030/images30/PHOTO-2026-04-15-18-52-11.jpg',
   },
   {
     slug: 'creative-workspace',
     name: 'Creative Workspace',
     tagline: 'Work in style',
     description: 'Desks, shelving units, task lamps and office chairs.',
-    image: 'https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=800&q=85',
+    image: '/images/chairs/images2/PHOTO-2026-04-15-18-51-17.jpg',
   },
   {
     slug: 'outdoor',
     name: 'Outdoor',
     tagline: 'Extend the interior',
     description: 'Garden furniture, planters and patio pieces.',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=85',
+    image: '/images/chairs/images2/PHOTO-2026-04-15-18-51-18.jpg',
   },
 ]
 
@@ -58,7 +58,10 @@ export default function CategoriesPage() {
       {/* Header */}
       <div className="relative bg-brand-off border-b border-brand-rule overflow-hidden">
         <div className="max-w-7xl mx-auto px-8 md:px-12 py-20 md:py-28 relative z-10">
-          <span className="label-caps text-brand-muted block mb-3">Browse by Room</span>
+          <div className="mb-3 flex items-center gap-3">
+            <span className="h-[0.5px] w-8 bg-brand-black/15" />
+            <span className="label-caps text-brand-muted">Browse by Room</span>
+          </div>
           <h1 className="font-serif text-4xl md:text-[3.4rem] text-brand-black font-light leading-tight">
             Categories
           </h1>

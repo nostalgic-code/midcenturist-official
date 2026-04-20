@@ -22,42 +22,42 @@ const CATEGORY_CONTENT: Record<string, CategoryMeta> = {
     tagline: 'Where stories begin',
     description:
       'Sideboards, credenzas, coffee tables and lounge chairs — the heart of mid-century living. Each piece has been sourced for its design integrity and restored to a standard that lets you live with it for another lifetime.',
-    heroImage: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1600&q=85',
+    heroImage: '/images/suede%20couch/images/PHOTO-2026-04-15-18-49-00.jpg',
   },
   'dining-room': {
     name: 'Dining Room',
     tagline: 'Gather around something real',
     description:
       'Dining tables, chairs, sideboards and display cabinets from the 1950s through the 1970s. Teak, rosewood and walnut — designed for daily use and built to last generations.',
-    heroImage: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=1600&q=85',
+    heroImage: '/images/folder%2030/images30/PHOTO-2026-04-15-18-51-53.jpg',
   },
   'bedroom': {
     name: 'Bedroom',
     tagline: 'Rest in design',
     description:
       'Dressers, bedside tables, wardrobes and vanities that bring warmth, craft and quiet elegance to the most personal room in your home.',
-    heroImage: 'https://images.unsplash.com/photo-1540518614846-7eded433c457?w=1600&q=85',
+    heroImage: '/images/office%20couch/images%20(1)/PHOTO-2026-04-15-18-48-00.jpg',
   },
   'decor-elements': {
     name: 'Décor Elements',
     tagline: 'Details that define a space',
     description:
       'Ceramics, sculptural vases, wall art, clocks and mirrors — the finishing touches that turn a room into a curated interior. Every object hand-picked for character and craftsmanship.',
-    heroImage: 'https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=1600&q=85',
+    heroImage: '/images/folder%2030/images30/PHOTO-2026-04-15-18-52-11.jpg',
   },
   'creative-workspace': {
     name: 'Creative Workspace',
     tagline: 'Work in style',
     description:
       'Desks, shelving units, task lamps and office chairs from the golden age of Scandinavian design. Functional, beautiful and built for focus.',
-    heroImage: 'https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=1600&q=85',
+    heroImage: '/images/chairs/images2/PHOTO-2026-04-15-18-51-17.jpg',
   },
   'outdoor': {
     name: 'Outdoor',
     tagline: 'Extend the interior',
     description:
       'Garden furniture, planters and patio pieces that bring mid-century sensibility outdoors. Weather-tested, design-forward, and ready for your space.',
-    heroImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=85',
+    heroImage: '/images/chairs/images2/PHOTO-2026-04-15-18-51-18.jpg',
   },
 }
 
@@ -114,9 +114,10 @@ export default async function CategoryPage({ params }: { params: { slug: string 
         {/* Side vignette */}
         <div className="absolute inset-0 bg-gradient-to-r from-brand-black/40 to-transparent" aria-hidden="true" />
         <div className="relative z-10 max-w-7xl mx-auto px-8 md:px-12 py-24 md:py-32 flex flex-col justify-end">
-          <span className="label-caps text-white/50 block mb-3">
-            {meta.tagline}
-          </span>
+          <div className="mb-3 flex items-center gap-3">
+            <span className="h-[0.5px] w-8 bg-white/35" />
+            <span className="label-caps text-white/50">{meta.tagline}</span>
+          </div>
           <h1 className="font-serif text-4xl md:text-[3.6rem] text-white font-light mb-4 leading-tight">
             {apiCategoryName}
           </h1>
