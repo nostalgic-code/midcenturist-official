@@ -218,23 +218,6 @@ function StoryChapter({
       </div>
 
       <div className="max-w-7xl mx-auto px-8 md:px-12 py-10 md:py-20">
-        {/* Chapter header — faint line + label */}
-        <motion.div
-          className="flex items-center gap-3 mb-8 md:mb-10"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <motion.div
-            className="h-[0.5px] bg-brand-black/[0.06] origin-left"
-            initial={{ scaleX: 0 }}
-            animate={isInView ? { scaleX: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            style={{ width: 32 }}
-          />
-          <span className="label-caps text-brand-muted">{section.label}</span>
-        </motion.div>
-
         {/* DOM order determines column placement — Philosophy: img left + text right; Story/Mission: text left + img right */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-14 lg:gap-20 items-start">
           {textOnRight ? (
@@ -253,6 +236,22 @@ function StoryChapter({
               </motion.div>
               {/* Philosophy — text RIGHT */}
               <div>
+                {/* Label above title — right column */}
+                <motion.div
+                  className="flex items-center gap-3 mb-6"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <motion.div
+                    className="h-[0.5px] bg-brand-black/[0.06] origin-left"
+                    initial={{ scaleX: 0 }}
+                    animate={isInView ? { scaleX: 1 } : {}}
+                    transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                    style={{ width: 32 }}
+                  />
+                  <span className="label-caps text-brand-muted">{section.label}</span>
+                </motion.div>
                 <div className="overflow-hidden mb-8">
                   <motion.h2
                     className="font-serif text-[clamp(1.8rem,3vw,2.8rem)] font-light text-brand-black leading-[1.15] whitespace-pre-line"
@@ -283,6 +282,22 @@ function StoryChapter({
             <>
               {/* Story / Mission — text LEFT */}
               <div>
+                {/* Label above title — left column */}
+                <motion.div
+                  className="flex items-center gap-3 mb-6"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <motion.div
+                    className="h-[0.5px] bg-brand-black/[0.06] origin-left"
+                    initial={{ scaleX: 0 }}
+                    animate={isInView ? { scaleX: 1 } : {}}
+                    transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                    style={{ width: 32 }}
+                  />
+                  <span className="label-caps text-brand-muted">{section.label}</span>
+                </motion.div>
                 <div className="overflow-hidden mb-8">
                   <motion.h2
                     className="font-serif text-[clamp(1.8rem,3vw,2.8rem)] font-light text-brand-black leading-[1.15] whitespace-pre-line"
