@@ -45,8 +45,8 @@ const SECTIONS = [
       'We believe we are Mid-century Woodsmiths, purely because we profoundly believe in the enduring value of good mid-century designs.',
       'Our restorative craftsmanship reflects a deep respect for original materials and in the process, we breathe new life into mid-century iconic pieces, preserving their story and ensuring they remain functional pieces of art for generations to come.',
     ],
-    image: '/images/suede%20couch/images/PHOTO-2026-04-15-18-49-00.jpg',
-    imageAlt: 'Curated mid-century furniture showroom',
+    image: '/images/office%20couch/images%20(1)/PHOTO-2026-04-15-18-48-00.jpg',
+    imageAlt: 'Restored mid-century modern couch',
   },
   {
     label: 'Our Mission',
@@ -54,8 +54,8 @@ const SECTIONS = [
     body: [
       'To enable our customers to create character-filled living and creative work spaces that perfectly blend simplicity, functionality and form.',
     ],
-    image: '/images/office%20couch/images%20(1)/PHOTO-2026-04-15-18-48-00.jpg',
-    imageAlt: 'Restored mid-century modern couch',
+    image: '/images/suede%20couch/images/PHOTO-2026-04-15-18-49-00.jpg',
+    imageAlt: 'Curated mid-century furniture showroom',
   },
 ]
 
