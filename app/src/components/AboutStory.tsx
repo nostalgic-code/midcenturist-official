@@ -201,12 +201,13 @@ function StoryChapter({
 
   /* Image right on even (0, 2), left on odd (1) */
   const imageRight = index % 2 === 0
+  const bg = index === 1 ? 'bg-brand-off/50' : ''
 
   return (
     <section
       ref={ref}
       id={`chapter-${index}`}
-      className="relative scroll-mt-20"
+      className={`relative scroll-mt-20 ${bg}`}
     >
       {/* Thin progress line at top */}
       <div className="max-w-[1400px] mx-auto px-5 sm:px-8 md:px-16 lg:px-24">
