@@ -197,9 +197,8 @@ function StoryChapter({
   const imgY = useTransform(scrollYProgress, [0, 1], ['-2%', '2%'])
   const progressWidth = useTransform(scrollYProgress, [0, 0.6], ['0%', '100%'])
 
-  /* Image right on even (0, 2), left on odd (1) */
-  const imageRight = index % 2 === 0
-  const philosophyRight = section.label === 'Our Philosophy'
+  /* Keep Philosophy text on the right; Story and Mission keep image on the right */
+  const textOnRight = section.label === 'Our Philosophy'
   const bg = index === 1 ? 'bg-brand-off/50' : ''
 
   return (
@@ -240,7 +239,7 @@ function StoryChapter({
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-14 lg:gap-20 items-start">
           {/* Image with reveal */}
           <motion.div
-            className={`relative overflow-hidden rounded-sm aspect-[4/3] max-h-[380px] md:max-h-[460px] ${(imageRight && !philosophyRight) ? 'lg:order-2' : ''}`}
+            className={`relative overflow-hidden rounded-sm aspect-[4/3] max-h-[380px] md:max-h-[460px] ${textOnRight ? 'lg:order-1' : 'lg:order-2'}`}
             initial={{ opacity: 0, clipPath: 'inset(0 100% 0 0)' }}
             animate={isInView ? { opacity: 1, clipPath: 'inset(0 0% 0 0)' } : {}}
             transition={{ duration: 1.2, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
@@ -264,7 +263,7 @@ function StoryChapter({
           </motion.div>
 
           {/* Text content — limit to 2 paragraphs for alignment */}
-          <div className={`${(imageRight && !philosophyRight) ? 'lg:order-1' : 'lg:order-2'} lg:min-h-[460px] flex flex-col justify-between`}>
+          <div className={`${textOnRight ? 'lg:order-2' : 'lg:order-1'} lg:min-h-[460px] lg:pt-6 flex flex-col justify-between`}>
             <div>
               {/* Title */}
               <div className="overflow-hidden mb-8">
