@@ -168,9 +168,7 @@ export default function ContactPage() {
               custom={0}
               variants={fadeUp}
             >
-              A direct line to
-              <br />
-              Midcenturist
+              Contact Details
             </motion.h2>
 
             <div className="space-y-6 mb-12">
