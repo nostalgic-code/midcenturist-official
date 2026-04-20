@@ -57,41 +57,32 @@ export default function Footer() {
 
   return (
     <footer ref={footerRef} className="reveal-up bg-brand-black text-white" aria-label="Site footer">
-      {/* Top section — mission statement */}
+      {/* Top section — logo + social icons */}
       <div className="max-w-[1200px] mx-auto px-8 md:px-12 pt-20 pb-16 border-b border-white/8">
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_1.5fr] gap-12 items-start">
-          <div>
-            {/* Logo */}
-            <Image
-              src="/logo/logo.jpg"
-              alt="Midcenturist SA"
-              width={540}
-              height={146}
-              className="h-[146px] w-[300px] object-contain rounded mb-6"
-            />
-
-            {/* Social icons */}
-            <div className="flex items-center gap-2" role="list" aria-label="Social media links">
-              {SOCIAL_LINKS.map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-[34px] h-[34px] border border-white/10 flex items-center justify-center text-white/30 hover:border-white/40 hover:text-white transition-all duration-300"
-                  aria-label={s.label}
-                  role="listitem"
-                >
-                  <FontAwesomeIcon icon={SOCIAL_ICON_MAP[s.icon]} className="w-3 h-3" aria-hidden="true" />
-                </a>
-              ))}
-            </div>
-          </div>
-          <div>
-            <p className="font-serif text-[clamp(1.2rem,2vw,1.6rem)] font-light text-white/50 leading-[1.7] italic">
-              &ldquo;To enable our customers to create character-filled living and creative work spaces that perfectly blend simplicity, functionality and form.&rdquo;
-            </p>
-            <p className="label-caps text-white/20 mt-4">Our Mission</p>
+        <div className="flex flex-col gap-8">
+          {/* Logo aligned with social icons */}
+          <Image
+            src="/logo/logo-removebg-preview.png"
+            alt="Midcenturist"
+            width={160}
+            height={40}
+            className="h-8 w-auto brightness-0 invert opacity-60"
+          />
+          {/* Social icons */}
+          <div className="flex items-center gap-2" role="list" aria-label="Social media links">
+            {SOCIAL_LINKS.map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-[34px] h-[34px] border border-white/10 flex items-center justify-center text-white/30 hover:border-white/40 hover:text-white transition-all duration-300"
+                aria-label={s.label}
+                role="listitem"
+              >
+                <FontAwesomeIcon icon={SOCIAL_ICON_MAP[s.icon]} className="w-3 h-3" aria-hidden="true" />
+              </a>
+            ))}
           </div>
         </div>
       </div>

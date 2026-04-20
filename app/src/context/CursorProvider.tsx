@@ -54,11 +54,11 @@ export default function CursorProvider({ children }: { children: React.ReactNode
     <CursorContext.Provider value={{ setHoverLabel }}>
       {children}
       {/* Only show on non-touch devices */}
-      <div className="pointer-events-none fixed inset-0 z-[9999] select-none" aria-hidden="true">
+      <div className="pointer-events-none fixed inset-0 z-[9999] select-none mix-blend-difference" aria-hidden="true">
         {/* Dot */}
         <div
           ref={dotRef}
-          className="absolute w-[6px] h-[6px] rounded-full bg-brand-black"
+          className="absolute w-[6px] h-[6px] rounded-full bg-white"
           style={{ top: 0, left: 0, willChange: 'transform' }}
         />
         {/* Ring */}
@@ -66,13 +66,13 @@ export default function CursorProvider({ children }: { children: React.ReactNode
           ref={ringRef}
           className={`absolute rounded-full flex items-center justify-center transition-[width,height,background-color] duration-200 ${
             isExpanded
-              ? 'w-[72px] h-[72px] bg-brand-black'
-              : 'w-[36px] h-[36px] bg-transparent border border-brand-black'
+              ? 'w-[72px] h-[72px] bg-white'
+              : 'w-[36px] h-[36px] bg-transparent border border-white'
           }`}
           style={{ top: 0, left: 0, willChange: 'transform' }}
         >
           {isExpanded && hoverLabel && (
-            <span className="text-white font-sans text-[0.48rem] uppercase tracking-widest-2 leading-none">
+            <span className="text-black font-sans text-[0.48rem] uppercase tracking-widest-2 leading-none">
               {hoverLabel}
             </span>
           )}
