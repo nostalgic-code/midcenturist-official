@@ -8,12 +8,12 @@ import { faInstagram } from '@fortawesome/free-brands-svg-icons'
 import { useReveal } from '@/lib/useReveal'
 
 const IG_TILES = [
-  { src: 'https://images.unsplash.com/photo-1592078615290-033ee584e267?w=300&q=80', price: 'R 14,500', sold: false },
-  { src: 'https://images.unsplash.com/photo-1567016432779-094069958ea5?w=300&q=80', price: 'R 9,800', sold: true },
-  { src: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=300&q=80', price: 'R 22,000', sold: false },
-  { src: 'https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=300&q=80', price: 'R 1,950', sold: false },
-  { src: 'https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=300&q=80', price: 'R 4,200', sold: false },
-  { src: 'https://images.unsplash.com/photo-1581428982868-e410dd047a90?w=300&q=80', price: 'R 8,500', sold: true },
+  { src: '/images/suede%20couch/images/PHOTO-2026-04-15-18-49-00.jpg', price: 'R 14,500', sold: false },
+  { src: '/images/folder%2030/images30/PHOTO-2026-04-15-18-52-05.jpg', price: 'R 9,800', sold: true },
+  { src: '/images/chairs/images2/PHOTO-2026-04-15-18-51-17.jpg', price: 'R 22,000', sold: false },
+  { src: '/images/oldschool%20chairs/images%20(1)/PHOTO-2026-04-15-18-49-49.jpg', price: 'R 1,950', sold: false },
+  { src: '/images/office%20couch/images%20(1)/PHOTO-2026-04-15-18-47-59.jpg', price: 'R 4,200', sold: false },
+  { src: '/images/suede%20chairs/images/PHOTO-2026-04-15-18-50-41.jpg', price: 'R 8,500', sold: true },
 ]
 
 export default function IGFeed() {

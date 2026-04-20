@@ -15,7 +15,7 @@ export default function EditorialIntro() {
       {/* Image */}
       <div className="relative overflow-hidden bg-brand-off min-h-[420px] md:min-h-[640px]">
         <Image
-          src="https://images.unsplash.com/photo-1538688525198-9b88f6f53126?w=900&q=85"
+          src="/images/folder%2030/images30/PHOTO-2026-04-15-18-52-06.jpg"
           alt="Our shop — curated mid-century modern furniture"
           fill
           sizes="(max-width: 768px) 100vw, 50vw"

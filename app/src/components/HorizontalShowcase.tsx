@@ -13,7 +13,7 @@ const PANELS = [
     eyebrow: 'We Source',
     title: 'Found,\nnot manufactured.',
     body: 'We travel far and wide to find authentic mid-century pieces with strong design heritage and solid bones. Every object has already proven itself across decades of use.',
-    image: 'https://images.unsplash.com/photo-1538688525198-9b88f6f53126?w=1200&q=85',
+    image: '/images/oldschool%20chairs/images%20(1)/PHOTO-2026-04-15-18-49-49.jpg',
     accent: 'Since 2018',
   },
   {
@@ -21,7 +21,7 @@ const PANELS = [
     eyebrow: 'We Restore',
     title: 'Craft meets\nreverence.',
     body: 'Our restorative craftsmanship reflects a deep respect for original materials. Teak, walnut, brass, ceramic \u2014 we breathe new life into every joint and surface without erasing the character that time has given.',
-    image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1200&q=85',
+    image: '/images/office%20couch/images%20(1)/PHOTO-2026-04-15-18-47-59.jpg',
     accent: 'By hand',
   },
   {
@@ -29,7 +29,7 @@ const PANELS = [
     eyebrow: 'We Curate',
     title: 'Not a store.\nA collection.',
     body: 'Every piece is selected for its design integrity, historical significance, and condition. We don\u2019t deal in volume \u2014 we deal in meaning. Each object earns its place.',
-    image: 'https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=1200&q=85',
+    image: '/images/folder%2030/images30/PHOTO-2026-04-15-18-52-06.jpg',
     accent: 'One at a time',
   },
   {
@@ -37,7 +37,7 @@ const PANELS = [
     eyebrow: 'Your Home',
     title: 'Where it all\ncomes together.',
     body: 'These aren\u2019t showroom props. They\u2019re pieces meant to be lived with, touched, used, and loved \u2014 for another fifty years and beyond.',
-    image: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=1200&q=85',
+    image: '/images/suede%20couch/images/PHOTO-2026-04-15-18-49-01.jpg',
     accent: 'Ready for you',
     cta: { label: 'Shop the Collection', href: '/shop' },
   },

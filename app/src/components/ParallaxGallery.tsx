@@ -12,25 +12,25 @@ const CATEGORIES = [
     name: 'Living Room',
     slug: 'living-room',
     tagline: 'Where stories begin',
-    image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=85',
+    image: '/images/suede%20couch/images/PHOTO-2026-04-15-18-49-00.jpg',
   },
   {
     name: 'Dining Room',
     slug: 'dining-room',
     tagline: 'Gather around something real',
-    image: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=800&q=85',
+    image: '/images/folder%2030/images30/PHOTO-2026-04-15-18-52-10.jpg',
   },
   {
     name: 'Bedroom',
     slug: 'bedroom',
     tagline: 'Rest in design',
-    image: 'https://images.unsplash.com/photo-1540518614846-7eded433c457?w=800&q=85',
+    image: '/images/office%20couch/images%20(1)/PHOTO-2026-04-15-18-48-00.jpg',
   },
   {
     name: 'D\u00e9cor Elements',
     slug: 'decor-elements',
     tagline: 'Details that define a space',
-    image: 'https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800&q=85',
+    image: '/images/folder%2030/images30/PHOTO-2026-04-15-18-52-11.jpg',
   },
 ]
 

@@ -10,7 +10,7 @@ import { useReveal } from '@/lib/useReveal'
 const PANELS = [
   {
     href: '/shop/available',
-    image: 'https://images.unsplash.com/photo-1592078615290-033ee584e267?w=800&q=85',
+    image: '/images/chairs/images2/PHOTO-2026-04-15-18-51-18.jpg',
     alt: 'Available Items',
     tag: 'Shop Now',
     title: 'Available\nPieces',
@@ -19,7 +19,7 @@ const PANELS = [
   },
   {
     href: '/shop',
-    image: 'https://images.unsplash.com/photo-1567016432779-094069958ea5?w=800&q=85',
+    image: '/images/folder%2030/images30/PHOTO-2026-04-15-18-52-05.jpg',
     alt: 'All Items',
     tag: 'Full Archive',
     title: 'Complete\nArchive',

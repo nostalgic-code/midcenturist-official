@@ -267,3 +267,66 @@ body {
 - **Century Gothic** is a system font — always include `'Josefin Sans'` as the immediate fallback in the font stack
 - Keep all components **pure UI** — no API calls inside components. Data is passed via props
 - Follow the **DRY principle** — shared types live in `src/types/index.ts`, shared constants in `src/lib/constants.ts`
+
+
+
+
+edit pictures 
+featured piece 
+image represent each category 
+
+delay slider (holdoff)
+
+representative image  midcentury woodsmiths
+ 
+
+ replace about page with woodsmiths 
+
+
+
+ 1. landing page - 
+
+
+image for each category  
+
+decor elements. ---- with images. 
+ 
+
+ plain white
+
+
+
+2.  products available 
+
+
+about us image - midcentury woodsmiths 
+
+image for about us - 
+
+designs with an s 
+
+same background same size 
+
+
+values to replace black space 4 
+
+
+smaller images
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

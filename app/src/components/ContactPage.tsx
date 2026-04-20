@@ -159,17 +159,7 @@ export default function ContactPage() {
       <section className="mx-auto max-w-7xl px-8 py-20 md:px-12 md:py-28">
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-[1fr_1.2fr] lg:gap-24 items-start">
           {/* Left — Info */}
-          <div>
-            <motion.div
-              className="mb-6 flex items-center gap-3"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeUp}
-            >
-              <span className="h-[0.5px] w-8 bg-brand-black/8" />
-              <span className="label-caps text-brand-muted">Contact Details</span>
-            </motion.div>
+          <div className="pt-0 lg:pt-1">
             <motion.h2
               className="font-serif text-[clamp(2rem,3.2vw,3rem)] font-light leading-[1.08] text-brand-black mb-10"
               initial="hidden"

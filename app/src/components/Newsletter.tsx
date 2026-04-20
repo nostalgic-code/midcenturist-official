@@ -62,7 +62,7 @@ export default function Newsletter() {
       {/* Image side */}
       <div className="relative overflow-hidden min-h-[340px] md:min-h-[520px] group">
         <Image
-          src="https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=800&q=85"
+          src="/images/folder%2030/images30/PHOTO-2026-04-15-18-52-10.jpg"
           alt="Stay in the loop — mid-century modern newsletter"
           fill
           sizes="(max-width: 768px) 100vw, 50vw"
