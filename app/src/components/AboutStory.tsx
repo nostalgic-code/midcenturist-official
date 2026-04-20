@@ -28,7 +28,7 @@ const VALUES = [
 const SECTIONS = [
   {
     label: 'Our Story',
-    title: 'A curated midcentury collectables house\n& aspirational brand',
+    title: 'A curated midcentury\ncollectables house',
     body: [
       'Midcenturist is a curated midcentury collectables house, and aspirational brand, dedicated to sourcing, restoration and offering timeless, collectable and iconic Mid-century, Danish, and Retro furniture and décor elements.',
       'We source far and wide for artful and elegant iconic design furniture pieces and home décor elements, with strong design heritage, solid structure and potential for full restoration, ensuring that each of the pieces meet our standards for practicality, longevity, comfort, and visual impact.',
