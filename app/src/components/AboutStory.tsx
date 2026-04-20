@@ -116,7 +116,7 @@ function Hero() {
 
       {/* Content */}
       <motion.div
-        className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-end px-8 pb-12 md:px-12 md:pb-28"
+        className="relative z-10 flex h-full max-w-7xl flex-col justify-end px-8 pb-12 md:px-12 md:pb-28"
         style={{ y: textY, opacity }}
       >
         {/* Animated line + label */}
@@ -197,9 +197,64 @@ function StoryChapter({
   const imgY = useTransform(scrollYProgress, [0, 1], ['-2%', '2%'])
   const progressWidth = useTransform(scrollYProgress, [0, 0.6], ['0%', '100%'])
 
-  /* Keep Philosophy text on the right; Story and Mission keep image on the right */
+  /* Philosophy → image left, text right. Story/Mission → text left, image right */
   const textOnRight = section.label === 'Our Philosophy'
   const bg = index === 1 ? 'bg-brand-off/50' : ''
+
+  /* ── Reusable image column (closure captures isInView, imgScale, imgY, section) ── */
+  const imgCol = (
+    <motion.div
+      className="relative overflow-hidden rounded-sm aspect-[4/3] max-h-[380px] md:max-h-[460px]"
+      initial={{ opacity: 0, clipPath: 'inset(0 100% 0 0)' }}
+      animate={isInView ? { opacity: 1, clipPath: 'inset(0 0% 0 0)' } : {}}
+      transition={{ duration: 1.2, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <motion.div className="absolute inset-0" style={{ scale: imgScale, y: imgY }}>
+        <Image src={section.image} alt={section.imageAlt} fill className="object-cover" />
+      </motion.div>
+      <div
+        className="absolute inset-0"
+        style={{ background: 'linear-gradient(to top, rgba(12,11,10,0.06) 0%, transparent 40%)' }}
+        aria-hidden="true"
+      />
+    </motion.div>
+  )
+
+  /* ── Reusable text column ── */
+  const txtCol = (
+    <div className="flex flex-col" style={{ minHeight: 360 }}>
+      <div className="overflow-hidden mb-8">
+        <motion.h2
+          className="font-serif text-[clamp(1.8rem,3vw,2.8rem)] font-light text-brand-black leading-[1.15] whitespace-pre-line"
+          initial={{ y: '110%' }}
+          animate={isInView ? { y: 0 } : {}}
+          transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+        >
+          {section.title}
+        </motion.h2>
+      </div>
+      <div className="space-y-5">
+        {section.body.slice(0, 2).map((paragraph, pi) => (
+          <motion.p
+            key={pi}
+            className="text-[0.85rem] text-brand-black/75 font-light leading-[2.1] tracking-[0.015em]"
+            initial={{ opacity: 0, y: 18 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.5 + pi * 0.1, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {paragraph}
+          </motion.p>
+        ))}
+      </div>
+      <motion.div
+        className="w-8 h-[0.5px] bg-brand-black/[0.06] mt-8"
+        initial={{ scaleX: 0, originX: 0 }}
+        animate={isInView ? { scaleX: 1 } : {}}
+        transition={{ duration: 1, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        aria-hidden="true"
+      />
+    </div>
+  )
 
   return (
     <section
@@ -208,7 +263,7 @@ function StoryChapter({
       className={`relative scroll-mt-20 ${bg}`}
     >
       {/* Thin progress line at top */}
-      <div className="max-w-7xl mx-auto px-8 md:px-12">
+      <div className="px-8 md:px-12">
         <div className="h-[0.5px] bg-brand-black/[0.04] relative overflow-hidden">
           <motion.div
             className="absolute inset-y-0 left-0 bg-brand-black/10"
@@ -217,16 +272,16 @@ function StoryChapter({
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-8 md:px-12 py-10 md:py-20">
-        {/* Chapter header — thin line + label (no number) */}
+      <div className="px-8 md:px-12 py-10 md:py-20">
+        {/* Chapter header — faint line + label */}
         <motion.div
-          className="flex items-center gap-4 mb-8 md:mb-10"
+          className="flex items-center gap-3 mb-8 md:mb-10"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
           <motion.div
-            className="h-[0.5px] bg-brand-black/8 origin-left"
+            className="h-[0.5px] bg-brand-black/[0.06] origin-left"
             initial={{ scaleX: 0 }}
             animate={isInView ? { scaleX: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
@@ -235,80 +290,18 @@ function StoryChapter({
           <span className="label-caps text-brand-muted">{section.label}</span>
         </motion.div>
 
-        {/* Content grid — Philosophy: image LEFT text RIGHT; Story/Mission: text LEFT image RIGHT */}
+        {/* DOM order controls column placement — no CSS order tricks */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-14 lg:gap-20 items-start">
-          {/* ── Image block ── */}
-          <motion.div
-            className="relative overflow-hidden rounded-sm aspect-[4/3] max-h-[380px] md:max-h-[460px]"
-            style={{ order: textOnRight ? 1 : 3 }}
-            initial={{ opacity: 0, clipPath: 'inset(0 100% 0 0)' }}
-            animate={isInView ? { opacity: 1, clipPath: 'inset(0 0% 0 0)' } : {}}
-            transition={{ duration: 1.2, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <motion.div
-              className="absolute inset-0"
-              style={{ scale: imgScale, y: imgY }}
-            >
-              <Image
-                src={section.image}
-                alt={section.imageAlt}
-                fill
-                className="object-cover"
-              />
-            </motion.div>
-            <div
-              className="absolute inset-0"
-              style={{ background: 'linear-gradient(to top, rgba(12,11,10,0.06) 0%, transparent 40%)' }}
-              aria-hidden="true"
-            />
-          </motion.div>
-
-          {/* ── Text block ── */}
-          <div className="lg:min-h-[460px] lg:pt-6 flex flex-col justify-between" style={{ order: textOnRight ? 3 : 1 }}>
-            <div>
-              {/* Title */}
-              <div className="overflow-hidden mb-8">
-                <motion.h2
-                  className="font-serif text-[clamp(1.8rem,3vw,2.8rem)] font-light text-brand-black leading-[1.15] whitespace-pre-line"
-                  initial={{ y: '110%' }}
-                  animate={isInView ? { y: 0 } : {}}
-                  transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  {section.title}
-                </motion.h2>
-              </div>
-
-              {/* Body paragraphs — staggered reveal, limit to 2 */}
-              <div className="space-y-5">
-                {section.body.slice(0, 2).map((paragraph, pi) => (
-                  <motion.p
-                    key={pi}
-                    className="text-[0.85rem] text-brand-black/75 font-light leading-[2.1] tracking-[0.015em]"
-                    initial={{ opacity: 0, y: 18 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.6, delay: 0.5 + pi * 0.1, ease: [0.22, 1, 0.36, 1] }}
-                  >
-                    {paragraph}
-                  </motion.p>
-                ))}
-              </div>
-            </div>
-
-            {/* Bottom accent line */}
-            <motion.div
-              className="w-8 h-[0.5px] bg-brand-black/8 mt-8"
-              initial={{ scaleX: 0, originX: 0 }}
-              animate={isInView ? { scaleX: 1 } : {}}
-              transition={{ duration: 1, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              aria-hidden="true"
-            />
-          </div>
+          {textOnRight
+            ? <>{imgCol}{txtCol}</>   /* Philosophy:   image left,  text right */
+            : <>{txtCol}{imgCol}</>   /* Story/Mission: text left, image right */
+          }
         </div>
       </div>
 
       {/* Final divider after last section */}
       {index === total - 1 && (
-        <div className="max-w-7xl mx-auto px-8 md:px-12">
+        <div className="px-8 md:px-12">
           <div className="h-[0.5px] bg-brand-black/[0.04]" />
         </div>
       )}
