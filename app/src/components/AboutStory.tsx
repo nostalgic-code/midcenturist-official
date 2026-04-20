@@ -235,11 +235,12 @@ function StoryChapter({
           <span className="label-caps text-brand-muted">{section.label}</span>
         </motion.div>
 
-        {/* Content grid — image right on even, left on odd, text aligned with image top */}
+        {/* Content grid — Philosophy: image LEFT text RIGHT; Story/Mission: text LEFT image RIGHT */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-14 lg:gap-20 items-start">
-          {/* Image with reveal */}
+          {/* ── Image block ── */}
           <motion.div
-            className={`relative overflow-hidden rounded-sm aspect-[4/3] max-h-[380px] md:max-h-[460px] ${textOnRight ? 'lg:order-1' : 'lg:order-2'}`}
+            className="relative overflow-hidden rounded-sm aspect-[4/3] max-h-[380px] md:max-h-[460px]"
+            style={{ order: textOnRight ? 1 : 3 }}
             initial={{ opacity: 0, clipPath: 'inset(0 100% 0 0)' }}
             animate={isInView ? { opacity: 1, clipPath: 'inset(0 0% 0 0)' } : {}}
             transition={{ duration: 1.2, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
@@ -262,8 +263,8 @@ function StoryChapter({
             />
           </motion.div>
 
-          {/* Text content — limit to 2 paragraphs for alignment */}
-          <div className={`${textOnRight ? 'lg:order-2' : 'lg:order-1'} lg:min-h-[460px] lg:pt-6 flex flex-col justify-between`}>
+          {/* ── Text block ── */}
+          <div className="lg:min-h-[460px] lg:pt-6 flex flex-col justify-between" style={{ order: textOnRight ? 3 : 1 }}>
             <div>
               {/* Title */}
               <div className="overflow-hidden mb-8">
