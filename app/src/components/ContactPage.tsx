@@ -170,7 +170,7 @@ export default function ContactPage() {
             >
               A direct line to
               <br />
-              Midcenturist SA
+              Midcenturist
             </motion.h2>
 
             <div className="space-y-6 mb-12">
