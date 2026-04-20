@@ -98,7 +98,7 @@ function Hero() {
   const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0])
 
   return (
-    <section ref={ref} className="relative h-[85vh] min-h-[560px] overflow-hidden bg-brand-black">
+    <section ref={ref} className="relative h-[70vh] min-h-[420px] md:h-[85vh] md:min-h-[560px] overflow-hidden bg-brand-black">
       {/* Parallax background */}
       <motion.div className="absolute inset-0" style={{ y: imgY }}>
         <Image
@@ -118,7 +118,7 @@ function Hero() {
 
       {/* Content */}
       <motion.div
-        className="relative z-10 h-full flex flex-col justify-end pb-20 md:pb-28 px-8 md:px-16 lg:px-24 max-w-[1400px] mx-auto"
+        className="relative z-10 h-full flex flex-col justify-end pb-12 md:pb-28 px-6 md:px-16 lg:px-24 max-w-[1400px] mx-auto"
         style={{ y: textY, opacity }}
       >
         <motion.span
@@ -173,18 +173,17 @@ function ContentSection({
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
   const imgScale = useTransform(scrollYProgress, [0, 0.6], [1.12, 1])
   const imgY = useTransform(scrollYProgress, [0, 1], ['-3%', '3%'])
-  const textX = useTransform(scrollYProgress, [0.1, 0.4], [60, 0])
   const textOpacity = useTransform(scrollYProgress, [0.1, 0.35], [0, 1])
 
   // Alternate background for visual rhythm
   const bg = index % 2 === 0 ? 'bg-brand-off' : 'bg-white'
 
   return (
-    <section ref={ref} className={`relative overflow-hidden rounded-lg mx-4 md:mx-8 ${bg}`}>
+    <section ref={ref} className={`relative overflow-hidden rounded-lg mx-3 md:mx-8 ${bg}`}>
       <div className="max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-[0.85fr_1fr] gap-8 md:gap-12 items-center py-12 md:py-16 px-6 md:px-12 lg:px-16">
+        <div className="grid grid-cols-1 md:grid-cols-[0.85fr_1fr] gap-6 md:gap-12 items-center py-8 md:py-16 px-4 sm:px-6 md:px-12 lg:px-16">
           {/* Image — always left, contained size */}
-          <div className="relative overflow-hidden rounded-md aspect-[4/3] max-h-[480px]">
+          <div className="relative overflow-hidden rounded-md aspect-[4/3] max-h-[320px] md:max-h-[480px]">
             <motion.div
               className="absolute inset-0"
               style={{ scale: imgScale, y: imgY }}
@@ -206,12 +205,12 @@ function ContentSection({
 
             {/* Section number — large, pinned bottom-left */}
             <motion.div
-              className="absolute bottom-8 left-8 z-10"
+              className="absolute bottom-4 left-4 md:bottom-8 md:left-8 z-10"
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
             >
-              <span className="font-serif text-[6rem] md:text-[8rem] text-white/[0.12] leading-none select-none">
+              <span className="font-serif text-[4rem] md:text-[8rem] text-white/[0.12] leading-none select-none">
                 {String(index + 1).padStart(2, '0')}
               </span>
             </motion.div>
@@ -219,8 +218,8 @@ function ContentSection({
 
           {/* Text — always right */}
           <motion.div
-            className="flex flex-col justify-center px-6 py-10 md:px-8 lg:px-12 md:py-0"
-            style={{ x: textX, opacity: textOpacity }}
+            className="flex flex-col justify-center px-2 py-6 sm:px-4 md:px-8 lg:px-12 md:py-0 overflow-hidden"
+            style={{ opacity: textOpacity }}
           >
             {/* Label with accent line */}
             <motion.div
@@ -289,10 +288,10 @@ function ValuesGrid() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
 
   return (
-    <section ref={ref} className="bg-brand-black py-28 md:py-40 overflow-hidden">
-      <div className="max-w-[1400px] mx-auto px-8 md:px-16 lg:px-24">
+    <section ref={ref} className="bg-brand-black py-16 md:py-28 lg:py-40 overflow-hidden">
+      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 md:px-16 lg:px-24">
         {/* Header */}
-        <div className="mb-20 md:mb-24">
+        <div className="mb-12 md:mb-20 lg:mb-24">
           <motion.span
             className="label-caps text-white/30 block mb-4"
             initial={{ opacity: 0, y: 15 }}
@@ -314,7 +313,7 @@ function ValuesGrid() {
         </div>
 
         {/* 4-column grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-0 border-t border-white/10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0 border-t border-white/10">
           {VALUES.map((v, i) => (
             <ValueCard key={v.num} value={v} index={i} isInView={isInView} progress={scrollYProgress} />
           ))}
@@ -339,14 +338,14 @@ function ValueCard({
 
   return (
     <motion.div
-      className="border-b sm:border-b md:border-b-0 sm:odd:border-r md:border-r md:last:border-r-0 border-white/10 py-12 md:py-16 md:px-8 first:md:pl-0 last:md:pr-0 group"
+      className="border-b last:border-b-0 sm:last:border-b sm:odd:border-r lg:border-b-0 lg:border-r lg:last:border-r-0 border-white/10 py-8 px-4 sm:px-5 md:py-12 lg:py-16 lg:px-8 first:lg:pl-0 last:lg:pr-0 group"
       initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.7, delay: 0.2 + index * 0.12, ease: [0.22, 1, 0.36, 1] }}
     >
       {/* Large number watermark */}
       <motion.span
-        className="font-serif text-[5rem] md:text-[6rem] text-white/[0.03] block leading-none mb-4 select-none transition-colors duration-700 group-hover:text-white/[0.06]"
+        className="font-serif text-[3.5rem] md:text-[5rem] lg:text-[6rem] text-white/[0.03] block leading-none mb-4 select-none transition-colors duration-700 group-hover:text-white/[0.06]"
         style={{ y: hoverY }}
       >
         {value.num}
@@ -364,7 +363,7 @@ function ValueCard({
       <h3 className="font-serif text-xl md:text-2xl text-white font-light mb-4 italic tracking-wide">
         {value.word}
       </h3>
-      <p className="text-[0.82rem] text-white/35 font-light leading-[2]">
+      <p className="text-[0.82rem] text-white/50 font-light leading-[2]">
         {value.text}
       </p>
     </motion.div>
