@@ -70,13 +70,12 @@ export default function AboutStory() {
       <div className="h-10 md:h-16" />
 
       {/* Chapter navigation dots (sticky on desktop) */}
-      <div className="relative">
-        <ChapterNav />
-        <div className="space-y-0">
-          {SECTIONS.map((section, i) => (
-            <StoryChapter key={section.label} section={section} index={i} total={SECTIONS.length} />
-          ))}
-        </div>
+      <ChapterNav />
+
+      <div className="space-y-0">
+        {SECTIONS.map((section, i) => (
+          <StoryChapter key={section.label} section={section} index={i} total={SECTIONS.length} />
+        ))}
       </div>
 
       {/* Spacer before values */}
@@ -117,22 +116,21 @@ function Hero() {
 
       {/* Content */}
       <motion.div
-        className="relative z-10 h-full flex flex-col justify-end pb-12 md:pb-28 px-6 md:px-16 lg:px-24 max-w-[1400px] mx-auto"
+        className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-end px-8 pb-12 md:px-12 md:pb-28"
         style={{ y: textY, opacity }}
       >
-        {/* Animated line + label (serif font matching hero headings) */}
+        {/* Animated line + label */}
         <motion.div
-          className="flex items-center gap-4 mb-5"
+          className="mb-5 flex items-center gap-3"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <motion.div
-            className="h-[1px] bg-white/40 origin-left"
+            className="h-[0.5px] w-8 bg-white/40 origin-left"
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            style={{ width: 48 }}
           />
           <span className="label-caps text-white/60">About Midcenturist</span>
         </motion.div>
