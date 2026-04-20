@@ -100,7 +100,7 @@ function Hero() {
       {/* Parallax background */}
       <motion.div className="absolute inset-0" style={{ y: imgY }}>
         <Image
-          src="/images/chairs/images2/PHOTO-2026-04-15-18-51-17.jpg"
+          src="/images/about.jpg"
           alt="Mid-century modern interior"
           fill
           priority
@@ -127,7 +127,7 @@ function Hero() {
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <motion.div
-            className="h-[0.5px] w-8 bg-white/40 origin-left"
+            className="h-[0.5px] w-8 bg-white/25 origin-left"
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
@@ -208,7 +208,7 @@ function StoryChapter({
       className={`relative scroll-mt-20 ${bg}`}
     >
       {/* Thin progress line at top */}
-      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 md:px-16 lg:px-24">
+      <div className="max-w-7xl mx-auto px-8 md:px-12">
         <div className="h-[0.5px] bg-brand-black/[0.04] relative overflow-hidden">
           <motion.div
             className="absolute inset-y-0 left-0 bg-brand-black/10"
@@ -217,7 +217,7 @@ function StoryChapter({
         </div>
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 md:px-16 lg:px-24 py-10 md:py-20">
+      <div className="max-w-7xl mx-auto px-8 md:px-12 py-10 md:py-20">
         {/* Chapter header — thin line + label (no number) */}
         <motion.div
           className="flex items-center gap-4 mb-8 md:mb-10"
@@ -226,7 +226,7 @@ function StoryChapter({
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
           <motion.div
-            className="h-[0.5px] bg-brand-black/15 origin-left"
+            className="h-[0.5px] bg-brand-black/8 origin-left"
             initial={{ scaleX: 0 }}
             animate={isInView ? { scaleX: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
@@ -235,8 +235,8 @@ function StoryChapter({
           <span className="label-caps text-brand-muted">{section.label}</span>
         </motion.div>
 
-        {/* Content grid — image right on even, left on odd */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-14 lg:gap-20 items-center">
+        {/* Content grid — image right on even, left on odd, text aligned with image top */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-14 lg:gap-20 items-start">
           {/* Image with reveal */}
           <motion.div
             className={`relative overflow-hidden rounded-sm aspect-[4/3] max-h-[380px] md:max-h-[460px] ${imageRight ? 'lg:order-2' : ''}`}
@@ -262,7 +262,7 @@ function StoryChapter({
             />
           </motion.div>
 
-          {/* Text content */}
+          {/* Text content — limit to 2 paragraphs for alignment */}
           <div className={`${imageRight ? 'lg:order-1' : ''}`}>
             {/* Title */}
             <div className="overflow-hidden mb-8">
@@ -276,9 +276,9 @@ function StoryChapter({
               </motion.h2>
             </div>
 
-            {/* Body paragraphs — staggered reveal */}
+            {/* Body paragraphs — staggered reveal, limit to 2 */}
             <div className="space-y-5">
-              {section.body.map((paragraph, pi) => (
+              {section.body.slice(0, 2).map((paragraph, pi) => (
                 <motion.p
                   key={pi}
                   className="text-[0.85rem] text-brand-black/75 font-light leading-[2.1] tracking-[0.015em]"
@@ -293,7 +293,7 @@ function StoryChapter({
 
             {/* Bottom accent line */}
             <motion.div
-              className="w-8 h-[0.5px] bg-brand-black/10 mt-8"
+              className="w-8 h-[0.5px] bg-brand-black/8 mt-8"
               initial={{ scaleX: 0, originX: 0 }}
               animate={isInView ? { scaleX: 1 } : {}}
               transition={{ duration: 1, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
@@ -305,7 +305,7 @@ function StoryChapter({
 
       {/* Final divider after last section */}
       {index === total - 1 && (
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 md:px-16 lg:px-24">
+        <div className="max-w-7xl mx-auto px-8 md:px-12">
           <div className="h-[0.5px] bg-brand-black/[0.04]" />
         </div>
       )}

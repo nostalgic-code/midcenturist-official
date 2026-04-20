@@ -59,7 +59,7 @@ export default function CategoriesPage() {
       <div className="relative bg-brand-off border-b border-brand-rule overflow-hidden">
         <div className="max-w-7xl mx-auto px-8 md:px-12 py-20 md:py-28 relative z-10">
           <div className="mb-3 flex items-center gap-3">
-            <span className="h-[0.5px] w-8 bg-brand-black/15" />
+            <span className="h-[0.5px] w-8 bg-brand-black/8" />
             <span className="label-caps text-brand-muted">Browse by Room</span>
           </div>
           <h1 className="font-serif text-4xl md:text-[3.4rem] text-brand-black font-light leading-tight">
