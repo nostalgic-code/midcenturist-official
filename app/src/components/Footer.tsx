@@ -2,7 +2,6 @@
 
 import React from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faCouch, faBox, faLightbulb, faTable, faStar, faTag,
@@ -57,33 +56,22 @@ export default function Footer() {
 
   return (
     <footer ref={footerRef} className="reveal-up bg-brand-black text-white" aria-label="Site footer">
-      {/* Top section — logo + social icons */}
+      {/* Top section — social icons */}
       <div className="max-w-[1200px] mx-auto px-8 md:px-12 pt-20 pb-16 border-b border-white/8">
-        <div className="flex flex-col gap-8">
-          {/* Logo aligned with social icons */}
-          <Image
-            src="/logo/logo-removebg-preview.png"
-            alt="Midcenturist"
-            width={160}
-            height={40}
-            className="h-8 w-auto brightness-0 invert opacity-60"
-          />
-          {/* Social icons */}
-          <div className="flex items-center gap-2" role="list" aria-label="Social media links">
-            {SOCIAL_LINKS.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-[34px] h-[34px] border border-white/10 flex items-center justify-center text-white/30 hover:border-white/40 hover:text-white transition-all duration-300"
-                aria-label={s.label}
-                role="listitem"
-              >
-                <FontAwesomeIcon icon={SOCIAL_ICON_MAP[s.icon]} className="w-3 h-3" aria-hidden="true" />
-              </a>
-            ))}
-          </div>
+        <div className="flex items-center gap-2" role="list" aria-label="Social media links">
+          {SOCIAL_LINKS.map((s) => (
+            <a
+              key={s.label}
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-[34px] h-[34px] border border-white/10 flex items-center justify-center text-white/30 hover:border-white/40 hover:text-white transition-all duration-300"
+              aria-label={s.label}
+              role="listitem"
+            >
+              <FontAwesomeIcon icon={SOCIAL_ICON_MAP[s.icon]} className="w-3 h-3" aria-hidden="true" />
+            </a>
+          ))}
         </div>
       </div>
 

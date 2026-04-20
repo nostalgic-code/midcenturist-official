@@ -97,7 +97,7 @@ function Hero() {
   const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0])
 
   return (
-    <section ref={ref} className="relative h-[70vh] min-h-[420px] md:h-[85vh] md:min-h-[560px] overflow-hidden bg-brand-black">
+    <section ref={ref} className="relative h-[60vh] min-h-[380px] md:h-[75vh] md:min-h-[500px] overflow-hidden bg-brand-black">
       {/* Parallax background */}
       <motion.div className="absolute inset-0" style={{ y: imgY }}>
         <Image
@@ -134,12 +134,12 @@ function Hero() {
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             style={{ width: 48 }}
           />
-          <span className="font-serif text-[0.85rem] md:text-[0.95rem] font-light text-white/60 tracking-wide italic">About Midcenturist</span>
+          <span className="label-caps text-white/60">About Midcenturist</span>
         </motion.div>
 
-        <h1 className="font-serif text-[clamp(2.8rem,7vw,6.5rem)] font-light text-white leading-[0.95] max-w-4xl overflow-hidden italic">
+        <h1 className="font-serif text-[clamp(2.8rem,7vw,6.5rem)] font-light text-white leading-[0.95] max-w-4xl overflow-hidden">
           <motion.span
-            className="block"
+            className="block italic"
             initial={{ y: '100%' }}
             animate={{ y: 0 }}
             transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
@@ -147,7 +147,7 @@ function Hero() {
             Midcentury
           </motion.span>
           <motion.span
-            className="block"
+            className="block italic"
             initial={{ y: '100%' }}
             animate={{ y: 0 }}
             transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
@@ -379,18 +379,19 @@ function ValueCard({
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.7, delay: 0.2 + index * 0.12, ease: [0.22, 1, 0.36, 1] }}
     >
-      {/* Accent line */}
-      <motion.div
-        className="w-5 h-[0.5px] bg-white/20 mb-5"
-        initial={{ scaleX: 0, originX: 0 }}
-        animate={isInView ? { scaleX: 1 } : {}}
-        transition={{ duration: 0.8, delay: 0.4 + index * 0.12, ease: [0.22, 1, 0.36, 1] }}
-        aria-hidden="true"
-      />
-
-      <h3 className="font-serif text-xl md:text-2xl text-white font-light mb-4 italic tracking-wide">
-        {value.word}
-      </h3>
+      {/* Line + value name inline */}
+      <div className="flex items-center gap-4 mb-5">
+        <motion.div
+          className="w-5 h-[0.5px] bg-white/20 shrink-0"
+          initial={{ scaleX: 0, originX: 0 }}
+          animate={isInView ? { scaleX: 1 } : {}}
+          transition={{ duration: 0.8, delay: 0.4 + index * 0.12, ease: [0.22, 1, 0.36, 1] }}
+          aria-hidden="true"
+        />
+        <h3 className="font-serif text-xl md:text-2xl text-white font-light italic tracking-wide">
+          {value.word}
+        </h3>
+      </div>
       <p className="text-[0.82rem] text-white/50 font-light leading-[2]">
         {value.text}
       </p>
