@@ -157,9 +157,27 @@ export default function ContactPage() {
 
       {/* Contact Grid */}
       <section className="max-w-7xl mx-auto px-8 py-20 md:px-12 md:py-28">
-        <div className="grid grid-cols-1 gap-14 lg:grid-cols-[1fr_1.2fr] lg:gap-24 items-start">
+        <div className="grid grid-cols-1 gap-14 lg:grid-cols-[1fr_1.2fr] lg:gap-24 items-stretch">
           {/* Left — Info */}
-          <div>
+          <div className="flex flex-col">
+            {/* Kicker header */}
+            <motion.div
+              className="mb-8"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={0}
+              variants={fadeUp}
+            >
+              <div className="flex items-center gap-3 mb-3">
+                <span className="h-[0.5px] w-8 bg-brand-black/25" />
+                <span className="font-sans text-[0.6rem] uppercase tracking-[0.22em] text-brand-black/40 font-light">Get in Touch</span>
+              </div>
+              <h2 className="font-serif text-[clamp(1.6rem,2.4vw,2.2rem)] font-light text-brand-black leading-tight">
+                Contact Details
+              </h2>
+            </motion.div>
+
             <div className="space-y-6 mb-12">
               {CONTACT_INFO.map((item, i) => (
                 <motion.div
@@ -197,6 +215,7 @@ export default function ContactPage() {
 
             {/* Socials */}
             <motion.div
+              className="mt-auto"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
