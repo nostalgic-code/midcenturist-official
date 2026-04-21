@@ -138,6 +138,7 @@ export default function HeroSlider({ slides, autoPlayInterval = 6000 }: HeroSlid
                 }}
                 aria-hidden="true"
               />
+            </>
           )}
         </motion.div>
       </AnimatePresence>
