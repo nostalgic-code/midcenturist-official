@@ -320,12 +320,11 @@ export default function ContactPage() {
                       className="w-full border border-brand-black/12 bg-white/80 px-4 py-3 font-sans text-[0.85rem] font-light text-brand-black focus:border-brand-black/40 focus:outline-none transition-colors"
                     >
                       <option value="">Select a topic</option>
-                      <option value="general">General Enquiry</option>
-                      <option value="product">Product Question</option>
-                      <option value="restoration">Restoration Services</option>
+                      <option value="product">Product Enquiry</option>
+                      <option value="purchase">Purchase Enquiry</option>
+                      <option value="delivery">Delivery/Courier Enquiry</option>
                       <option value="sell">Sell a Piece</option>
-                      <option value="order">Order Support</option>
-                      <option value="other">Other</option>
+                      <option value="general">General Enquiry</option>
                     </select>
                   </div>
 
