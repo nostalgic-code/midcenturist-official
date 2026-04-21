@@ -105,11 +105,11 @@ function Hero() {
           fill
           priority
           className="object-cover"
-          style={{ filter: 'brightness(0.35)' }}
+          style={{ filter: 'brightness(0.72)' }}
         />
         <div
           className="absolute inset-0"
-          style={{ background: 'linear-gradient(to bottom, rgba(12,11,10,0.3) 0%, rgba(12,11,10,0.7) 100%)' }}
+          style={{ background: 'linear-gradient(to bottom, rgba(12,11,10,0.08) 0%, rgba(12,11,10,0.38) 100%)' }}
           aria-hidden="true"
         />
       </motion.div>
