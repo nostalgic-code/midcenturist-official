@@ -113,7 +113,16 @@ export default function HeroSlider({ slides, autoPlayInterval = 6000 }: HeroSlid
             className="object-cover"
             style={dark ? undefined : { filter: 'brightness(0.55)' }}
           />
-          {!dark && (
+          {dark ? (
+            /* Light image: subtle bottom gradient only, so white text stays readable */
+            <div
+              className="absolute inset-0"
+              style={{
+                background: 'linear-gradient(to top, rgba(12,11,10,0.72) 0%, rgba(12,11,10,0.28) 28%, transparent 55%)',
+              }}
+              aria-hidden="true"
+            />
+          ) : (
             <>
               <div
                 className="absolute inset-0"
@@ -129,7 +138,6 @@ export default function HeroSlider({ slides, autoPlayInterval = 6000 }: HeroSlid
                 }}
                 aria-hidden="true"
               />
-            </>
           )}
         </motion.div>
       </AnimatePresence>
@@ -140,19 +148,19 @@ export default function HeroSlider({ slides, autoPlayInterval = 6000 }: HeroSlid
           <motion.div key={slide.id} initial="hidden" animate="visible" exit="exit">
             <motion.div custom={0} variants={textVariants} className="flex items-center gap-4 mb-5">
               <motion.div
-                className={`h-[0.5px] origin-left ${dark ? 'bg-brand-black/40' : 'bg-white/40'}`}
+                className="h-[0.5px] bg-white/40 origin-left"
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
                 transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] as const }}
                 style={{ width: 32 }}
               />
-              <span className={`label-caps ${dark ? 'text-brand-black/60' : 'text-white/60'}`}>{slide.eyebrow}</span>
+              <span className="label-caps text-white/60">{slide.eyebrow}</span>
             </motion.div>
 
             <motion.h1
               custom={1}
               variants={textVariants}
-              className={`display-heading ${dark ? 'text-brand-black' : 'text-white'}`}
+              className="display-heading text-white"
               style={{ fontSize: 'clamp(3.8rem, 9vw, 9rem)' }}
             >
               <span className="block overflow-hidden">
@@ -180,7 +188,7 @@ export default function HeroSlider({ slides, autoPlayInterval = 6000 }: HeroSlid
             <motion.p
               custom={3}
               variants={textVariants}
-              className={`mt-6 font-sans text-[0.82rem] font-light leading-[1.9] max-w-[480px] hidden md:block ${dark ? 'text-brand-black/50' : 'text-white/40'}`}
+              className="mt-6 font-sans text-[0.82rem] text-white/40 font-light leading-[1.9] max-w-[480px] hidden md:block"
             >
               {slide.subtitle}
             </motion.p>
@@ -188,7 +196,7 @@ export default function HeroSlider({ slides, autoPlayInterval = 6000 }: HeroSlid
             <motion.div custom={4} variants={textVariants} className="mt-8 hidden md:block">
               <button
                 onClick={() => router.push(slide.ctaHref)}
-                className={`group/cta inline-flex items-center gap-3 px-8 py-4 text-[0.6rem] uppercase tracking-widest-2 font-light backdrop-blur-sm transition-all duration-500 ${dark ? 'bg-brand-black/[0.06] border border-brand-black/20 text-brand-black hover:bg-brand-black/[0.12] hover:border-brand-black/35' : 'bg-white/[0.06] border border-white/15 text-white hover:bg-white/[0.12] hover:border-white/30'}`}
+                className="group/cta inline-flex items-center gap-3 bg-white/[0.06] border border-white/15 px-8 py-4 text-white text-[0.6rem] uppercase tracking-widest-2 font-light backdrop-blur-sm hover:bg-white/[0.12] hover:border-white/30 transition-all duration-500"
                 aria-label={slide.ctaLabel}
               >
                 <FontAwesomeIcon icon={faArrowRight} className="w-3 h-3 transition-transform duration-300 group-hover/cta:translate-x-1" aria-hidden="true" />
