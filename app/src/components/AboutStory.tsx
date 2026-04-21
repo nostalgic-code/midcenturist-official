@@ -104,7 +104,7 @@ function Hero() {
           alt="Mid-century modern interior"
           fill
           priority
-          className="object-contain"
+          className="object-cover"
           style={{ filter: 'brightness(0.72)' }}
         />
         <div
