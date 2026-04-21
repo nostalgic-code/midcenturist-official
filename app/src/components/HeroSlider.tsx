@@ -48,6 +48,7 @@ export default function HeroSlider({ slides, autoPlayInterval = 6000 }: HeroSlid
 
   const slide = slides[current]
   const dark = slide.noOverlay
+  const contain = slide.objectContain
 
   const imageVariants: Variants = {
     enter: (d: number) => ({
@@ -85,8 +86,8 @@ export default function HeroSlider({ slides, autoPlayInterval = 6000 }: HeroSlid
 
   return (
     <section
-      className="relative w-full overflow-hidden bg-brand-black"
-      style={{ height: 'calc(100vh - 68px)', minHeight: '580px' }}
+      className="relative w-full overflow-hidden"
+      style={{ height: 'calc(100vh - 68px)', minHeight: '580px', backgroundColor: contain ? '#ddd8d0' : '#0c0b0a' }}
       aria-label="Hero slider"
       aria-roledescription="carousel"
     >
@@ -110,7 +111,7 @@ export default function HeroSlider({ slides, autoPlayInterval = 6000 }: HeroSlid
             fill
             priority
             sizes="100vw"
-            className="object-cover"
+            className={contain ? 'object-contain' : 'object-cover'}
             style={dark ? undefined : { filter: 'brightness(0.55)' }}
           />
           {dark ? (
