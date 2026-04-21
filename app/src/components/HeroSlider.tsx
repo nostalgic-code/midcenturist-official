@@ -135,11 +135,11 @@ export default function HeroSlider({ slides, autoPlayInterval = 6000 }: HeroSlid
           <motion.div key={slide.id} initial="hidden" animate="visible" exit="exit">
             <motion.div custom={0} variants={textVariants} className="flex items-center gap-4 mb-5">
               <motion.div
-                className="h-[1px] bg-white/40 origin-left"
+                className="h-[0.5px] bg-white/40 origin-left"
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
                 transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] as const }}
-                style={{ width: 48 }}
+                style={{ width: 32 }}
               />
               <span className="label-caps text-white/60">{slide.eyebrow}</span>
             </motion.div>
