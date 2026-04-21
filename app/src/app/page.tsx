@@ -1,9 +1,6 @@
 import HeroSlider from '@/components/HeroSlider'
-import StoryIntro from '@/components/StoryIntro'
-import HorizontalShowcase from '@/components/HorizontalShowcase'
-import ParallaxGallery from '@/components/ParallaxGallery'
+import ShowcaseDuo from '@/components/ShowcaseDuo'
 import ProductCarousel from '@/components/ProductCarousel'
-import Manifesto from '@/components/Manifesto'
 import MissionBand from '@/components/MissionBand'
 import IGFeed from '@/components/IGFeed'
 import Newsletter from '@/components/Newsletter'
@@ -96,25 +93,14 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* Act 1 — The Hook */}
+      {/* 1 — Hero */}
       <HeroSlider slides={HERO_SLIDES} />
 
-      {/* Act 2 — The Invitation */}
-      <StoryIntro />
-
-      {/* Act 3 — The Journey (horizontal scroll) */}
-      <HorizontalShowcase />
-
-      {/* Act 4 — Browse by Room */}
-      <ParallaxGallery />
-
-      {/* Explore the Collection — Featured Products */}
-      <section className="py-28 bg-brand-off border-t border-brand-off-d" aria-labelledby="explore-heading">
+      {/* 2 — Featured Products */}
+      <section className="py-20 md:py-28 bg-brand-off border-t border-brand-off-d" aria-labelledby="explore-heading">
         <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 px-8 md:px-20 mb-14">
           <div>
-            <span className="label-caps text-brand-muted mb-3 block">
-              Freshly Listed
-            </span>
+            <span className="label-caps text-brand-muted mb-3 block">Freshly Listed</span>
             <h2 id="explore-heading" className="font-serif text-[clamp(2rem,3vw,3rem)] font-light text-brand-black">
               Explore the Collection
             </h2>
@@ -135,32 +121,38 @@ export default async function HomePage() {
         )}
       </section>
 
-      {/* Act 5 — The Proof */}
-      <Manifesto />
+      {/* 3 — Sold & Archive showcase */}
+      <ShowcaseDuo />
 
-      {/* New Arrivals Section */}
+      {/* 4 — New Arrivals */}
       {newInProducts.length > 0 && (
-        <section className="py-28 bg-white border-t border-brand-rule" aria-labelledby="newin-heading">
+        <section className="py-20 md:py-28 bg-white border-t border-brand-rule" aria-labelledby="newin-heading">
           <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 px-8 md:px-20 mb-14">
             <div>
-              <span className="label-caps text-brand-muted mb-3 block">
-                Just Added
-              </span>
+              <span className="label-caps text-brand-muted mb-3 block">Just Added</span>
               <h2 id="newin-heading" className="font-serif text-[clamp(2rem,3vw,3rem)] font-light text-brand-black">
                 New Arrivals
               </h2>
             </div>
+            <Link
+              href="/shop?sort=newest"
+              className="group/link inline-flex items-center gap-2.5 font-sans text-[0.56rem] tracking-[0.18em] uppercase text-brand-black font-light border-b border-brand-black/30 pb-[3px] hover:border-brand-black transition-colors duration-300"
+            >
+              View All New
+              <FontAwesomeIcon icon={faArrowRight} className="w-2.5 h-2.5 transition-transform duration-300 group-hover/link:translate-x-1" aria-hidden="true" />
+            </Link>
           </div>
-
           <ProductCarousel apiProducts={newInProducts} />
         </section>
       )}
 
-      {/* Mission Statement */}
+      {/* 5 — Brand statement */}
       <MissionBand />
 
+      {/* 6 — Newsletter */}
       <Newsletter />
 
+      {/* 7 — Instagram */}
       <IGFeed />
     </>
   )
