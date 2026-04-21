@@ -160,17 +160,6 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-[1fr_1.2fr] lg:gap-24 items-start">
           {/* Left — Info */}
           <div>
-            <motion.h2
-              className="font-serif text-[clamp(2rem,3.2vw,3rem)] font-light leading-[1.08] text-brand-black mb-10"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={0}
-              variants={fadeUp}
-            >
-              Contact Details
-            </motion.h2>
-
             <div className="space-y-6 mb-12">
               {CONTACT_INFO.map((item, i) => (
                 <motion.div

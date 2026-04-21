@@ -22,6 +22,7 @@ export interface HeroSlide {
   ctaLabel: string
   ctaHref: string
   imageUrl: string
+  noOverlay?: boolean
   featuredPieceName: string
   featuredPiecePrice: string
   featuredPieceYear: number
