@@ -54,8 +54,8 @@ const SECTIONS = [
     body: [
       'To enable our customers to create character-filled living and creative work spaces that perfectly blend simplicity, functionality and form.',
     ],
-    image: '/images/mission3.jpg',
-    imageAlt: 'Curated mid-century furniture showroom',
+    image: '/images/mision1.jpg',
+    imageAlt: 'Restored mid-century green velvet couch',
   },
 ]
 
