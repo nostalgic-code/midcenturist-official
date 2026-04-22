@@ -8,7 +8,7 @@ const CATEGORIES = [
     name: 'Living Room',
     tagline: 'Where stories begin',
     description: 'Sideboards, credenzas, coffee tables and lounge chairs.',
-    image: '/images/suede%20chairs/images/PHOTO-2026-04-15-18-50-41.jpg',
+    image: '/images/landingpage7.jpg',
   },
   {
     slug: 'dining-room',

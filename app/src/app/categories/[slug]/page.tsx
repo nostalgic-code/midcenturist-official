@@ -23,7 +23,7 @@ const CATEGORY_CONTENT: Record<string, CategoryMeta> = {
     tagline: 'Where stories begin',
     description:
       'Sideboards, credenzas, coffee tables and lounge chairs — the heart of mid-century living. Each piece has been sourced for its design integrity and restored to a standard that lets you live with it for another lifetime.',
-    heroImage: '/images/suede%20couch/images/PHOTO-2026-04-15-18-49-00.jpg',
+    heroImage: '/images/landingpage7.jpg',
   },
   'dining-room': {
     name: 'Dining Room',
