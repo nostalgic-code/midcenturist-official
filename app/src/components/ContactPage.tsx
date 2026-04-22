@@ -111,7 +111,7 @@ export default function ContactPage() {
         <div
           ref={heroImageRef}
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('/images/getintouch2.jpg')" }}
+          style={{ backgroundImage: "url('/images/getintouch.jpg')" }}
         />
         <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(8,7,6,0.82)_0%,rgba(8,7,6,0.48)_42%,rgba(8,7,6,0.9)_100%)]" />
         <div className="absolute -bottom-20 -right-20 h-72 w-72 rounded-full bg-[#b58a59]/20 blur-3xl" />
