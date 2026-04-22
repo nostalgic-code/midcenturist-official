@@ -87,7 +87,7 @@ export default function HeroSlider({ slides, autoPlayInterval = 6000 }: HeroSlid
   return (
     <section
       className="relative w-full overflow-hidden"
-      style={{ height: 'calc(100vh - 68px)', minHeight: '580px', backgroundColor: contain ? '#ddd8d0' : '#0c0b0a' }}
+      style={{ height: 'calc(100vh - 68px)', minHeight: '580px', backgroundColor: contain ? '#eeece8' : '#0c0b0a' }}
       aria-label="Hero slider"
       aria-roledescription="carousel"
     >
