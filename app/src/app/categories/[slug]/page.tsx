@@ -14,6 +14,7 @@ interface CategoryMeta {
   tagline: string
   description: string
   heroImage: string
+  objectContain?: boolean
 }
 
 const CATEGORY_CONTENT: Record<string, CategoryMeta> = {
@@ -43,21 +44,22 @@ const CATEGORY_CONTENT: Record<string, CategoryMeta> = {
     tagline: 'Details that define a space',
     description:
       'Ceramics, sculptural vases, wall art, clocks and mirrors — the finishing touches that turn a room into a curated interior. Every object hand-picked for character and craftsmanship.',
-    heroImage: '/images/decorelements/PHOTO-2026-04-21-20-45-53_1.jpg',
+    heroImage: '/images/decorelements/3.jpg',
+    objectContain: true,
   },
   'creative-workspace': {
     name: 'Creative Workspace',
     tagline: 'Work in style',
     description:
       'Desks, shelving units, task lamps and office chairs from the golden age of Scandinavian design. Functional, beautiful and built for focus.',
-    heroImage: '/images/workspaceimages/PHOTO-2026-04-21-21-32-19.jpg',
+    heroImage: 'https://plus.unsplash.com/premium_photo-1720884611740-f5e807d7c77e?q=80&w=1600&auto=format&fit=crop',
   },
   'outdoor': {
     name: 'Outdoor',
     tagline: 'Extend the interior',
     description:
       'Garden furniture, planters and patio pieces that bring mid-century sensibility outdoors. Weather-tested, design-forward, and ready for your space.',
-    heroImage: '/images/chairs/images2/PHOTO-2026-04-15-18-51-18.jpg',
+    heroImage: 'https://plus.unsplash.com/premium_photo-1679545132741-898f44e4f42f?q=80&w=1600&auto=format&fit=crop',
   },
 }
 
@@ -104,10 +106,11 @@ export default async function CategoryPage({ params }: { params: { slug: string 
       {/* Hero Banner */}
       <div className="relative overflow-hidden" style={{ minHeight: '380px' }}>
         <div
-          className="absolute inset-0 bg-cover bg-center transition-transform duration-[1.4s] ease-out-expo"
+          className={`absolute inset-0 ${meta.objectContain ? 'bg-contain bg-no-repeat bg-center' : 'bg-cover bg-center'} transition-transform duration-[1.4s] ease-out-expo`}
           style={{
             backgroundImage: `url(${meta.heroImage})`,
-            filter: 'brightness(0.5)',
+            backgroundColor: meta.objectContain ? '#eeece8' : undefined,
+            filter: meta.objectContain ? undefined : 'brightness(0.5)',
           }}
           aria-hidden="true"
         />

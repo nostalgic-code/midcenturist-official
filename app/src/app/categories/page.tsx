@@ -29,21 +29,22 @@ const CATEGORIES = [
     name: 'Décor Elements',
     tagline: 'Details that define a space',
     description: 'Ceramics, sculptural vases, wall art, clocks and mirrors.',
-    image: '/images/decorelements/PHOTO-2026-04-21-20-45-53_1.jpg',
+    image: '/images/decorelements/3.jpg',
+    objectContain: true,
   },
   {
     slug: 'creative-workspace',
     name: 'Creative Workspace',
     tagline: 'Work in style',
     description: 'Desks, shelving units, task lamps and office chairs.',
-    image: '/images/workspaceimages/PHOTO-2026-04-21-21-32-19.jpg',
+    image: 'https://plus.unsplash.com/premium_photo-1720884611740-f5e807d7c77e?q=80&w=1400&auto=format&fit=crop',
   },
   {
     slug: 'outdoor',
     name: 'Outdoor',
     tagline: 'Extend the interior',
     description: 'Garden furniture, planters and patio pieces.',
-    image: '/images/oldschool%20chairs/images%20(1)/PHOTO-2026-04-15-18-49-53.jpg',
+    image: 'https://plus.unsplash.com/premium_photo-1679545132741-898f44e4f42f?q=80&w=1400&auto=format&fit=crop',
   },
 ]
 
@@ -89,10 +90,11 @@ export default function CategoriesPage() {
             >
               {/* Background image */}
               <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                className={`absolute inset-0 ${'objectContain' in cat && cat.objectContain ? 'bg-contain bg-no-repeat bg-center' : 'bg-cover bg-center'} transition-transform duration-700 ease-out group-hover:scale-[1.04]`}
                 style={{
                   backgroundImage: `url(${cat.image})`,
-                  filter: 'brightness(0.7)',
+                  backgroundColor: 'objectContain' in cat && cat.objectContain ? '#eeece8' : undefined,
+                  filter: 'objectContain' in cat && cat.objectContain ? undefined : 'brightness(0.7)',
                 }}
                 aria-hidden="true"
               />
