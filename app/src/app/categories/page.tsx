@@ -45,6 +45,7 @@ const CATEGORIES = [
     tagline: 'Extend the interior',
     description: 'Garden furniture, planters and patio pieces.',
     image: 'https://images.unsplash.com/photo-1532323544230-7191fd51bc1b?q=80&w=1400&auto=format&fit=crop',
+    objectContain: true,
   },
 ]
 

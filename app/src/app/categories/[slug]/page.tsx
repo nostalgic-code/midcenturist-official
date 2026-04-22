@@ -60,6 +60,7 @@ const CATEGORY_CONTENT: Record<string, CategoryMeta> = {
     description:
       'Garden furniture, planters and patio pieces that bring mid-century sensibility outdoors. Weather-tested, design-forward, and ready for your space.',
     heroImage: 'https://images.unsplash.com/photo-1532323544230-7191fd51bc1b?q=80&w=1600&auto=format&fit=crop',
+    objectContain: true,
   },
 }
 
