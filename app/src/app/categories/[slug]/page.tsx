@@ -36,21 +36,21 @@ const CATEGORY_CONTENT: Record<string, CategoryMeta> = {
     tagline: 'Rest in design',
     description:
       'Dressers, bedside tables, wardrobes and vanities that bring warmth, craft and quiet elegance to the most personal room in your home.',
-    heroImage: '/images/office%20couch/images%20(1)/PHOTO-2026-04-15-18-48-00.jpg',
+    heroImage: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1600&q=80',
   },
   'decor-elements': {
     name: 'Décor Elements',
     tagline: 'Details that define a space',
     description:
       'Ceramics, sculptural vases, wall art, clocks and mirrors — the finishing touches that turn a room into a curated interior. Every object hand-picked for character and craftsmanship.',
-    heroImage: '/images/folder%2030/images30/PHOTO-2026-04-15-18-52-11.jpg',
+    heroImage: '/images/decorelements/PHOTO-2026-04-21-20-45-53_1.jpg',
   },
   'creative-workspace': {
     name: 'Creative Workspace',
     tagline: 'Work in style',
     description:
       'Desks, shelving units, task lamps and office chairs from the golden age of Scandinavian design. Functional, beautiful and built for focus.',
-    heroImage: '/images/chairs/images2/PHOTO-2026-04-15-18-51-17.jpg',
+    heroImage: '/images/workspaceimages/PHOTO-2026-04-21-21-32-19.jpg',
   },
   'outdoor': {
     name: 'Outdoor',

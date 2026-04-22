@@ -22,14 +22,14 @@ const CATEGORIES = [
     name: 'Bedroom',
     tagline: 'Rest in design',
     description: 'Dressers, bedside tables, wardrobes and vanities.',
-    image: '/images/landing3.jpg',
+    image: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=900&q=80',
   },
   {
     slug: 'decor-elements',
     name: 'Décor Elements',
     tagline: 'Details that define a space',
     description: 'Ceramics, sculptural vases, wall art, clocks and mirrors.',
-    image: '/images/decorelements/1.jpg',
+    image: '/images/decorelements/PHOTO-2026-04-21-20-45-53_1.jpg',
   },
   {
     slug: 'creative-workspace',
