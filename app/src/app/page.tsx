@@ -23,7 +23,7 @@ const HERO_SLIDES: HeroSlide[] = [
     subtitle: 'Mid-century sofas, teak sideboards and curated objects — living rooms with decades of soul, ready for yours.',
     ctaLabel: 'Shop Living Room',
     ctaHref: '/categories/living-room',
-    imageUrl: '/images/landing4.jpg',
+    imageUrl: '/images/landingpage5.jpg',
     featuredPieceName: 'Danish Teak Sideboard',
     featuredPiecePrice: 'R 14,500',
     featuredPieceYear: 1962,

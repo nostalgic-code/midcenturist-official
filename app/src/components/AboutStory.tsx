@@ -135,23 +135,27 @@ function Hero() {
           <span className="label-caps text-white/60">About Midcenturist</span>
         </motion.div>
 
-        <h1 className="font-serif text-[clamp(2.8rem,7vw,6.5rem)] font-light text-white leading-[0.95] max-w-4xl overflow-hidden">
-          <motion.span
-            className="block italic"
-            initial={{ y: '100%' }}
-            animate={{ y: 0 }}
-            transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          >
-            Midcentury
-          </motion.span>
-          <motion.span
-            className="block italic"
-            initial={{ y: '100%' }}
-            animate={{ y: 0 }}
-            transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          >
-            Woodsmiths
-          </motion.span>
+        <h1 className="font-serif text-[clamp(2.8rem,7vw,6.5rem)] font-light text-white leading-[0.95] max-w-4xl">
+          <div className="overflow-hidden">
+            <motion.span
+              className="block"
+              initial={{ y: '100%' }}
+              animate={{ y: 0 }}
+              transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            >
+              Midcentury
+            </motion.span>
+          </div>
+          <div className="overflow-hidden">
+            <motion.span
+              className="block italic"
+              initial={{ y: '100%' }}
+              animate={{ y: 0 }}
+              transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            >
+              Woodsmiths
+            </motion.span>
+          </div>
         </h1>
       </motion.div>
     </section>
