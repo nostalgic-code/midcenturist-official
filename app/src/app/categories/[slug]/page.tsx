@@ -59,8 +59,7 @@ const CATEGORY_CONTENT: Record<string, CategoryMeta> = {
     tagline: 'Extend the interior',
     description:
       'Garden furniture, planters and patio pieces that bring mid-century sensibility outdoors. Weather-tested, design-forward, and ready for your space.',
-    heroImage: 'https://plus.unsplash.com/premium_photo-1679545132741-898f44e4f42f?q=80&w=1600&auto=format&fit=crop',
-    objectContain: true,
+    heroImage: 'https://images.unsplash.com/photo-1532323544230-7191fd51bc1b?q=80&w=1600&auto=format&fit=crop',
   },
 }
 
