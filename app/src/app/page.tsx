@@ -54,7 +54,7 @@ const HERO_SLIDES: HeroSlide[] = [
     subtitle: 'Sculptural ceramics, hand-thrown vessels and wall objects — the finishing touch that makes a room unmistakably yours.',
     ctaLabel: 'Shop Décor',
     ctaHref: '/categories/decor-elements',
-    imageUrl: '/images/decorelements/PHOTO-2026-04-21-20-45-54_3.jpg',
+    imageUrl: '/images/decorelements/4.jpg',
     objectContain: true,
     featuredPieceName: 'Ceramic Vessel Set',
     featuredPiecePrice: 'R 1,950',
