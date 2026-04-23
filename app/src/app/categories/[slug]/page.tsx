@@ -44,7 +44,7 @@ const CATEGORY_CONTENT: Record<string, CategoryMeta> = {
     tagline: 'Details that define a space',
     description:
       'Ceramics, sculptural vases, wall art, clocks and mirrors — the finishing touches that turn a room into a curated interior. Every object hand-picked for character and craftsmanship.',
-    heroImage: '/images/decorelements/3.jpg',
+    heroImage: '/images/decorelements/2.jpg',
     objectContain: true,
   },
   'creative-workspace': {
