@@ -29,7 +29,7 @@ const CATEGORIES = [
     name: 'Décor Elements',
     tagline: 'Details that define a space',
     description: 'Ceramics, sculptural vases, wall art, clocks and mirrors.',
-    image: '/images/decorelements/3.jpg',
+    image: '/images/decorelements/2.jpg',
     objectContain: true,
   },
   {
