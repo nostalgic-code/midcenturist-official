@@ -85,11 +85,11 @@ export default async function HomePage() {
 
   try {
     const [featuredRes, newInRes] = await Promise.all([
-      getProducts({ featured: true, limit: 4 }),
-      getProducts({ badge: 'New In', limit: 4 }),
+      getProducts({ limit: 4 }),
+      getProducts({ limit: 4, page: 2 }),
     ])
     featuredProducts = featuredRes.products
-    newInProducts = newInRes.products
+    newInProducts = newInRes.products.length > 0 ? newInRes.products : featuredRes.products
   } catch (e) {
     console.error('Failed to fetch homepage products', e)
   }
@@ -103,8 +103,7 @@ export default async function HomePage() {
       <ShowcaseDuo />
 
       {/* 3 — Explore our products */}
-      {featuredProducts.length > 0 && (
-        <section className="py-20 md:py-28 bg-white border-t border-gray-100" aria-labelledby="explore-heading">
+      <section className="py-20 md:py-28 bg-white border-t border-gray-100" aria-labelledby="explore-heading">
           <div className="px-8 md:px-16 lg:px-20">
             <div className="text-center mb-12">
               <h2 id="explore-heading" className="font-serif text-[clamp(1.8rem,3vw,2.8rem)] font-light text-brand-black mb-4">
@@ -130,11 +129,9 @@ export default async function HomePage() {
             </div>
           </div>
         </section>
-      )}
 
       {/* 4 — Our best sellers */}
-      {newInProducts.length > 0 && (
-        <section className="py-20 md:py-28 bg-brand-off border-t border-brand-off-d" aria-labelledby="bestsellers-heading">
+      <section className="py-20 md:py-28 bg-brand-off border-t border-brand-off-d" aria-labelledby="bestsellers-heading">
           <div className="px-8 md:px-16 lg:px-20">
             <div className="text-center mb-12">
               <h2 id="bestsellers-heading" className="font-serif text-[clamp(1.8rem,3vw,2.8rem)] font-light text-brand-black mb-4">
@@ -160,7 +157,6 @@ export default async function HomePage() {
             </div>
           </div>
         </section>
-      )}
 
       {/* 5 — Newsletter */}
       <Newsletter />

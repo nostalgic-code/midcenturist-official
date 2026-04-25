@@ -9,6 +9,14 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
 const PANELS = [
   {
+    label: 'New Arrivals',
+    title: 'Just in\n& waiting.',
+    tagline: 'Fresh stock added to the collection',
+    image: '/images/landingpage6.jpg',
+    href: '/shop?sort=newest',
+    cta: 'Shop New Arrivals',
+  },
+  {
     label: 'Sold Pieces',
     title: 'Pieces with\na story.',
     tagline: 'Appreciate what has found its home',
@@ -24,19 +32,11 @@ const PANELS = [
     href: '/shop?status=archived',
     cta: 'Browse Archive',
   },
-  {
-    label: 'New Arrivals',
-    title: 'Just in\n& waiting.',
-    tagline: 'Fresh stock added to the collection',
-    image: '/images/landingpage6.jpg',
-    href: '/shop?sort=newest',
-    cta: 'Shop New Arrivals',
-  },
 ]
 
 export default function ShowcaseDuo() {
   return (
-    <section className="border-t border-brand-rule">
+    <section className="border-t border-brand-rule mt-10 md:mt-16">
       <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-brand-rule">
         {PANELS.map((panel, i) => (
           <Panel key={panel.label} panel={panel} index={i} />
@@ -60,63 +60,22 @@ function Panel({
   const contentOpacity = useTransform(scrollYProgress, [0.1, 0.36], [0, 1])
 
   return (
-    <div
-      ref={ref}
-      className="relative overflow-hidden"
-      style={{ height: '540px' }}
-    >
+    <div ref={ref} className="relative overflow-hidden" style={{ height: '540px' }}>
       <Link href={panel.href} className="group absolute inset-0 block">
-        {/* Parallax image */}
         <motion.div className="absolute inset-0 scale-[1.12]" style={{ y: imageY }}>
-          <Image
-            src={panel.image}
-            alt={panel.label}
-            fill
-            sizes="(max-width: 768px) 100vw, 50vw"
-            className="object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.04]"
-            style={{ filter: 'brightness(0.55)' }}
-          />
+          <Image src={panel.image} alt={panel.label} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.04]" style={{ filter: 'brightness(0.55)' }} />
         </motion.div>
-
-        {/* Gradient */}
-        <div
-          className="absolute inset-0 z-[1]"
-          style={{
-            background:
-              'linear-gradient(to top, rgba(12,11,10,0.88) 0%, rgba(12,11,10,0.3) 50%, rgba(12,11,10,0.1) 100%)',
-          }}
-          aria-hidden="true"
-        />
-
-        {/* Content */}
-        <motion.div
-          className="absolute bottom-0 left-0 right-0 z-[2] p-8 md:p-12"
-          style={{ opacity: contentOpacity, y: contentY }}
-        >
-          {/* Label */}
+        <div className="absolute inset-0 z-[1]" style={{ background: 'linear-gradient(to top, rgba(12,11,10,0.88) 0%, rgba(12,11,10,0.3) 50%, rgba(12,11,10,0.1) 100%)' }} aria-hidden="true" />
+        <motion.div className="absolute bottom-0 left-0 right-0 z-[2] p-8 md:p-12" style={{ opacity: contentOpacity, y: contentY }}>
           <div className="flex items-center gap-3 mb-5">
             <span className="h-[0.5px] w-8 bg-white/30 block" aria-hidden="true" />
             <span className="label-caps text-white/50">{panel.label}</span>
           </div>
-
-          {/* Title */}
-          <h3 className="font-serif text-[clamp(2rem,3.5vw,3rem)] font-light text-white leading-[1.12] whitespace-pre-line mb-3">
-            {panel.title}
-          </h3>
-
-          {/* Tagline */}
-          <p className="font-sans text-[0.72rem] text-white/40 font-light tracking-[0.04em] mb-7 leading-relaxed">
-            {panel.tagline}
-          </p>
-
-          {/* CTA */}
+          <h3 className="font-serif text-[clamp(2rem,3.5vw,3rem)] font-light text-white leading-[1.12] whitespace-pre-line mb-3">{panel.title}</h3>
+          <p className="font-sans text-[0.72rem] text-white/40 font-light tracking-[0.04em] mb-7 leading-relaxed">{panel.tagline}</p>
           <span className="inline-flex items-center gap-2.5 label-caps text-white/50 border-b border-white/15 pb-[3px] group-hover:text-white group-hover:border-white/50 transition-all duration-500">
             {panel.cta}
-            <FontAwesomeIcon
-              icon={faArrowRight}
-              className="w-2.5 h-2.5 transition-transform duration-300 group-hover:translate-x-1"
-              aria-hidden="true"
-            />
+            <FontAwesomeIcon icon={faArrowRight} className="w-2.5 h-2.5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
           </span>
         </motion.div>
       </Link>
