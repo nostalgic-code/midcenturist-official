@@ -1,7 +1,6 @@
 import HeroSlider from '@/components/HeroSlider'
 import ShowcaseDuo from '@/components/ShowcaseDuo'
-import ProductCarousel from '@/components/ProductCarousel'
-import MissionBand from '@/components/MissionBand'
+import ProductCard from '@/components/ProductCard'
 import IGFeed from '@/components/IGFeed'
 import Newsletter from '@/components/Newsletter'
 import Link from 'next/link'
@@ -86,8 +85,8 @@ export default async function HomePage() {
 
   try {
     const [featuredRes, newInRes] = await Promise.all([
-      getProducts({ featured: true, limit: 8 }),
-      getProducts({ badge: 'New In', limit: 8 }),
+      getProducts({ featured: true, limit: 4 }),
+      getProducts({ badge: 'New In', limit: 4 }),
     ])
     featuredProducts = featuredRes.products
     newInProducts = newInRes.products
@@ -100,63 +99,73 @@ export default async function HomePage() {
       {/* 1 — Hero */}
       <HeroSlider slides={HERO_SLIDES} />
 
-      {/* 2 — Featured Products */}
-      <section className="py-20 md:py-28 bg-brand-off border-t border-brand-off-d" aria-labelledby="explore-heading">
-        <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 px-8 md:px-20 mb-14">
-          <div>
-            <span className="label-caps text-brand-muted mb-3 block">Freshly Listed</span>
-            <h2 id="explore-heading" className="font-serif text-[clamp(2rem,3vw,3rem)] font-light text-brand-black">
-              Explore the Collection
-            </h2>
-          </div>
-          <Link
-            href="/shop"
-            className="group/link inline-flex items-center gap-2.5 font-sans text-[0.56rem] tracking-[0.18em] uppercase text-brand-black font-light border-b border-brand-black/30 pb-[3px] hover:border-brand-black transition-colors duration-300"
-          >
-            View All Pieces
-            <FontAwesomeIcon icon={faArrowRight} className="w-2.5 h-2.5 transition-transform duration-300 group-hover/link:translate-x-1" aria-hidden="true" />
-          </Link>
-        </div>
-
-        {featuredProducts.length > 0 ? (
-          <ProductCarousel apiProducts={featuredProducts} />
-        ) : (
-          <p className="text-center text-brand-muted text-sm py-8">No featured products available right now.</p>
-        )}
-      </section>
-
-      {/* 3 — Sold & Archive showcase */}
+      {/* 2 — 3-panel showcase: Sold Pieces / Archive / New Arrivals */}
       <ShowcaseDuo />
 
-      {/* 4 — New Arrivals */}
-      {newInProducts.length > 0 && (
-        <section className="py-20 md:py-28 bg-white border-t border-brand-rule" aria-labelledby="newin-heading">
-          <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 px-8 md:px-20 mb-14">
-            <div>
-              <span className="label-caps text-brand-muted mb-3 block">Just Added</span>
-              <h2 id="newin-heading" className="font-serif text-[clamp(2rem,3vw,3rem)] font-light text-brand-black">
-                New Arrivals
+      {/* 3 — Explore our products */}
+      {featuredProducts.length > 0 && (
+        <section className="py-20 md:py-28 bg-white border-t border-gray-100" aria-labelledby="explore-heading">
+          <div className="px-8 md:px-16 lg:px-20">
+            <div className="text-center mb-12">
+              <h2 id="explore-heading" className="font-serif text-[clamp(1.8rem,3vw,2.8rem)] font-light text-brand-black mb-4">
+                Explore our products
               </h2>
+              <p className="font-sans text-sm text-brand-muted font-light max-w-md mx-auto leading-relaxed">
+                Shop some of our favourite and most loved pieces, from living room, dining, and bedroom furniture.
+              </p>
             </div>
-            <Link
-              href="/shop?sort=newest"
-              className="group/link inline-flex items-center gap-2.5 font-sans text-[0.56rem] tracking-[0.18em] uppercase text-brand-black font-light border-b border-brand-black/30 pb-[3px] hover:border-brand-black transition-colors duration-300"
-            >
-              View All New
-              <FontAwesomeIcon icon={faArrowRight} className="w-2.5 h-2.5 transition-transform duration-300 group-hover/link:translate-x-1" aria-hidden="true" />
-            </Link>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+              {featuredProducts.map(product => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+            <div className="text-center mt-14">
+              <Link
+                href="/shop"
+                className="inline-flex items-center gap-3 font-sans text-[0.6rem] tracking-[0.22em] uppercase bg-brand-black text-white px-10 py-4 hover:bg-brand-black/80 transition-colors duration-300"
+              >
+                Shop Catalogue
+                <FontAwesomeIcon icon={faArrowRight} className="w-2.5 h-2.5" aria-hidden="true" />
+              </Link>
+            </div>
           </div>
-          <ProductCarousel apiProducts={newInProducts} />
         </section>
       )}
 
-      {/* 5 — Brand statement */}
-      <MissionBand />
+      {/* 4 — Our best sellers */}
+      {newInProducts.length > 0 && (
+        <section className="py-20 md:py-28 bg-brand-off border-t border-brand-off-d" aria-labelledby="bestsellers-heading">
+          <div className="px-8 md:px-16 lg:px-20">
+            <div className="text-center mb-12">
+              <h2 id="bestsellers-heading" className="font-serif text-[clamp(1.8rem,3vw,2.8rem)] font-light text-brand-black mb-4">
+                Our best sellers
+              </h2>
+              <p className="font-sans text-sm text-brand-muted font-light max-w-md mx-auto leading-relaxed">
+                Explore our curated collection of mid-century pieces for an exquisite living space. Shop today.
+              </p>
+            </div>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+              {newInProducts.map(product => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+            <div className="text-center mt-14">
+              <Link
+                href="/shop"
+                className="inline-flex items-center gap-3 font-sans text-[0.6rem] tracking-[0.22em] uppercase bg-brand-black text-white px-10 py-4 hover:bg-brand-black/80 transition-colors duration-300"
+              >
+                Shop Catalogue
+                <FontAwesomeIcon icon={faArrowRight} className="w-2.5 h-2.5" aria-hidden="true" />
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
 
-      {/* 6 — Newsletter */}
+      {/* 5 — Newsletter */}
       <Newsletter />
 
-      {/* 7 — Instagram */}
+      {/* 6 — Instagram */}
       <IGFeed />
     </>
   )

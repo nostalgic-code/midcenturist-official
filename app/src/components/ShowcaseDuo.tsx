@@ -24,12 +24,20 @@ const PANELS = [
     href: '/shop?status=archived',
     cta: 'Browse Archive',
   },
+  {
+    label: 'New Arrivals',
+    title: 'Just in\n& waiting.',
+    tagline: 'Fresh stock added to the collection',
+    image: '/images/landingpage6.jpg',
+    href: '/shop?sort=newest',
+    cta: 'Shop New Arrivals',
+  },
 ]
 
 export default function ShowcaseDuo() {
   return (
     <section className="border-t border-brand-rule">
-      <div className="grid grid-cols-1 md:grid-cols-2">
+      <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-brand-rule">
         {PANELS.map((panel, i) => (
           <Panel key={panel.label} panel={panel} index={i} />
         ))}
@@ -54,7 +62,7 @@ function Panel({
   return (
     <div
       ref={ref}
-      className={`relative overflow-hidden${index === 0 ? ' md:border-r border-brand-rule' : ''}`}
+      className="relative overflow-hidden"
       style={{ height: '540px' }}
     >
       <Link href={panel.href} className="group absolute inset-0 block">
