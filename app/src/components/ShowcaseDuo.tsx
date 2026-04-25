@@ -48,7 +48,7 @@ export default function ShowcaseDuo() {
 
 function Panel({
   panel,
-  index,
+  index: _index,
 }: {
   panel: (typeof PANELS)[number]
   index: number
