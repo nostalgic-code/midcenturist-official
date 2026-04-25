@@ -158,7 +158,9 @@ export default async function HomePage() {
         </section>
 
       {/* 5 — Newsletter */}
-      <Newsletter />
+      <div className="mt-16 md:mt-24">
+        <Newsletter />
+      </div>
     </>
   )
 }
