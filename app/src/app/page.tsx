@@ -1,7 +1,6 @@
 import HeroSlider from '@/components/HeroSlider'
 import ShowcaseDuo from '@/components/ShowcaseDuo'
 import ProductCard from '@/components/ProductCard'
-import IGFeed from '@/components/IGFeed'
 import Newsletter from '@/components/Newsletter'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -160,9 +159,6 @@ export default async function HomePage() {
 
       {/* 5 — Newsletter */}
       <Newsletter />
-
-      {/* 6 — Instagram */}
-      <IGFeed />
     </>
   )
 }
